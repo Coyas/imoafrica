@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="login-box">
     <div class="login-logo">
 <!--        <a href=""><b> Html::encode($this->title) ?></b></a>-->
-        <img src="fav.svg" width="100" height="100">
+        <img src="fav.png" width="100" height="100">
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
