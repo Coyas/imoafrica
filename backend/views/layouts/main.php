@@ -30,13 +30,8 @@ AppAsset::register($this);
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-<!--            <span class="logo-mini"><b>I</b>MO</span>-->
-            <img class="icon" src="<?=Url::to('/sys/fav.png')?>" height="40" width="40" >
-            <!-- logo for regular state and mobile devices -->
-<!--            <span class="logo-lg"><b>ImoAfrica</b></span>-->
-        </a>
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <?=Html::a(Html::img(Url::to('/sys/fav.png'), ['class' => 'icon', 'height' => 40, 'width' => 40]), ['site/index'], ['class' => 'logo'])?>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
@@ -60,7 +55,7 @@ AppAsset::register($this);
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -73,7 +68,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -85,7 +80,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -97,7 +92,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -109,7 +104,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -246,13 +241,13 @@ AppAsset::register($this);
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="user-image" alt="User Image">
                             <span class="hidden-xs"><?=Yii::$app->user->identity->username?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
 
                                 <p>
                                     Alexander Pierce - Web Developer
@@ -323,10 +318,7 @@ AppAsset::register($this);
                 <li class="header">Menus De Navegação</li>
 
                 <li class="active">
-                    <a href="#">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Dashboard</span>
-                    </a>
+                    <?=Html::a('<i class="fas fa-chart-line"></i><span>Dashboard</span>', ['site/index'])?>
                 </li>
                 <li class="treeview">
                     <a href="#">
@@ -375,9 +367,9 @@ AppAsset::register($this);
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><?=Html::a('<i class="fas fa-eye"></i> <span>Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
+                        <li><?=Html::a('<i class="fas fa-eye"></i> <span>Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
                         <li><a href="#"><i class="fas fa-phone"></i> Contactos</a></li>
-                        <li><a href="#"><i class="fas fa-users"></i> Usuarios</a></li>
+                        <li><?=Html::a('<i class="fas fa-users"></i> Usuarios', ['users/'])?></li>
 <!--                        <li class="treeview">-->
 <!--                            <a href="#"><i class="fa fa-circle-o"></i> Level One-->
 <!--                                <span class="pull-right-container">-->

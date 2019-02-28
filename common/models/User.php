@@ -25,6 +25,9 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    public $old_password;
+    public $new_password;
+    public $new_password_repeat;
 
 
     /**
@@ -53,9 +56,27 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+            [['old_password', 'new_password', 'new_password_repeat'], 'required'],
+            [['old_password'], 'validateOld_password'],
+            [['new_password', 'new_password_repeat'], 'string', 'min' => 6],
+            [['new_password', 'new_password_repeat'], 'filter', 'filter' => 'trim'],
+            [['new_password_repeat'], 'compare', 'compareAttribute' => 'new_password', 'message' => 'As Credenciais Não Coincidem'],
         ];
     }
 
+    public function validateOld_password()
+    {
+        if (!$this->verifyPassword($this->old_password)) {
+            $this->addError('old_password', 'Senha Atual Incorreta');
+        }
+    }
+
+    public function verifyPassword($password)
+    {
+        $dbPassword = static::findOne(['username' => Yii::$app->user->identity->username, 'status' => self::STATUS_ACTIVE])->password_hash;
+        return Yii::$app->security->validatePassword($password, $dbPassword);
+    }
     /**
      * {@inheritdoc}
      */
