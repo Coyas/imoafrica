@@ -2,12 +2,21 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
+use yii\helpers\Html;
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-
+<p>
+    <?php
+    echo Html::a('PT', Url::current(['language' => 'pt-PT']))."<br>";
+    echo Html::a('En', Url::current(['language' => 'en-US']))."<br>";
+    echo Html::a('FR', Url::current(['language' => 'fr-FR']));
+    ?>
+</p>
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1><?= Yii::t('app', 'Eu sou Ailton')?></h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
