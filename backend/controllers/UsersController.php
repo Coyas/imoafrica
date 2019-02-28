@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\SignupForm;
 use Yii;
 use app\models\Users;
 use backend\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -150,5 +152,42 @@ class UsersController extends Controller
             'user' => $user,
         ]);
 
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     *
+     * criação de usuarios com confirmação de senha pelo email
+     */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+//        echo "antes do load<br>";
+        if ($model->load(Yii::$app->request->post())) {
+//            echo "depois do load antes do signup<br>";
+            if ($user = $model->signup()) {
+//                echo "depois do signup<br>";
+                Yii::$app->session->setFlash('success', "Siga para o email para finalizar o registro.");
+                Yii::$app->mailer
+                    ->compose(
+                        ['html' => 'passwordDefine'],
+//                        ['text' => 'passwordDefine-text'],
+                        ['user' => $user]
+//                        ['ctr' => Yii::$app->params['senha']]
+                    )
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Nova senha foi definida'])
+                    ->setTo($user->email)
+                    ->setSubject(Yii::$app->name.' Seu password foi definido')
+                    ->send();
+                return $this->redirect(['users/index']);
+            }else {
+                echo "nao quer fazer signup<br>";
+                die;
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 }
