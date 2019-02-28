@@ -55,7 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <!-- /.social-auth-links -->
 
-        <a href="#">Esqueceu a senha?</a>
+<!--        <a href="#">Esqueceu a senha?</a>-->
+        <?= Html::a('Esqueceu a senha?', ['site/request-password-reset']); ?>
     </div>
     <!-- /.login-box-body -->
 </div>

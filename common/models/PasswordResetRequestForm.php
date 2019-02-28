@@ -3,7 +3,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
-use common\models\User;
+use \himiklab\yii2\recaptcha\ReCaptchaValidator;
 
 /**
  * Password reset request form
@@ -11,6 +11,7 @@ use common\models\User;
 class PasswordResetRequestForm extends Model
 {
     public $email;
+    public $reCaptcha;
 
 
     /**
@@ -25,8 +26,9 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with this email address.'
-            ],
+                'message' => 'Este email não parece estar correto.'],
+            [['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6LdspJQUAAAAALc6DOO96ggEaerhMUbQGM-U6wI5', 'uncheckedMessage' => 'Por favor confirme que não és um robo'],
+
         ];
     }
 
@@ -49,7 +51,7 @@ class PasswordResetRequestForm extends Model
         
         if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
-            if (!$user->save()) {
+            if (!$user->save(false)) {
                 return false;
             }
         }
@@ -60,9 +62,9 @@ class PasswordResetRequestForm extends Model
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name ])
             ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->setSubject('Restauro da senha para ' . Yii::$app->name)
             ->send();
     }
 }

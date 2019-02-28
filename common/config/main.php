@@ -16,6 +16,12 @@ return [
             'password' => 'Terra.system1',
             'charset' => 'utf8',
         ],
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LeAl3QUAAAAAPh0DtPfFmnKgmBwQDpK9XwQFVYc',
+            'secret' => '6LeAl3QUAAAAALruOESsemGt-x4vMZx1W8UjTejZ',
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',

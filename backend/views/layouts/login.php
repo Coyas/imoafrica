@@ -8,6 +8,7 @@
 use backend\assets\LoginAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\widgets\Alert;
 
 LoginAsset::Register($this);
 ?>
@@ -27,7 +28,9 @@ LoginAsset::Register($this);
 </head>
 <body class="hold-transition login-page">
 <?php $this->beginBody() ?>
-
+<div style="margin-left: 35%; width: 40%; margin-top: 5%;">
+    <?= Alert::widget() ?>
+</div>
 <?= $content ?>
 
 <script>
