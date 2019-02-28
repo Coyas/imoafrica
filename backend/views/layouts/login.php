@@ -7,6 +7,7 @@
  */
 use backend\assets\LoginAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 LoginAsset::Register($this);
 ?>
@@ -18,7 +19,8 @@ LoginAsset::Register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="icon.png">
+<!--    <link rel="icon" href="sys/icon.png">-->
+    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/sys/icon.png')]); ?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>

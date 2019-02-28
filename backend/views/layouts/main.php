@@ -5,10 +5,8 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -19,7 +17,8 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="icon.png">
+<!--    <link rel="icon" href="sys/icon.png">-->
+    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/sys/icon.png')]);?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -34,7 +33,7 @@ AppAsset::register($this);
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
 <!--            <span class="logo-mini"><b>I</b>MO</span>-->
-            <img class="icon" src="fav.png" height="40" width="40" >
+            <img class="icon" src="<?=Url::to('/sys/fav.png')?>" height="40" width="40" >
             <!-- logo for regular state and mobile devices -->
 <!--            <span class="logo-lg"><b>ImoAfrica</b></span>-->
         </a>
@@ -376,7 +375,7 @@ AppAsset::register($this);
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fas fa-eye"></i> <span>Visitar O Site</span></a></li>
+                        <li><a href="#"><?=Html::a('<i class="fas fa-eye"></i> <span>Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
                         <li><a href="#"><i class="fas fa-phone"></i> Contactos</a></li>
                         <li><a href="#"><i class="fas fa-users"></i> Usuarios</a></li>
 <!--                        <li class="treeview">-->

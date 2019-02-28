@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="login-logo">
 <!--        <a href=""><b> Html::encode($this->title) ?></b></a>-->
 <!--        <img src="fav.png" width="100" height="100" alt="Imoafrica">-->
-        <?= Html::img('fav.png', ['width' => 100, 'height' => 100, 'alt' => 'Imoafrica'])?>
+        <?= Html::img(Url::to('/sys/icon.png'), ['width' => 100, 'height' => 100, 'alt' => 'Imoafrica'])?>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
