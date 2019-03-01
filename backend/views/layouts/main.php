@@ -55,7 +55,7 @@ AppAsset::register($this);
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -68,7 +68,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -80,7 +80,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -92,7 +92,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -104,7 +104,7 @@ AppAsset::register($this);
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -163,7 +163,7 @@ AppAsset::register($this);
                     <!-- Tasks: style can be found in dropdown.less -->
                     <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-tasks"></i>
                             <span class="label label-danger">9</span>
                         </a>
                         <ul class="dropdown-menu">
@@ -241,13 +241,13 @@ AppAsset::register($this);
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="user-image" alt="User Image">
+                            <img src="<?=Url::to('/sys/icon.png')?>" class="user-image" alt="User Image">
                             <span class="hidden-xs"><?=Yii::$app->user->identity->username?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="<?=Url::to('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+                                <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
 
                                 <p>
                                     Alexander Pierce - Web Developer
@@ -272,7 +272,8 @@ AppAsset::register($this);
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+<!--                                    <a href="#" class="btn btn-default btn-flat">Profile</a>-->
+                                    <?=Html::a('Perfil', ['users/view', 'id' => Yii::$app->user->identity->getId()], ['class' => 'btn btn-default btn-flat'])?>
                                 </div>
                                 <div class="pull-right">
 <!--                                    <a id="sair" class="btn btn-default btn-flat">Sair</a>-->
@@ -408,7 +409,7 @@ AppAsset::register($this);
         <section class="content-header">
             <h1>
                 Dashboard
-                <small>Control panel</small>
+                <small>Painel De Controle</small>
             </h1>
 <!--            <ol class="breadcrumb">-->
 <!--                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>-->
@@ -433,7 +434,7 @@ AppAsset::register($this);
         <div class="pull-right hidden-xs">
             <b>Versão</b> 2.0
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://innovatmedia.com" target="_blank">iMedia innovative media</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy; <?=date('Y');?> <a href="https://innovatmedia.com" target="_blank">iMedia innovative media</a>.</strong> Todos os direitos reservados.
     </footer>
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use yii\db\Query;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -15,16 +16,41 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
+
+    <?php
+    $access = (new Query())->select('access')->from('user')->where(['id' => Yii::$app->user->identity->getId()])->One();
+    $apagar = (new Query())->select('status')->from('user')->where(['id' => $model->id])->One();
+    ?>
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Desejas mesmo apagar este usuario?',
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?= Html::a('Mudar a senha', ['users/change-password'], ['class' => 'btn btn-primary']) ?>
+<!--        se estas desativo e eś admin podes ativar ou apagar esta conta-->
+        <?php if ($model->status == 0 && $access['access'] == 1) { ?>
+            <?= Html::a('Activar', ['activar', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+            <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Queres mesmo apagar esta conta?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php } ?>
+
+<!--        se és admin, estas ativo e não eś o dono da sessão podes desativar esta conta-->
+        <?php if($access['access'] == 1 && $apagar['status'] == 10 && Yii::$app->user->identity->username != $model->username){?>
+            <?= Html::a('Desativar', ['desativar', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Queres mesmo desativar esta conta?',
+                    'method' => 'post',
+                ],
+            ]);} ?>
+
+<!--        se és o dono ca sessão podes atualizar e mudar a senha deste usuario-->
+        <?php if (Yii::$app->user->identity->username === $model->username) { ?>
+            <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+
+            <?= Html::a('Mudar a senha', ['users/change-password'], ['class' => 'btn btn-primary']) ?>
+        <?php }?>
     </p>
 
     <?= DetailView::widget([
@@ -39,7 +65,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'ftlg',
             'access',
-            'status',
+//            'status',
+            [
+                'attribute' => 'Estado',
+                'value' => function($data){
+                    if($data->status == 10){
+                        return "Activo";
+                    }else {
+                        return "Inactivo";
+                    }
+                }
+            ],
             'created_at',
             'updated_at',
         ],

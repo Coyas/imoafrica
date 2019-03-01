@@ -108,7 +108,8 @@ class UsersController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+//        return $this->redirect(['index']);
+        return $this->redirect(['users/index']);
     }
 
     /**
@@ -189,5 +190,45 @@ class UsersController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     * função para tornar um ususario inativo, isto é, não poder acessar o site
+     */
+    public function actionActivar($id){
+
+
+
+//        $searchModel = new UsersSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $user = Users::findOne($id);
+        $user->status = 10;
+        $user->save(false);
+        Yii::$app->session->setFlash('success', "Usuario activado com sucesso.");
+
+        return $this->redirect(['users/view', 'id' => $id]);
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ]);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * esta função fará com que um usuario seja desativado
+     */
+    public function actionDesativar($id)
+    {
+        $user = $this->findModel($id);
+        $user->status = 0;
+        $user->save(false);
+
+//        return $this->goHome();
+        return $this->redirect(['users/view', 'id' => $id]);
     }
 }
