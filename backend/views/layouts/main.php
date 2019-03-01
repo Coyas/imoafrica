@@ -250,7 +250,7 @@ AppAsset::register($this);
                                 <img src="<?=Url::to('/sys/icon.png')?>" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    <?= Yii::$app->user->identity->Nome ?>
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>

@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <div class="form-group has-feedback">
 <!--                <input type="email" class="form-control" placeholder="Email">-->
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Username'])->label(false) ?>
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true, 'placeholder' => 'Email'])->label(false) ?>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 
             </div>

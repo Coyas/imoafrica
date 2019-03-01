@@ -38,5 +38,17 @@ return [
                 'encryption' => 'ssl',
             ],
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'nullDisplay' => '-',
+            'locale' => 'pt-PT',
+            'dateFormat' => 'd-M-Y',
+            'datetimeFormat' => 'd-M-Y H:i:s',
+            'timeFormat' => 'H:i:s',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'CVE',
+            'timeZone' => 'Atlantic/Cape_Verde'
+        ],
     ],
 ];
