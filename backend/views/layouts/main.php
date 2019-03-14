@@ -21,6 +21,8 @@ AppAsset::register($this);
     <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/sys/icon.png')]);?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+    <script src="<?=Url::to('/plugins/ckfinder/ckfinder.js')?>"></script>
     <?php $this->head() ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -251,7 +253,7 @@ AppAsset::register($this);
 
                                 <p>
                                     <?= Yii::$app->user->identity->Nome ?>
-                                    <small>Member since Nov. 2012</small>
+                                    <small>Membro desde <?= Yii::$app->user->identity->created_at ?></small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -443,6 +445,7 @@ AppAsset::register($this);
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
+
 <?php $this->endBody() ?>
 </body>
 </html>

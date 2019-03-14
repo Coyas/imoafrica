@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
         'bower_components/bootstrap-daterangepicker/daterangepicker.css',
         'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
         'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',
-        'https://use.fontawesome.com/releases/v5.7.2/css/all.css'
+        'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
 
     ];
     public $js = [
@@ -45,7 +45,7 @@ class AppAsset extends AssetBundle
         'bower_components/fastclick/lib/fastclick.js',
         'dist/js/adminlte.min.js',
         'dist/js/pages/dashboard.js',
-        'dist/js/demo.js'
+        'dist/js/demo.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
