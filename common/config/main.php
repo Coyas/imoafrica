@@ -12,8 +12,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=imo',
-            'username' => 'coyas',
-            'password' => 'Terra.system1',
+            'username' => 'root',
+            'password' => 'terrasystem',
             'charset' => 'utf8',
         ],
         'reCaptcha' => [

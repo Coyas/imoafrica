@@ -7,5 +7,6 @@
  */
 
 return [
-    'Eu sou Ailton' => 'Je suis Ailton',
+    'Arrendar' => 'Je suis Ailton',
+    'Propriedades Para Arrendar' => 'Propriété à louer'
 ];

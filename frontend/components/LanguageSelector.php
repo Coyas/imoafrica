@@ -27,12 +27,12 @@ class LanguageSelector implements BootstrapInterface
     {
         $cookies = $app->response->cookies;
         $languageNew = $app->request->get('language');
-        echo $languageNew;
+//        echo $languageNew;
 
         if($languageNew !== null)
         {
             if (!in_array($languageNew, $this->supportedLanguages)) {
-                throw new Exception('Invalid your selected language terra system.');
+                throw new Exception('Invalid your selected language.');
             }
 
             $cookies->add(new Cookie([
@@ -41,7 +41,7 @@ class LanguageSelector implements BootstrapInterface
                 'expire' => time() + 60 * 60 * 24 * 30, // 30 days
             ]));
             $app->language = $languageNew;
-            echo $app->language;
+//            echo $app->language;
 
         }
         else

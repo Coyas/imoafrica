@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\PasswordResetRequestForm;
+use common\models\ResetPasswordForm;
+use common\models\SignupForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -8,9 +11,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
 /**
@@ -211,5 +211,27 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionArrendar(){
+        return $this->render('arrendar');
+    }
+    public function actionComprar(){
+        return $this->render('comprar');
+    }
+    public function actionVender(){
+        return $this->render('vender');
+    }
+    public function actionLegalizar(){
+        return $this->render('legalizar');
+    }
+    public function actionJunte(){
+        return $this->render('junte');
+    }
+    public function actionAvaliacao(){
+        return $this->render('avaliacao');
+    }
+    public function actionDetalhes(){
+        return $this->render('detalhes');
     }
 }

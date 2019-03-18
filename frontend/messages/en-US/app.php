@@ -7,5 +7,6 @@
  */
 
 return  [
-    'Eu sou Ailton' => 'I am Ailton',
+    'Arrendar' => 'Rent',
+    'Propriedades Para Arrendar' => 'Property For Rent'
 ];

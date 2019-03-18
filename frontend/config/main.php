@@ -46,12 +46,12 @@ return [
             'supportedLanguages' => ['en-US', 'pt-PT', 'fr-FR'],
         ],
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'rules' => [
+//            ],
+//        ],
 
     ],
     'params' => $params,
