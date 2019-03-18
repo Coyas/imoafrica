@@ -1,9 +1,9 @@
-// ESCONDER MENU BAR
-$("#banner").hide();
+/*// ESCONDER MENU BAR*/
+//$("#banner").hide();
 // fade in .navbar
 $(function () {
 
-    if ($(window).width() > 1024) {
+    /*if ($(window).width() > 1024) {
       $(window).scroll(function () {
         // set distance user needs to scroll before we start fadeIn
         if ($(this).scrollTop() > 680) {
@@ -29,7 +29,7 @@ $(function () {
             $('#banner').fadeOut();
         }
       });
-    }
+    }*/
 
     /* $(document).ready(function(){
     var banner = $("#meunav");
@@ -41,7 +41,8 @@ $(function () {
         $("meubanner").fadeIn();
       }
     }); */
-  
+
+
     $(".filter-button").click(function(){
         var value = $(this).attr('data-filter');
         if(value == "all")
@@ -54,39 +55,39 @@ $(function () {
             $('.filter').filter('.'+value).show('3000');
         }
     });
-    
+
     if ($(".filter-button").removeClass("active")) {
     $(this).removeClass("active");
     }
     $(this).addClass("active");
 
-    
+
 });
 
 (function($) {
     "use strict";
-  
+
     //* Form js
     function verificationForm() {
       //jQuery time
       var current_fs, next_fs, previous_fs; //fieldsets
       var left, opacity, scale; //fieldset properties which we will animate
       var animating; //flag to prevent quick multi-click glitches
-  
+
       $(".next").click(function() {
         if (animating) return false;
         animating = true;
-  
+
         current_fs = $(this).parent();
         next_fs = $(this)
           .parent()
           .next();
-  
+
         //activate next step on progressbar using the index of next_fs
         $("#progressbar li")
           .eq($("fieldset").index(next_fs))
           .addClass("active");
-  
+
         //show the next fieldset
         next_fs.show();
         //hide the current fieldset with style
@@ -122,21 +123,21 @@ $(function () {
           }
         );
       });
-  
+
       $(".previous").click(function() {
         if (animating) return false;
         animating = true;
-  
+
         current_fs = $(this).parent();
         previous_fs = $(this)
           .parent()
           .prev();
-  
+
         //de-activate current step on progressbar
         $("#progressbar li")
           .eq($("fieldset").index(current_fs))
           .removeClass("active");
-  
+
         //show the previous fieldset
         previous_fs.show();
         //hide the current fieldset with style
@@ -171,15 +172,15 @@ $(function () {
           }
         );
       });
-  
+
       $(".submit").click(function() {
         return false;
       });
     }
-   
+
     verificationForm();
   })(jQuery);
-  
+
   $(document).ready(function() {
     $('.input-group input[required], .input-group textarea[required], .input-group select[required]').on('keyup change', function() {
 		var $form = $(this).closest('form'),
@@ -187,7 +188,7 @@ $(function () {
 			$addon = $group.find('.input-group-addon'),
 			$icon = $addon.find('span'),
 			state = false;
-            
+
     	if (!$group.data('validate')) {
 			state = $(this).val() ? true : false;
 		}else if ($group.data('validate') == "email") {
@@ -209,16 +210,14 @@ $(function () {
 				$addon.addClass('danger');
 				$icon.attr('class', 'glyphicon glyphicon-remove');
 		}
-        
+
         if ($form.find('.input-group-addon.danger').length == 0) {
             $form.find('[type="button"]').prop('disabled', false);
         }else{
             $form.find('[type="button"]').prop('disabled', true);
         }
 	});
-    
-    $('.input-group input[required], .input-group textarea[required], .input-group select[required]').trigger('change');
-    
-});
 
-  
+    $('.input-group input[required], .input-group textarea[required], .input-group select[required]').trigger('change');
+
+});

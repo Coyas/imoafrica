@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'fullpage/src/fullpage.css',
         'vendor/bootstrap/css/bootstrap.min.css',
         'css/index.css',
         'css/jssorlider.css',
@@ -29,7 +30,9 @@ class AppAsset extends AssetBundle
         'http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js',
         'js/script.js',
         'js/jssorslider.js',
-        'js/lightbox.js'
+        'js/lightbox.js',
+        'fullpage/vendors/scrolloverflow.min.js',
+        'fullpage/dist/fullpage.extensions.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

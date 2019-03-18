@@ -7,5 +7,6 @@
  */
 
 ?>
-
+<div class="section">
 legalizar
+</div>

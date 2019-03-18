@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -24,80 +25,16 @@ AppAsset::register($this);
     <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/icon.png')]); ?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+
     <?php $this->head() ?>
+
 </head>
 <body>
 <?php $this->beginBody() ?>
-<!--banner logo-->
-<div id="img">
-    <!-- Page Content -->
-    <section>
-        <div class="container">
-            <div class="float-right row">
-                <div class="p-3">
-                    <!--                    <a href="#" title="Português"><img class="imglp" src="images/pt.png"></a>-->
-                    <!--                    <a href="#" title="Inglês"><img class="imglp" src="images/en.png"></a>-->
-                    <!--                    <a href="#" title="Francês"><img class="imglp"  src="images/fr.png"></a>-->
-                    <!--                    <img class="imglp" src="images/pt.png">-->
 
-                    <?= Html::a(Html::img(Url::to('images/pt.png'), ['class' => 'imglp']), Url::current(['language' => 'pt-PT']), ['title' => 'Português'])?>
-                    <?= Html::a(Html::img(Url::to('images/en.png'), ['class' => 'imglp']), Url::current(['language' => 'en-US']), ['title' => 'Inglês'])?>
-                    <?= Html::a(Html::img(Url::to('images/fr.png'), ['class' => 'imglp']), Url::current(['language' => 'fr-FR']), ['title' => 'Francês'])?>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <div id="meubanner">
-        <nav id="meunav" class="navbar navbar-expand-lg fixed-bottommeu">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <!--                            <a class="nav-link" href="#">Arrendar</a>-->
-                            <?= Html::a(Yii::t('app', 'Arrendar'), ['site/arrendar'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item">
-                            <!--                            <a class="nav-link" href="#">Comprar</a>-->
-                            <?= Html::a(Yii::t('app', 'Comprar'), ['site/comprar'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item">
-                            <!--                            <a class="nav-link" href="#">Vender</a>-->
-                            <?= Html::a(Yii::t('app', 'Vender'), ['site/vender'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item">
-                            <!--                            <a class="nav-link" href="#">Legalizar</a>-->
-                            <?= Html::a(Yii::t('app', 'Legalizar'), ['site/legalizar'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item">
-                            <!--                            <a class="nav-link" href="#">Contactos</a>-->
-                            <?= Html::a(Yii::t('app', 'Contactos'), ['site/contact'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item active">
-                            <!--                            <a class="nav-link" href="#">Junte-se a nós</a>-->
-                            <?= Html::a(Yii::t('app', 'Junte-se a nós'), ['site/junte'], ['class' => 'nav-link'])?>
-                        </li>
-                        <li class="nav-item">
-                            <!--                            <a class="nav-link" href="#">Avaliação</a>-->
-                            <?= Html::a(Yii::t('app', 'Avaliação'), ['site/avaliacao'], ['class' => 'nav-link'])?>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="fixed-footer p-3 footermobile">
-        <!--        <a href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>-->
-        <a href="#"> <?= Html::img(URL::to(Yii::$app->params['img'].'faceboook.png', true), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']);?> </a>
-
-    </div>
-
-</div>
-<!--fim do banner inicial-->
+<!--Menu que sera fixo-->
 
 
-<!--header menu-->
 <!-- Navigation -->
 <div id="banner">
     <nav id="navscroll" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -112,42 +49,39 @@ AppAsset::register($this);
 
                 </div>
                 <div class="logom">
-<!--                    <img src="images/logop.png" alt="" class="imlogom">-->
-                    <?= Html::img(Url::to(Yii::$app->params['images'].'logop.png'), ['class' => 'imlogom'])?>
+                    <img src="images/logop.png" alt="" class="imlogom">
                 </div>
                 <div class="telem">
-<!--                    <span> <img src="images/phone.png" width="30" height="30" alt="" class=""> 921 01 15</span>-->
-                    <span>  <?= Html::img(Url::to(Yii::$app->params['images'].'phone.png'), [ 'width' => 30, 'height' => 30])?> 921 01 15</span>
+                    <span> <img src="images/phone.png" width="30" height="30" alt="" class=""> 921 01 15</span>
                 </div>
             </div>
 
             <div class="logop">
 <!--                <a class="navbar-brand" href="#">-->
-<!--                    <img src="images/logop.png" alt="" class="logo">-->
-<!---->
+<!--                    <img  src="images/logop.png" alt="" class="logo">-->
 <!--                </a>-->
-                <?= Html::a(Html::img('images/logop.png', ['class' => 'logo']), ['site/index'],['class' => 'navbar-brand'])?>
+                <?= Html::a(Html::img('images/logop.png', ['class' => 'logo']),['site/index'], ['class' => 'navbar-brand']) ?>
             </div>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+                <ul id="tt" class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <!--                            <a class="nav-link" href="#">Arrendar</a>-->
+<!--                        <a class="nav-link" href="#">Arrendar</a>-->
                         <?= Html::a(Yii::t('app', 'Arrendar'), ['site/arrendar'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
-                        <!--                            <a class="nav-link" href="#">Comprar</a>-->
+<!--                        <a class="nav-link" href="#">Comprar</a>-->
                         <?= Html::a(Yii::t('app', 'Comprar'), ['site/comprar'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
-                        <!--                            <a class="nav-link" href="#">Vender</a>-->
+<!--                        <a class="nav-link" href="#">Vender</a>-->
                         <?= Html::a(Yii::t('app', 'Vender'), ['site/vender'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
-                        <!--                            <a class="nav-link" href="#">Legalizar</a>-->
-                        <?= Html::a(Yii::t('app', 'Legalizar'), ['site/legalizar'], ['class' => 'nav-link'])?>
+<!--                        <a class="nav-link" href="#">Legalizar</a>-->
+                        <?= Html::a(Yii::t('app', 'Legalizar'), ['site/contact'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
-                        <!--                            <a class="nav-link" href="#">Contactos</a>-->
+<!--                        <a class="nav-link" href="#">Contactos</a>-->
                         <?= Html::a(Yii::t('app', 'Contactos'), ['site/contact'], ['class' => 'nav-link'])?>
                     </li>
                 </ul>
@@ -159,7 +93,7 @@ AppAsset::register($this);
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Avaliação</a>-->
-                        <?= Html::a(Yii::t('app', 'Avaliação'), ['site/avaliacao'], ['class' => 'nav-link'])?>
+                        <?= Html::a(Yii::t('app', 'Avaliação'), ['site/contact'], ['class' => 'nav-link'])?>
                     </li>
                 </ul>
 
@@ -180,6 +114,7 @@ AppAsset::register($this);
                                 <li>
                                     <a href="#" title="Select this card"><img width="40" height="40" src="images/en.png"></a>
                                 </li>
+
                             </ul>
                         </div>
                     </li>
@@ -188,26 +123,69 @@ AppAsset::register($this);
         </div>
     </nav>
 </div>
-<!--fim do header menu-->
+<!--fim do menu fixo-->
 
-<?= $content ?>
+<!--inicio do fullpage-->
+<div id="fullpage">
 
-<!-- footer -->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <p>2018 © ImoAfrica. Todos os direitos reservados<br>
-                    Implementado pela <?= Html::a('iMedia Innovative media', 'https://innovativemedia.com', ['target' => '_blank'])?>
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <a class="facebooklink" href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>
+    <?= $content ?>
+    <div id="foot" class="section fp-auto-height">
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                        <p>2018 © ImoAfrica. Todos os direitos reservados<br>
+                            Implementado pela <a href="#">iMedia Innovative media</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <a class="facebooklink" href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </div>
 </div>
+<!--fim do fullpage-->
+<?php
+$this->registerJs(
+    " new fullpage('#fullpage', {
+        //licença
+        licenseKey: '57FD467D-B08342AA-83713A7A-94441FA6',
+        //options here
+        autoScrolling:true,
+        scrollHorizontally: true,
+        lazyLoading: true,
+        //scrollingSpeed: 5000,
+        //easing: 'easeInOutCubic',
+        //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/
+        //easingcss3: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+
+        onLeave: function(origin, destination, direction){
+            var leavingSection = this;
+
+            //after leaving section 2
+            if(origin.index == 0 && direction =='down'){
+                $('#banner').fadeIn();
+            }
+            else if(origin.index == 1 && direction == 'up'){
+                 $('#banner').fadeOut();
+            }
+        }
+
+    });
+
+    //methods
+    fullpage_api.setAllowScrolling(true);
+    $(\"#banner\").hide();",
+    View::POS_END,
+    'myfullpage'
+);
+?>
 
 <?php $this->endBody() ?>
 </body>
