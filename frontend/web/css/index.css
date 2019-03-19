@@ -4,6 +4,45 @@ body{
   height: 100vh;
 }
 
+/*tooltips*/
+.tooltips {
+    position: relative;
+    display: inline-block;
+    /*border-bottom: 1px dotted black;*/
+}
+
+.tooltips .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    background-color: #c19435;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    /*z-index: 1000;*/
+    bottom: 101%;
+    left: 18%;
+    margin-left: -60px;
+}
+
+.tooltips .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c19435 transparent transparent transparent;
+}
+
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+}
+/*fim do tooltips*/
+
+
 iframe {
     width:100%;
     height: 100%;
@@ -11,8 +50,39 @@ iframe {
 /*.nav-item a {*/
     /*font-size: 14px !important;*/
 /*}*/
-#b {
-    height: 700px !important;
+.juntese {
+    font-size: 3.4em;
+    position: absolute;
+    top: 20%;
+    right: 38%;
+    z-index: 50;
+    float: left;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+}
+.aa {
+    text-decoration: none !important;
+}
+.aa:hover {
+    color: white;
+    text-shadow: 1px 1px black;
+}
+#meubanner li{
+    font-size: 1.4em;
+}
+.vazio {
+   margin-top: 5%;
+}
+#vender {
+    margin-left: -2%;
+}
+.vender {
+    /*width: 532px;*/
+    height: 820px;
+}
+#fundo {
+    background-image: url("../images/map.png");
 }
 #destaquesCarousel .fp-tableCell {
   height: 72px !important;
@@ -327,8 +397,8 @@ input.meu-form::placeholder {
   background-repeat: repeat;
   background-position: center center;
 }
-.fullwidthc{
-  padding: 20;
+.fullwidthc {
+  padding: 20px;
 }
 .pub{
   padding: 30px;
@@ -437,7 +507,7 @@ input.meu-form::placeholder {
   margin-bottom: auto
 }
 .meumarginb {
-  margin-bottom: 30px;
+    padding: 0 5% 0 5%;
 }
 
 
@@ -478,6 +548,7 @@ a.linkdetalhes:hover {
 /* CADASTRO DE PROPRIEDADE */
 .formcadpro {
   background: #ecba49;
+    padding: 0 4% 0 4%;
 }
 .meucontainer {
   width: 100%;
@@ -564,6 +635,10 @@ color: #000000;
 }
 .footer .facebooklink {
     float: right;
+}
+.footer .instagramlink {
+    float: right;
+    margin-right: 2%;
 }
 .footer a {
     color: #c19435;
@@ -940,7 +1015,7 @@ padding-bottom: 5px;
 
 /* PAGINA JUNTE_SE A NOS */
 .imgjuntese{
-  background: url("../images/junte-se.png");
+  background: url("../images/jordy.webp");
   background-size: cover;
   min-height: 650px;
 }

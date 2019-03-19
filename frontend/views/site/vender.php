@@ -1,18 +1,25 @@
 <?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 
 ?>
-
+<div class="section fp-auto-height">
+    <div id="cabe" class="container-fluid">
+        <h1 class="gallery-title"> </h1>
+    </div>
+</div>
 <div class="section fp-auto-height">
     <div id="cabe" class="container-fluid">
         <h1 class="gallery-title"> Venda aqui a sua Propriedade </h1>
     </div>
 </div>
 <div class="section fp-auto-height">
-    <div id="b" class="container-fluid">
-        <div class="row">
+    <div  class="container-fluid">
+        <div id="vender" class="row">
             <div style="background-color: #000;" class="col-md-4 mh-100">
-
+                <?= Html::img(Url::to('images/vender.webp'), ['class' => 'vender']) ?>
             </div>
             <div class="formcadpro col-md-8 mh-100">
                 <!-- Multi step form -->
@@ -151,6 +158,16 @@ use yii\web\View;
                         </fieldset>
 
                         <fieldset>
+                            <h3 class="info-text">3. Preview da publicação</h3>
+                            <div class="preview">
+                                <img src="images/p2.jpg" class="img-preview img-fluid" alt="">
+                                <div class="centered"><img width="80" height="80" src="images/preview.png" alt=""></div>
+                            </div>
+                            <a href="#" class="action-button">HOME</button>
+                                <a href="#" class="action-button">Ir para pagina</a></a>
+                        </fieldset>
+
+                        <fieldset>
                             <h3 class="info-text">4. Comfirmação da publicação</h3>
                             <div class="comfirmacao">
                                 <img width="100" height="100" src="images/confirmar.png" alt="">
@@ -160,15 +177,6 @@ use yii\web\View;
                             <button type="button" class="next action-button">Próximo</button>
                         </fieldset>
 
-                        <fieldset>
-                            <h3 class="info-text">3. Preview da publicação</h3>
-                            <div class="preview">
-                                <img src="images/p2.jpg" class="img-preview img-fluid" alt="">
-                                <div class="centered"><img width="80" height="80" src="images/preview.png" alt=""></div>
-                            </div>
-                            <a href="#" class="action-button">HOME</button>
-                                <a href="#" class="action-button">Ir para pagina</a></a>
-                        </fieldset>
                     </form>
                 </section>
                 <!-- End Multi step form -->

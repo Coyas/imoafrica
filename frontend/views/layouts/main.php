@@ -29,7 +29,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
 </head>
-<body>
+<body id="fundo">
 <?php $this->beginBody() ?>
 
 <!--Menu que sera fixo-->
@@ -78,7 +78,7 @@ AppAsset::register($this);
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Legalizar</a>-->
-                        <?= Html::a(Yii::t('app', 'Legalizar'), ['site/contact'], ['class' => 'nav-link'])?>
+                        <?= Html::a(Yii::t('app', 'Legalizar'), ['site/legalizar'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Contactos</a>-->
@@ -93,13 +93,13 @@ AppAsset::register($this);
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Avaliação</a>-->
-                        <?= Html::a(Yii::t('app', 'Avaliação'), ['site/contact'], ['class' => 'nav-link'])?>
+                        <?= Html::a(Yii::t('app', 'Avaliação'), ['site/avaliacao'], ['class' => 'nav-link'])?>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link bold" href="#"> <img src="images/phone.png" width="30" height="30" alt="" class=""> (+238) 921 01 15</a>
+                        <a class="nav-link bold" id="tel" href="tel:002389210115"><img src="images/phone.png" width="30" height="30" alt="" class="">  (+238) 921 01 15</a>
                     </li>
                     <li>
                         <div class="btn-group">
@@ -141,7 +141,10 @@ AppAsset::register($this);
                         </p>
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <a class="facebooklink" href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>
+                        <?= Html::a(Html::img(Url::to('images/facebook.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']), 'https://web.facebook.com/imoafricarealestate/', ['class' => 'facebooklink', 'target' => '_blank'])?>
+                        <?= Html::a(Html::img(Url::to('images/instagram.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Instagram']), 'https://web.facebook.com/imoafricarealestate/', ['class' => 'instagramlink', 'target' => '_blank'])?>
+<!--                        <a class="facebooklink" href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>-->
+<!--                        <a class="instagramlink" href="#"> <img src="images/instagram.png" width="50" height="50" alt="Nosso Instagram"> </a>-->
                     </div>
                 </div>
 
@@ -160,6 +163,10 @@ $this->registerJs(
         autoScrolling:true,
         scrollHorizontally: true,
         lazyLoading: true,
+        navigation: true,
+	    navigationPosition: 'right',
+	    showActiveTooltip: false,
+	    scrollOverflow: true,
         //scrollingSpeed: 5000,
         //easing: 'easeInOutCubic',
         //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/

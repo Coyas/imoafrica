@@ -292,25 +292,25 @@ $this->title = 'ImoAfrica Real Estate';
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/clientes.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> 1000 + Clientes Satisfeitos</h3>
-                        <p class="pub-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam. </p>
-                        <a href="#" class="pub-btn">Saiba Mais</a>
+                        <h3 class="pub-title"> ??? Clientes Satisfeitos</h3>
+                        <p class="pub-text"> Confira os varios clientes satisfeitos e seus testimunhos. </p>
+                        <a href="#" class="pub-btn aa">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/pesquisa.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> Pesquisa Inteligentes </h3>
-                        <p class="pub-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam. </p>
-                        <a href="#" class="pub-btn">Saiba Mais</a>
+                        <h3 class="pub-title"> Pesquisas Inteligente </h3>
+                        <p class="pub-text"> Dispomos de uma ferramenta para pesquisa filtrada de propriedades. </p>
+                        <a href="#" class="pub-btn aa">Saiba Mais</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/help.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> Nos Estamos Aqui Para Ajudar </h3>
-                        <p class="pub-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent aliquam. </p>
-                        <a href="#" class="pub-btn">Saiba Mais</a>
+                        <h3 class="pub-title"> Nós Estamos Aqui Para Ajudar </h3>
+                        <p class="pub-text"> Na oferta de um serviço integrado e global no mundo de mediação imobiliária. </p>
+                        <a href="#" class="pub-btn aa">Saiba Mais</a>
                     </div>
                 </div>
             </div>

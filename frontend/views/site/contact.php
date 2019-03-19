@@ -11,15 +11,20 @@ use yii\web\View;
 
 $this->title = 'Contacto';
 ?>
-<div class="section">
+
+<div  class="section fp-auto-height">
+    <div id="cabe" class="container-fluid">
+        <h1 class="gallery-title"> </h1>
+    </div>
+</div>
+
+<div class="section fp-auto-height">
     <div class="container-fluid">
         <div class="row">
-            <div style="background-color: #fff;" class="col-md-6 mh-100 p-0">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15420.877359107766!2d-23.5081126!3d14.9248684!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3555f5db0b9eaa9a!2sIMOAFRICA+-+MEDIA%C3%87%C3%83O+IMOBILI%C3%81RIA%2C+LDA!5e0!3m2!1spt-PT!2scv!4v1552915948916" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </div>
+
             <div class="contatodesc col-md-6 mh-100 p-0">
                 <div class="contato">
-                    <h1 class="titlecontato"> Contatos </h1>
+                    <h1 class="titlecontato"> <?= Yii::t('app', 'Contactos ') ?></h1>
                     <div class="dadosendereco">
                         <span class="itemscontato"> <img src="images/tele.png" width="20" height="20" alt=""> (+238) 298 76 77 </span>
                         <span class="itemscontato"> <img src="images/email.png" width="20" height="20" alt=""> geral@imoafrica.com </span>
@@ -44,8 +49,10 @@ $this->title = 'Contacto';
                                     <div class="input-group col-md-12">
                                         <select class="meuselectcontato" name="" id="">
                                             <optgroup>
-                                                <option value=""> Assunto </option>
-                                                <option value="">1</option>
+                                                <option value=""> Informaçes da empresa</option>
+                                                <option value=""> Legalizar imovel</option>
+                                                <option value=""> Avaliar Propriedade</option>
+                                                <option value=""> OUTRO</option>
                                             </optgroup>
                                         </select>
                                     </div>
@@ -66,9 +73,14 @@ $this->title = 'Contacto';
                 </div>
 
             </div>
+
+            <div style="background-color: #fff;" class="col-md-6 mh-100 p-0">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15420.877359107766!2d-23.5081126!3d14.9248684!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3555f5db0b9eaa9a!2sIMOAFRICA+-+MEDIA%C3%87%C3%83O+IMOBILI%C3%81RIA%2C+LDA!5e0!3m2!1spt-PT!2scv!4v1552915948916" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 </div>
+
 
 <?php
 $this->registerJs(

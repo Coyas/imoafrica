@@ -8,33 +8,56 @@
 
 use yii\web\View;
 ?>
-<div class="section">
-    <div class="meumarginb container">
+
+    <div class="section">
+    <div class="meumarginb container-fluid">
         <h1 class="gallery-title">Showroom</h1>
         <div class="row">
-            <div class="gallery col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="gallery col-md-6">
                 <div class="detalhes-header">
-                    <div class="desc-detalhes preco"> <b>Preço:</b> 200.000</div>
+                    <div class="desc-detalhes preco"> <b>Preço:</b> 200.000 $00</div>
                     <div class="desc-detalhes tipo"> <b>Tipo:</b> Arrendar</div>
-                    <div class="desc-detalhes area"> <b>Area: </b> 0000M</div>
+                    <div class="desc-detalhes area"> <b>Area: </b> 0000m<sup>2</sup></div>
                     <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>
                 </div>
-                <h2 class="detalhes-title">Nome do localização da Propriedade</h2>
+                <h2 class="detalhes-title"><b>Terreno + Casa</b><br>Praia, Achada Grande Trás</h2>
+
                 <h4 class="detalhes-desc">Descrisão</h4>
                 <p class="detalhes-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae dictum eros.
                     Quisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
                     Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
                     risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
                     risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsum
+                    risus, sit amet euismod lacus tellus ac ipsumQuisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
+                    Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
+                    risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
+                    risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
+                    risus, sit amet euismod lacus tellus ac ipsumQuisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
+                    Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
+                    risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
+                    risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
                 </p>
                 <h4 class="detalhes-desc">Compartimentos</h4>
                 <div class="detalhes-header">
-                    <div class="com-detalhes"> <img src="images/quarto.png" class="icone-detalhes" alt=""> <b>2</b></div>
-                    <div class="com-detalhes"> <img src="images/garragem.png" class="icone-detalhes" alt=""> <b>3</b></div>
-                    <div class="com-detalhes"> <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b>2 </b></div>
-                    <div class="com-detalhes"> <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b>1</b></div>
-                    <div class="com-detalhes"> <img src="images/sala.png" class="icone-detalhes" alt=""> <b>1</b></div>
+                    <div class="com-detalhes tooltips">
+                        <img src="images/quarto.png" class="icone-detalhes" alt=""> <b><sub>2</sub></b>
+                        <span class="tooltiptext">Quartos</span>
+                    </div>
+                    <div class="com-detalhes  tooltips">
+                        <img src="images/garragem.png" class="icone-detalhes" alt=""> <b><sub>3</sub></b>
+                        <span class="tooltiptext">Garragem</span>
+                    </div>
+                    <div class="com-detalhes  tooltips">
+                        <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b><sub>2</sub></b>
+                        <span class="tooltiptext">Casa De Banho</span>
+                    </div>
+                    <div class="com-detalhes  tooltips">
+                        <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b><sub>1</sub></b>
+                        <span class="tooltiptext">Cozinha</span>
+                    </div>
+                    <div class="com-detalhes  tooltips">
+                        <img src="images/sala.png" class="icone-detalhes" alt=""> <b><sub>1</sub></b>
+                        <span class="tooltiptext">Sala De Estar</span></div>
                 </div>
             </div>
 
@@ -93,6 +116,9 @@ use yii\web\View;
     </div>
 </div>
 
+<div class="section">
+    <h1 class="gallery-title"> Veja em 360° </h1>
+</div>
 
 
 <?php

@@ -7,11 +7,15 @@
  */
 use yii\web\View;
 ?>
-<div class="section">
+    <div  class="section fp-auto-height">
+        <div id="cabe" class="container-fluid">
+            <h1 class="gallery-title"> </h1>
+        </div>
+    </div>
+<div class="section fp-auto-height">
     <div class="container-fluid">
-        <h1 class="gallery-title">Junte-se a nós</h1>
-
         <div class="row">
+            <h1 class="juntese"><?= Yii::t('app', 'Junte-se a nós')?></h1>
             <div class="imgjuntese col-md-8 mh-100 p-0">
             </div>
             <div class=" col-md-4 mh-100 p-0">
