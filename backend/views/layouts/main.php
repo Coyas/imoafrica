@@ -399,7 +399,7 @@ AppAsset::register($this);
                 </li>
 
                 <li class="header">ACESSOS</li>
-                <li><a href="#"><i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span></a></li>
+                <li><?=Html::a('<i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span>', ['bugreport/index'])?></li>
             </ul>
         </section>
         <!-- /.sidebar -->

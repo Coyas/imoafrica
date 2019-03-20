@@ -18,7 +18,7 @@ use yii\web\View;
                     <div class="desc-detalhes preco"> <b>Preço:</b> 200.000 $00</div>
                     <div class="desc-detalhes tipo"> <b>Tipo:</b> Arrendar</div>
                     <div class="desc-detalhes area"> <b>Area: </b> 0000m<sup>2</sup></div>
-                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>
+<!--                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>-->
                 </div>
                 <h2 class="detalhes-title"><b>Terreno + Casa</b><br>Praia, Achada Grande Trás</h2>
 

@@ -74,7 +74,7 @@ AppAsset::register($this);
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Vender</a>-->
-                        <?= Html::a(Yii::t('app', 'Vender'), ['site/vender'], ['class' => 'nav-link'])?>
+                        <?= Html::a(Yii::t('app', 'Vender'), ['site/contact'], ['class' => 'nav-link'])?>
                     </li>
                     <li class="nav-item">
 <!--                        <a class="nav-link" href="#">Legalizar</a>-->
