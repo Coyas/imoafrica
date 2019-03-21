@@ -77,7 +77,7 @@ class m190320_110719_DataBaseIMO extends Migration
 
         $this->createTable('imagens', [
             'id' => $this->primaryKey(),
-            'link' => $this->text()->notNull(),
+            'foto' => $this->text()->notNull(),
             'id_propriedade' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),

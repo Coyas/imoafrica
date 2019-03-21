@@ -11,7 +11,7 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=imo',
+            'dsn' => 'mysql:host=localhost;dbname=imoDefault',
             'username' => 'root',
             'password' => 'terrasystem',
             'charset' => 'utf8',

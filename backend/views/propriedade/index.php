@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PropriedadeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->params['senha'] = " ";
+
 $this->title = 'Propriedades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

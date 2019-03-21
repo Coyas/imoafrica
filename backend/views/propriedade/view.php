@@ -8,7 +8,6 @@ use yii\web\View;
 /* @var $model app\models\Propriedade */
 
 $this->title = $model->id;
-$this->params['senha'] = " ";
 $this->params['breadcrumbs'][] = ['label' => 'Propriedades', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -56,27 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 
-    <script src="https://product-gallery.cloudinary.com/all.js" type="text/javascript">
-    </script>
-
-    <div id="my-gallery" style="max-width:80%;margin:auto">
-    </div>
-
-    <?php
-        $this->registerJs(
-                "const myGallery= cloudinary.galleryWidget({
-            container: \"#my-gallery\",
-            cloudName: \"imoafrica\",
-            mediaAssets: [
-                {tag: \"imo\"}
-            ]
-        });
-
-        myGallery.render();",
-            View::POS_READY,
-            'upload'
-        );
-    ?>
 
 
 </div>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Propriedade */
-$this->params['senha'] = " ";
+
 $this->title = 'Create Propriedade';
 $this->params['breadcrumbs'][] = ['label' => 'Propriedades', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

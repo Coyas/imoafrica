@@ -400,7 +400,7 @@ AppAsset::register($this);
 
                 <li class="header">ACESSOS</li>
                 <li><?=Html::a('<i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span>', ['bugreport/index'])?></li>
-                <li><a><i class="fas fa-bug" style="color:red;"></i> <span>Senha: </span><?=$this->params['senha']?></a></li>
+<!--                <li><a><i class="fas fa-bug" style="color:red;"></i> <span>Senha: </span>--><?php //=$this->params['senha']?><!--</a></li>-->
             </ul>
         </section>
         <!-- /.sidebar -->

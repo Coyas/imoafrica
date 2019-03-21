@@ -7,8 +7,8 @@
  */
 use yii\web\View;
 ?>
-<button id="upload_widget" class="cloudinary-button">Carregar Imagens</button>
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<!--<button id="upload_widget" class="cloudinary-button">Carregar Imagens</button>-->
+<!--<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>-->
 
 
 <?php
@@ -22,24 +22,24 @@ $dono = "vera";
 //);
 //$assinatura = Cloudinary::api_sign_request($params_to_sign, "2yxRMRhlxO1LQ8xY2n6NO2x7blQ");
 //if($assinatura){
-    $this->registerJs(
-        "var myWidget = cloudinary.createUploadWidget({
-        cloudName: 'imoafrica',
-        uploadPreset: 'imovelF',
+//    $this->registerJs(
+//        "var myWidget = cloudinary.createUploadWidget({
+//        cloudName: 'imoafrica',
+//        uploadPreset: 'imovelF',
 //        apiKey: '855424493243825',
 //        uploadSignature: assinatura',
-        folder: '$dono',
-        multiple: true,
-        sources: ['local', 'url', 'camera', 'image_search']
-        }, (error, result) => { console.log(error, result) })
-        
-        document.getElementById(\"upload_widget\").addEventListener(\"click\", function(){
-        myWidget.open();
-       }, false);
-       ",
-        View::POS_READY,
-        'upload'
-    );
+//        folder: '$dono',
+//        multiple: true,
+//        sources: ['local', 'url', 'camera', 'image_search']
+//        }, (error, result) => { console.log(error, result) })
+//
+//        document.getElementById(\"upload_widget\").addEventListener(\"click\", function(){
+//        myWidget.open();
+//       }, false);
+//       ",
+//        View::POS_READY,
+//        'upload'
+//    );
 //}else{
 //    echo "erro no Cloudinary::api_sign_request";
 //}
