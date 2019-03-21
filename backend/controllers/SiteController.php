@@ -3,6 +3,8 @@ namespace backend\controllers;
 
 use app\models\Users;
 use backend\models\ChangePasswordForm;
+use Cloudinary;
+use Cloudinary\Uploader;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use Yii;
@@ -28,7 +30,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'change-password', 'reset-password', 'request-password-reset'],
+                        'actions' => ['login', 'error', 'change-password', 'reset-password', 'request-password-reset', 'upload', 'my_generate_signature'],
                         'allow' => true,
                     ],
                     [
@@ -42,7 +44,17 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                     [
+                        'actions' => ['upload'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
                         'actions' => ['request-password-reset'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['my_generate_signature'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -212,5 +224,36 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionUpload(){
+
+        Cloudinary::config(array(
+            "cloud_name" => "imoafrica",
+            "api_key" => "855424493243825",
+            "api_secret" => "2yxRMRhlxO1LQ8xY2n6NO2x7blQ"
+        ));
+
+//        $foto = "sys/icon.png";
+//
+//        $var = Uploader::upload($foto,
+//            array(
+//            "folder" => "imoveis/vera/",
+//            "public_id" => "imoafricaw")
+//        );
+//
+//        if($var){
+//            echo "Upload para o cloudnary feito com sucesso";
+//            echo $var;
+//        }else {
+//            echo "deu um erro ao enviar a imagem para o cloudnay";
+//            echo $var;
+//        }
+
+
+        return $this->render('upload');
+    }
+    public function actionMy_generate_signature(){
+//        echo
     }
 }

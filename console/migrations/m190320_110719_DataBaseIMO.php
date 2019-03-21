@@ -32,7 +32,9 @@ class m190320_110719_DataBaseIMO extends Migration
 //            1 - vender
         $this->createTable('propriedade', [
             'id' => $this->primaryKey(),
-            'nome' => $this->string(50)->notNull(),
+            'nomePt' => $this->string(50)->notNull(),
+            'nomeEn' => $this->string(50)->notNull(),
+            'nomeFr' => $this->string(50)->notNull(),
             'ilha' => $this->string(50)->notNull(),
             'zona' => $this->string(50)->notNull(),
             'area' => $this->integer()->notNull(),
@@ -44,17 +46,20 @@ class m190320_110719_DataBaseIMO extends Migration
             'banheiro' => $this->integer()->defaultValue(0),
             'cozinha' => $this->integer()->defaultValue(0),
             'sala' => $this->integer()->defaultValue(0),
-            'descricao' => $this->text(),
+            'descricaoPt' => $this->text(),
+            'descricaoEn' => $this->text(),
+            'descricaoFr' => $this->text(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ], $tableOptions);
 
         $this->createTable('dono', [
             'id' => $this->primaryKey(),
-            'nome' => $this->string(100)->notNull(),
+            'nome' => $this->string(20)->notNull(),
+            'apelido' => $this->string(100)->notNull(),
             'contato' => $this->integer()->notNull(),
             'endereco' => $this->string(100)->notNull(),
-            'email' => $this->string(100)->notNull(),
+            'email' => $this->string(100)->unique(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ], $tableOptions);
@@ -72,7 +77,7 @@ class m190320_110719_DataBaseIMO extends Migration
 
         $this->createTable('imagens', [
             'id' => $this->primaryKey(),
-            'nome' => $this->string(150)->notNull(),
+            'link' => $this->text()->notNull(),
             'id_propriedade' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
@@ -97,6 +102,7 @@ class m190320_110719_DataBaseIMO extends Migration
         $this->dropTable('propriedade');
         $this->dropTable('dono');
         $this->dropTable('dono_propriedade');
+        $this->dropTable('imagens');
     }
 
     /*

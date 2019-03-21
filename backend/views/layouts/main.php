@@ -331,9 +331,9 @@ AppAsset::register($this);
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fas fa-home"></i> Imoveis/Terrenos</a></li>
-                        <li><a href="#"><i class="fas fa-user-tie"></i> Clientes</a></li>
-                        <li><a href="#"><i class="far fa-images"></i> Galeria</a></li>
+                        <li><?=Html::a('<i class="fas fa-home"></i> Imoveis/Terrenos', ['propriedade/'])?></li>
+                        <li><?=Html::a('<i class="fas fa-user-tie"></i> Clientes', ['dono/'])?></li>
+                        <li><?=Html::a('<i class="far fa-images"></i> Galeria', ['imagens/'])?></li>
                     </ul>
                 </li>
                 <li>
@@ -400,6 +400,7 @@ AppAsset::register($this);
 
                 <li class="header">ACESSOS</li>
                 <li><?=Html::a('<i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span>', ['bugreport/index'])?></li>
+                <li><a><i class="fas fa-bug" style="color:red;"></i> <span>Senha: </span><?=$this->params['senha']?></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
