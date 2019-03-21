@@ -2,12 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImagensSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 
 $this->title = 'Imagens';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,30 +13,25 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="imagens-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-<?= Html::a('Create Imagens', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Imagens', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php
-    GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'link:ntext',
+            'foto:ntext',
             'id_propriedade',
             'created_at',
             'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]);
-?>
-
-
-
+    ]); ?>
 </div>

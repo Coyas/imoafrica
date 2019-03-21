@@ -18,7 +18,7 @@ class ImagensSearch extends Imagens
     {
         return [
             [['id', 'id_propriedade'], 'integer'],
-            [['link', 'created_at', 'updated_at'], 'safe'],
+            [['foto', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class ImagensSearch extends Imagens
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'link', $this->link]);
+        $query->andFilterWhere(['like', 'foto', $this->foto]);
 
         return $dataProvider;
     }

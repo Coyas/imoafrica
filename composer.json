@@ -19,7 +19,7 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "himiklab/yii2-recaptcha-widget": "*",
-	    "cloudinary/cloudinary_php": "dev-master"
+        "perminder-klair/yii2-dropzone": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

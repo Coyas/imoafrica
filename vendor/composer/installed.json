@@ -249,60 +249,6 @@
         ]
     },
     {
-        "name": "cloudinary/cloudinary_php",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cloudinary/cloudinary_php.git",
-            "reference": "fd6a49f1ca585c896f0730ec46bf37967bb454db"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/fd6a49f1ca585c896f0730ec46bf37967bb454db",
-            "reference": "fd6a49f1ca585c896f0730ec46bf37967bb454db",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.8.*"
-        },
-        "time": "2019-03-07T12:15:03+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "src"
-            ],
-            "files": [
-                "src/Helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Cloudinary",
-                "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
-            }
-        ],
-        "description": "Cloudinary PHP SDK",
-        "homepage": "https://github.com/cloudinary/cloudinary_php",
-        "keywords": [
-            "cdn",
-            "cloud",
-            "cloudinary",
-            "image management",
-            "sdk"
-        ]
-    },
-    {
         "name": "codeception/base",
         "version": "2.5.4",
         "version_normalized": "2.5.4.0",
@@ -955,6 +901,50 @@
             "duplicate",
             "object",
             "object graph"
+        ]
+    },
+    {
+        "name": "perminder-klair/yii2-dropzone",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/perminder-klair/yii2-dropzone.git",
+            "reference": "41e8145d940cc9955011138a9f16ad80e9831423"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/perminder-klair/yii2-dropzone/zipball/41e8145d940cc9955011138a9f16ad80e9831423",
+            "reference": "41e8145d940cc9955011138a9f16ad80e9831423",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "2.0.*"
+        },
+        "time": "2015-11-09T11:28:44+00:00",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kato\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Parminder Klair",
+                "email": "perminder.klair@gmail.com"
+            }
+        ],
+        "description": "DropzoneJs Extention for Yii2",
+        "keywords": [
+            "dropzone",
+            "extension",
+            "upload",
+            "yii2"
         ]
     },
     {

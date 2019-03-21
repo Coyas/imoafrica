@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'link') ?>
+    <?= $form->field($model, 'foto') ?>
 
     <?= $form->field($model, 'id_propriedade') ?>
 

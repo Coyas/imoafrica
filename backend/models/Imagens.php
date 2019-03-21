@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "imagens".
  *
  * @property int $id
- * @property string $link
+ * @property string $foto
  * @property int $id_propriedade
  * @property string $created_at
  * @property string $updated_at
@@ -31,8 +31,8 @@ class Imagens extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['link', 'id_propriedade'], 'required'],
-            [['link'], 'string'],
+            [['foto'], 'required'],
+            [['foto'], 'file', 'extensions' => 'png, jpg'],
             [['id_propriedade'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['id_propriedade'], 'exist', 'skipOnError' => true, 'targetClass' => Propriedade::className(), 'targetAttribute' => ['id_propriedade' => 'id']],
@@ -46,7 +46,7 @@ class Imagens extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'link' => 'Link',
+            'foto' => 'Foto',
             'id_propriedade' => 'Id Propriedade',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
