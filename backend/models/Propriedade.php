@@ -24,6 +24,7 @@ use Yii;
  * @property string $descricaoPt
  * @property string $descricaoEn
  * @property string $descricaoFr
+ * @property int $publicar
  * @property string $created_at
  * @property string $updated_at
  *
@@ -48,7 +49,7 @@ class Propriedade extends \yii\db\ActiveRecord
     {
         return [
             [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'area', 'preco'], 'required'],
-            [['area', 'preco', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala'], 'integer'],
+            [['area', 'preco', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar'], 'integer'],
             [['proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona'], 'string', 'max' => 50],
@@ -78,6 +79,7 @@ class Propriedade extends \yii\db\ActiveRecord
             'descricaoPt' => 'Descricao Pt',
             'descricaoEn' => 'Descricao En',
             'descricaoFr' => 'Descricao Fr',
+            'publicar' => 'Publicar',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

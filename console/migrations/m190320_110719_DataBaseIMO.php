@@ -49,6 +49,7 @@ class m190320_110719_DataBaseIMO extends Migration
             'descricaoPt' => $this->text(),
             'descricaoEn' => $this->text(),
             'descricaoFr' => $this->text(),
+            'publicar' => $this->integer()->defaultValue(0),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ], $tableOptions);
@@ -78,6 +79,7 @@ class m190320_110719_DataBaseIMO extends Migration
         $this->createTable('imagens', [
             'id' => $this->primaryKey(),
             'foto' => $this->text()->notNull(),
+            'capa' => $this->integer()->defaultValue(0),
             'id_propriedade' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),

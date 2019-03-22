@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="propriedade-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title)."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; if($model->publicar == 1){ echo "<span class='label-success'>Esta Propriedade Esta Online</span>";}else {echo "<span class='label-warning'>Esta Propriedade Nao Esta Online</span>";} ?></h1>
 
     <div class="container-fluid">
         <div class="panel panel-default">
@@ -30,7 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'method' => 'post',
                     ],
                 ]) ?>
-                <?= Html::a('Adicionar Imagens', ['imagens/upload', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
+                <?php
+                    if($model->publicar == 0){
+                        echo Html::a('Publicar No Site', ['propriedade/publicar', 'id' => $model->id], ['class' => 'btn btn-success']);
+                    }else{
+                        echo Html::a('Remover Do Site', ['propriedade/remover', 'id' => $model->id], ['class' => 'btn btn-warning']);
+                    }
+                ?>
             </div>
             <div class="panel-body">
                 <?= DetailView::widget([
@@ -69,14 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container-fluid">
         <h2>Imagens</h2>
         <div class="panel panel-default">
-            <div class="panel-heading">Panel Heading</div>
+            <div class="panel-heading"> <?= Html::a('Adicionar Imagens', ['imagens/upload', 'id' => $model->id], ['class' => 'btn btn-primary']) ?></div>
             <div class="panel-body">
                 <div class="body">
                     <!-- Swiper -->
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <?php foreach ($imagens as $imagen){?>
-                                <div class="swiper-slide"><?=Html::img(Url::to('/upload/imoveis/'.$imagen['foto']))?></div>
+                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$imagen['foto']))?></div>
                             <?php } ?>
                         </div>
                         <!-- Add Pagination -->

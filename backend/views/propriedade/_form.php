@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="propriedade-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'nomePt')->textInput(['maxlength' => true]) ?>
 
@@ -43,6 +43,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'descricaoEn')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'descricaoFr')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($imagem, 'foto')->fileInput()->label('Foto De Capa') ?>
 
 
     <div class="form-group">

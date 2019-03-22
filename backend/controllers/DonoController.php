@@ -2,9 +2,14 @@
 
 namespace backend\controllers;
 
+use app\models\DonoPropriedade;
+use app\models\Imagens;
+use app\models\Propriedade;
+use yii\db\Query;
 use Yii;
 use app\models\Dono;
 use backend\models\DonoSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,8 +57,25 @@ class DonoController extends Controller
      */
     public function actionView($id)
     {
+//        select id, nomePt from propriedade left join dono_propriedade dp on propriedade.id = dp.id_propriedade where dp.id_dono = 1;
+        $query = Propriedade::find()
+            ->leftJoin('dono_propriedade dp', 'propriedade.id = dp.id_propriedade')
+            ->where(['dp.id_dono' => $id]);
+//        print_r($query);
+//        die;
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => ['nomePt' => SORT_ASC]
+            ]
+        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+//            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -111,7 +133,26 @@ class DonoController extends Controller
      */
     public function actionDelete($id)
     {
-//        $this->findModel($id)->delete();
+//        select dono.id as dono, p.id as propriedade from dono left join dono_propriedade dp on dono.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where dono.id = 1;
+        $id_propriedades = (new Query())->select('p.id')
+            ->from('dono')
+            ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
+            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+            ->where(['dono.id' => $id])
+            ->All();
+//        print_r($id_propriedade);die;
+        DonoPropriedade::deleteAll(['id_dono' => $id]);
+//        eliminar imagens
+        foreach ($id_propriedades as $id_propriedade) {
+            Imagens::deleteAll(['id_propriedade' => $id_propriedade['id']]);
+        }
+//        eliminar propriedades
+        foreach ($id_propriedades as $id_propriedade){
+//            echo $id_propriedade['id'];
+            Propriedade::findOne($id_propriedade['id'])->delete();
+        }
+//        eliminar dono
+        $this->findModel($id)->delete();//eliminar o dono
 
         return $this->redirect(['index']);
     }

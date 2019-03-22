@@ -7,6 +7,7 @@ use Yii;
 use app\models\Imagens;
 use backend\models\ImagensSearch;
 use yii\db\Query;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -107,8 +108,16 @@ class ImagensController extends Controller
 
     public function actionUpload($id)
     {
+        $donoNome = (new Query())->select('nome, apelido')
+            ->from('dono')
+            ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
+            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+            ->where(['p.id' => $id])
+            ->One();
+        $pasta = str_replace(" ", "_", $donoNome['nome'].$donoNome['apelido']);
+//        echo $pasta;die;
         $fileName = 'file';
-        $uploadPath = 'upload/imoveis';
+        $uploadPath = 'upload/imoveis/'.$pasta;
         $model = new Imagens();
 
         if (isset($_FILES[$fileName])) {
@@ -163,7 +172,26 @@ class ImagensController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+
+//        select nome, apelido from dono left join dono_propriedade dp on dono.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id left join imagens i on p.id = i.id_propriedade where i.id = 1;
+        $imagem = Imagens::findOne($id);
+
+            if (file_exists(Yii::$app->params['upload']."/" . $imagem['foto'])) {
+                if (!empty($imagem['foto'])) {
+                    unlink(Yii::$app->params['upload']."/" . $imagem['foto']);
+//                    echo "remover<br>";
+                }
+            }
+
+        try {
+            $imagem->delete();
+        } catch (StaleObjectException $e) {
+            echo "erro na eliminacao da imagem: StaleObjectException";
+            die;
+        } catch (\Throwable $e) {
+                echo "erro na eliminacao da imagem: Throwable";
+                die;
+        }
 
         return $this->redirect(['index']);
     }
