@@ -116,6 +116,7 @@ class ImagensController extends Controller
             ->One();
         $pasta = str_replace(" ", "_", $donoNome['nome'].$donoNome['apelido']);
 //        echo $pasta;die;
+//        $fileName = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_imo-'.$data.'.'.$foto->extension)
         $fileName = 'file';
         $uploadPath = 'upload/imoveis/'.$pasta;
         $model = new Imagens();
@@ -126,9 +127,10 @@ class ImagensController extends Controller
             //Print file data
 //            print_r($file);
 
-//            die;
+            if ($file->saveAs($uploadPath . '/' . str_replace(" ", "_", $file->name = substr ($file->baseName, 0, 10).'_imo-'.$this->randomPassword().'.'.$file->extension))) {
+//                $data = date('d-m-Y h:m:s');
+//                $file->name = str_replace(" ", "_", substr ($file->baseName, 0, 10).'_imo-'.$data.'.'.$file->extension);
 
-            if ($file->saveAs($uploadPath . '/' . $file->name)) {
                 //Now save file data to database
                 $model->foto = $file->name;
                 $model->id_propriedade = $id;
@@ -143,6 +145,17 @@ class ImagensController extends Controller
         return false;
     }
 
+    public function randomPassword() {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789#&@(){}[]?-_";
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 15; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
+
     /**
      * Updates an existing Imagens model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -154,7 +167,45 @@ class ImagensController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//        pagar o nome do dono
+//        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id left join imagens i on p.id = i.id_propriedade where i.id = 11;
+        $dono = (new Query())
+            ->select('d.nome, d.apelido')
+            ->from('dono d')
+            ->leftJoin('dono_propriedade dp' , 'd.id = dp.id_dono')
+            ->leftJoin('propriedade p' , 'dp.id_propriedade = p.id')
+            ->leftJoin('imagens i' , 'p.id = i.id_propriedade')
+            ->where(['i.id' => $id])
+            ->One();
+        $pasta = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+//        print_r($dono);die;
+//        print_r($pasta);die;
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $data = date('Y:m:d h:m:s');
+//            pegar a imagem antiga
+            $old_foto = (new Query())
+                ->select('id, foto')
+                ->from('imagens')
+                ->One();
+            if(file_exists(Yii::$app->params['upload'].$pasta."/".$old_foto['foto']) && $foto = UploadedFile::getInstance($model, 'foto')){
+                $model->foto = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_imo-'.$data.'.'.$foto->extension);
+                if(!empty($old_foto['foto'])) {
+                    unlink(Yii::$app->params['upload'].$pasta."/".$old_foto['foto']);
+                    echo "foi unlinked";
+                }
+//                echo "file ".$old_foto['foto']." existe";die;
+                $foto->saveAs(Yii::$app->params['upload'].$pasta."/".$model->foto);
+//                echo "file ".Yii::$app->params['upload'].$pasta."/".$old_foto['foto']." existe";die;
+            }else {
+                $model->foto = $old_foto['foto'];
+//                unlink(Yii::$app->params['upload'].$pasta."/".$old_foto['foto']);
+//                echo "file ".Yii::$app->params['upload'].$pasta."/".$old_foto['foto']." nao existe";
+            }
+
+            $model->updated_at = $data;
+//            die;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

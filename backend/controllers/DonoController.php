@@ -10,6 +10,7 @@ use Yii;
 use app\models\Dono;
 use backend\models\DonoSearch;
 use yii\data\ActiveDataProvider;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -133,16 +134,64 @@ class DonoController extends Controller
      */
     public function actionDelete($id)
     {
+        $dono = $this->findModel($id);
 //        select dono.id as dono, p.id as propriedade from dono left join dono_propriedade dp on dono.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where dono.id = 1;
+//       pegar todos os propriedades desse dono
         $id_propriedades = (new Query())->select('p.id')
             ->from('dono')
             ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
             ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
             ->where(['dono.id' => $id])
             ->All();
-//        print_r($id_propriedade);die;
+//        print_r($id_propriedades);
+
+
+
+//        Pegar a lista de todas as imagens desse dono
+//        select DISTINCT i.id, i.foto from imagens i left join propriedade p on i.id_propriedade = p.id left join dono_propriedade dp on p.id = 1 left join dono d on dp.id_dono = d.id where d.id = 1;
+        $imagens = (new Query())
+            ->select('i.id, i.foto')
+            ->from('imagens i')
+            ->leftJoin('propriedade p', 'i.id_propriedade = p.id')
+            ->leftJoin('dono_propriedade dp', 'p.id = dp.id_propriedade')
+            ->leftJoin('dono d', 'dp.id_dono = d.id')
+            ->where(['d.id' => $id])
+            ->All();
+
+//        print_r($imagens);die;
+//        gerar o nome da pasta
+        $pasta = str_replace(" ", "_", $dono->nome.$dono->apelido);
+//        echo $pasta;die;
+//        apagar todas as imagens do servidor
+            foreach ($imagens as $imagem){
+                echo $imagem['id'].": ".$imagem['foto']."<br>";
+                if (file_exists(Yii::$app->params['upload'].$pasta."/" . $imagem['foto'])) {
+//                    echo Yii::$app->params['upload'].$pasta."/" . $imagem['foto'];die;
+                    if (!empty($imagem['foto'])) {
+
+                        if (unlink(Yii::$app->params['upload'].$pasta."/" . $imagem['foto'])){
+//                            echo "remover<br>";
+                        }else {
+                            echo "erro ao remover imagem";
+                        }
+//                    echo "remover<br>";
+                    }else {
+                        echo "erro ao remover imagem";
+                    }
+                }
+            }
+//            die;
+//        apagar pasta do dono do servidor
+        if (is_dir(Yii::$app->params['upload'].$pasta)){
+            rmdir(Yii::$app->params['upload'].$pasta);
+        }else {
+            echo "nao foi possivel apagar esta pasta: ".$pasta;
+            die;
+        }
+
+        //        apagar o elo entre dono e propriedade
         DonoPropriedade::deleteAll(['id_dono' => $id]);
-//        eliminar imagens
+//        eliminar imagens do banco de dados
         foreach ($id_propriedades as $id_propriedade) {
             Imagens::deleteAll(['id_propriedade' => $id_propriedade['id']]);
         }
@@ -151,8 +200,12 @@ class DonoController extends Controller
 //            echo $id_propriedade['id'];
             Propriedade::findOne($id_propriedade['id'])->delete();
         }
-//        eliminar dono
-        $this->findModel($id)->delete();//eliminar o dono
+//        eliminar o dono
+        try {
+            $dono->delete();
+        } catch (StaleObjectException $e) {
+        } catch (\Throwable $e) {
+        }//eliminar o dono
 
         return $this->redirect(['index']);
     }

@@ -71,7 +71,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
         $imagens = (new Query())->select('*')->from('imagens')->where(['id_propriedade' => $model->id])->All();
 //        print_r($imagens);die;
+    $pasta2 = $pasta;
+        
     ?>
+
+
 
     <div class="container-fluid">
         <h2>Imagens</h2>
@@ -83,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <?php foreach ($imagens as $imagen){?>
-                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$imagen['foto']))?></div>
+                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta2)."/".$imagen['foto'])?></div>
                             <?php } ?>
                         </div>
                         <!-- Add Pagination -->
