@@ -53,6 +53,15 @@ return [
 //            ],
 //        ],
 
+        'urlManagerB' => [
+            'class' => 'yii\web\urlManager',
+            'enablePrettyUrl' => true,
+            'baseUrl'=>'http://admin.imoafrica.cv',
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
+
     ],
     'params' => $params,
 ];

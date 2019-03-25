@@ -5,8 +5,9 @@
  * Date: 3/14/19
  * Time: 2:26 PM
  */
-
+use yii\db\Query;
 use yii\web\View;
+use yii\helpers\Html;
 ?>
 
 
@@ -17,22 +18,33 @@ use yii\web\View;
             <h1 class="gallery-title">Propriedades a Venda</h1>
 
             <div class="row">
-                <?php for( $i = 1; $i <= 4; $i++): ?>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 filter arrendar">
+                <?php foreach ($slides as $slide){
+                    //        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
+                    $dono = (new Query())
+                        ->select('d.nome, d.apelido')
+                        ->from('dono d')
+                        ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
+                        ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+                        ->where(['p.id' => $slide['id']])
+                        ->One();
+
+                    $pasta2 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+                    ?>
+                    <div class="col-md-3 col-sm-6 lthome filter arrendar">
                         <div class="destaques">
-                            <a href="" class="linkdetalhes">
-                                <img src="images/p2.jpg" class="img-fluid">
-                                <div class="text-center">
-                                    <span class="property-box-label property-box-label-primary">Alugar</span>
-                                    <h2 class="txt-nome"> Nome </h2>
-                                    <h3 class="txt-localizacao"> Localização </h3>
-                                    <h3 class="txt-dimensao"> Dimensão </h3>
-                                    <h4 class="txt-preco"> PREÇO </h4>
-                                </div>
-                            </a>
+                            <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                            <div class="text-center">
+                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
+                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
+                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                            </div>
                         </div>
                     </div>
-                <?php endfor;?>
+
+                <?php } ?>
             </div>
 
             <ul class="text-center pagination-imo">

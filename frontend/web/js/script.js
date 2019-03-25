@@ -45,6 +45,7 @@ $(function () {
 
     $(".filter-button").click(function(){
         var value = $(this).attr('data-filter');
+        console.log(value);
         if(value == "all")
         {
             $('.filter').show('1000');

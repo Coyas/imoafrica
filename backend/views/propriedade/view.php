@@ -86,7 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 
-
     <div class="container-fluid">
         <h2>Imagens</h2>
         <div class="panel panel-default">
@@ -97,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <?php foreach ($imagens as $imagen){?>
-                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta)."/".$imagen['foto'])?></div>
+                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$imagen['foto'], true))?></div>
                             <?php } ?>
                         </div>
                         <!-- Add Pagination -->

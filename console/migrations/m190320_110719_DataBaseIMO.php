@@ -18,6 +18,24 @@ class m190320_110719_DataBaseIMO extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
+        $this->createTable('notes', [
+            'id' => $this->primaryKey(),
+            'title' => $this->integer()->notNull(),
+            'message' => $this->text(),
+            'importancia' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
+        $this->createTable('tasks', [
+            'id' => $this->primaryKey(),
+            'title' => $this->integer()->notNull(),
+            'message' => $this->text(),
+            'importancia' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
         $this->createTable('contatos', [
             'id' => $this->primaryKey(),
             'contato' => $this->integer()->notNull(),
@@ -119,6 +137,8 @@ class m190320_110719_DataBaseIMO extends Migration
         $this->dropTable('dono');
         $this->dropTable('dono_propriedade');
         $this->dropTable('imagens');
+        $this->dropTable('notes');
+        $this->dropTable('tasks');
     }
 
     /*

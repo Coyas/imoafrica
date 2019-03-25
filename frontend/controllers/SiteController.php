@@ -6,6 +6,7 @@ use common\models\ResetPasswordForm;
 use common\models\SignupForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\db\Query;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -72,7 +73,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+//        select p.id, i.foto, p.preco, p.nomePt, p.nomeEn, p.nomeFr from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
+//        pegar propriedades
+        $destaques = (new Query())
+            ->select('p.id, i.foto, p.preco, p.nomePt, p.nomeEn, p.nomeFr')
+            ->from('propriedade p')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->Andwhere(['p.destaque' => 1])
+            ->orderBy('id')
+            ->All();
+
+//        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+        $slides = (new Query())
+            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->from('propriedade p')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->orderBy('id')
+            ->All();
+
+
+//        print_r($destaques);die;
+
+        return $this->render('index', [
+            'destaques' => $destaques,
+            'slides' => $slides
+        ]);
     }
 
     /**
@@ -213,12 +240,41 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionArrendar(){
-        return $this->render('arrendar');
+    public function actionArrendar()
+    {
+        //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+        $slides = (new Query())
+            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->from('propriedade p')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->andWhere(['like', 'p.proposito', 0])
+            ->orderBy('id')
+            ->All();
+//        print_r($slides);die;
+
+        return $this->render('arrendar', [
+            'slides' => $slides
+        ]);
     }
+
     public function actionComprar(){
-        return $this->render('comprar');
+        //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+        $slides = (new Query())
+            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->from('propriedade p')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->andWhere(['like', 'p.proposito', 1])
+            ->orderBy('id')
+            ->All();
+//        print_r($slides);die;
+
+        return $this->render('comprar', [
+            'slides' => $slides
+        ]);
     }
+
     public function actionVender(){
         return $this->render('vender');
     }

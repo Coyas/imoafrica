@@ -185,8 +185,8 @@ class DonoController extends Controller
         if (is_dir(Yii::$app->params['upload'].$pasta)){
             rmdir(Yii::$app->params['upload'].$pasta);
         }else {
-            echo "nao foi possivel apagar esta pasta: ".$pasta;
-            die;
+            echo "pasta nao existe: ".$pasta;
+//            die;
         }
 
         //        apagar o elo entre dono e propriedade

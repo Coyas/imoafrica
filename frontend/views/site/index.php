@@ -4,6 +4,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\db\Query;
 
 $this->title = 'ImoAfrica Real Estate';
 //echo Html::a('PT', Url::current(['language' => 'pt-PT']))."<br>";
@@ -164,10 +165,28 @@ $this->title = 'ImoAfrica Real Estate';
 <!---->
 <!--</div>-->
 <div class="section">
-    <div class="slide" data-anchor="slide1"> <img class="d-block w-100" src="../publi/new1.webp" alt="First slide"></div>
-    <div class="slide" data-anchor="slide2"><img class="d-block w-100" src="../publi/new1.webp" alt="First slide"> </div>
-    <div class="slide" data-anchor="slide3"> <img class="d-block w-100" src="../publi/new1.webp" alt="First slide"> </div>
-    <div class="slide" data-anchor="slide4"> <img class="d-block w-100" src="../publi/new1.webp" alt="First slide"> </div>
+    <?php foreach ($destaques as $destaque){
+        //        pegar dono
+//        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
+        $dono = (new Query())
+            ->select('d.nome, d.apelido')
+            ->from('dono d')
+            ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
+            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+            ->where(['p.id' => $destaque['id']])
+            ->One();
+
+        $pasta = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+//        echo Yii::$app->params['upload'].$pasta."/".$destaque['foto']."<br>";
+//        echo Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']);
+//        echo Html::a('Contact YiiLIb.com', Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']));
+        ?>
+
+        <?php //html::img(Url::to("/".Yii::$app->params['upload'].$pasta."/".$destaque['foto']), ['class' => 'd-block w-100']);?>
+        <div class="slide" data-anchor="slide1"> <?= html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']), ['class' => 'd-block w-100'])?></div>
+<!--        <div class="slide" data-anchor="slide1"> --><?php //// html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$destaque['foto'], true), ['class' => 'd-block w-100'])?><!--</div>-->
+<!--        <div class="slide" data-anchor="slide1"> <img class="d-block w-100" src="../publi/new1.webp" alt="First slide"></div>-->
+    <?php } //die;?>
     <div class="formpesquisatodo">
         <div class="formpesquisa">
             <form class="form-inline">
@@ -243,39 +262,65 @@ $this->title = 'ImoAfrica Real Estate';
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
-                            <?php for( $i = 1; $i <= 4; $i++): ?>
+                            <?php foreach ($slides as $slide){
+                                //        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
+                                $dono = (new Query())
+                                    ->select('d.nome, d.apelido')
+                                    ->from('dono d')
+                                    ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
+                                    ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+                                    ->where(['p.id' => $slide['id']])
+                                    ->One();
+
+                                $pasta2 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+                                ?>
                                 <div class="col-md-3 col-sm-6 lthome filter arrendar">
                                     <div class="destaques">
-                                        <img src="images/p2.jpg" class="img-fluid">
+<!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                                        <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
                                         <div class="text-center">
-                                            <span class="property-box-label property-box-label-primary">Alugar</span>
-                                            <h2 class="txt-nome"> Terreno + Casa  </h2>
-                                            <h3 class="txt-localizacao"> Praia, Achada Grande Trás  </h3>
-                                            <h3 class="txt-dimensao"> 400m<sup>2</sup> </h3>
-                                            <h4 class="txt-preco"> 2 500 000 $00 </h4>
+                                            <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
+                                            <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
+                                            <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                            <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                            <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endfor;?>
+
+                            <?php } ?>
                         </div>
                     </div>
 
                     <div class="carousel-item">
                         <div class="row">
-                            <?php for( $i = 1; $i <= 4; $i++): ?>
-                                <div class="col-md-3 col-sm-6 lthome filter comprar">
+                            <?php foreach ($slides as $slide){
+                                //        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
+                                $dono = (new Query())
+                                    ->select('d.nome, d.apelido')
+                                    ->from('dono d')
+                                    ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
+                                    ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+                                    ->where(['p.id' => $slide['id']])
+                                    ->One();
+
+                                $pasta3 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+                                ?>
+                                <div class="col-md-3 col-sm-6 lthome filter arrendar">
                                     <div class="destaques">
-                                        <img src="images/p2.jpg" class="img-fluid">
+                                        <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                                        <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
                                         <div class="text-center">
-                                            <span class="property-box-label property-box-label-primary">A Venda</span>
-                                            <h2 class="txt-nome"> Terreno + Casa  <?=$i?></h2>
-                                            <h3 class="txt-localizacao"> Praia, Achada Grande Trás  </h3>
-                                            <h3 class="txt-dimensao"> 400m<sup>2</sup> </h3>
-                                            <h4 class="txt-preco"> 2 500 000 $00 </h4>
+                                            <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
+                                            <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
+                                            <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                            <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                            <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endfor;?>
+
+                            <?php } ?>
                         </div>
                     </div>
 
