@@ -49,6 +49,12 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'descricaoFr') ?>
 
+    <?php // echo $form->field($model, 'publicar') ?>
+
+    <?php // echo $form->field($model, 'id_tipo') ?>
+
+    <?php // echo $form->field($model, 'destaque') ?>
+
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>

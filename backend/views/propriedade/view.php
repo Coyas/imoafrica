@@ -38,6 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         echo Html::a('Remover Do Site', ['propriedade/remover', 'id' => $model->id], ['class' => 'btn btn-warning']);
                     }
                 ?>
+
+                <?php
+                if($model->destaque == 0){
+                    echo Html::a('Manter Como Destaque', ['propriedade/destacar', 'id' => $model->id], ['class' => 'btn btn-success']);
+                }else{
+                    echo Html::a('Remover Do Destaque', ['propriedade/ndestacar', 'id' => $model->id], ['class' => 'btn btn-warning']);
+                }
+                ?>
             </div>
             <div class="panel-body">
                 <?= DetailView::widget([
@@ -57,6 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'banheiro',
                         'cozinha',
                         'sala',
+                        'publicar',
+                        'destaque',
                         'descricaoPt:ntext',
                         'descricaoEn:ntext',
                         'descricaoFr:ntext',
@@ -71,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
         $imagens = (new Query())->select('*')->from('imagens')->where(['id_propriedade' => $model->id])->All();
 //        print_r($imagens);die;
-    $pasta2 = $pasta;
+//    $pasta2 = $pasta;
         
     ?>
 
@@ -87,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <?php foreach ($imagens as $imagen){?>
-                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta2)."/".$imagen['foto'])?></div>
+                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta)."/".$imagen['foto'])?></div>
                             <?php } ?>
                         </div>
                         <!-- Add Pagination -->

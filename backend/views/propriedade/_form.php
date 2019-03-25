@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
+    <?= $form->field($model, 'id_tipo')->textInput() ?>
+
     <?= $form->field($model, 'nomePt')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nomeEn')->textInput(['maxlength' => true]) ?>

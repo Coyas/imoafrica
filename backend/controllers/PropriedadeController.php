@@ -311,4 +311,28 @@ class PropriedadeController extends Controller
         $model->save();
         return $this->redirect(['propriedade/view', 'id' => $model->id]);
     }
+
+    public function actionDestacar($id){
+//        $model = null;
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e){
+            echo "Houve um errro ao promover este movel para destaque, report isso!";die;
+        }
+        $model->destaque = 1;
+        $model->save();
+        return $this->redirect(['propriedade/view', 'id' => $model->id]);
+    }
+
+    public function actionNdestacar($id){
+//        $model = null;
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e){
+            echo "Houve um errro ao remover este movel do destaque, report isso!";die;
+        }
+        $model->destaque = 0;
+        $model->save();
+        return $this->redirect(['propriedade/view', 'id' => $model->id]);
+    }
 }

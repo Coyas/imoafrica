@@ -159,7 +159,7 @@ AppAsset::register($this);
                                     </li>
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
+                            <li class="footer"><?=Html::a('Ver Todos', ['notes/index'])?></li>
                         </ul>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
@@ -236,7 +236,7 @@ AppAsset::register($this);
                                 </ul>
                             </li>
                             <li class="footer">
-                                <a href="#">View all tasks</a>
+                                <?=Html::a('Ver Todas Tarrefas', ['notes/index'])?>
                             </li>
                         </ul>
                     </li>
@@ -400,7 +400,9 @@ AppAsset::register($this);
 
                 <li class="header">ACESSOS</li>
                 <li><?=Html::a('<i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span>', ['bugreport/index'])?></li>
-<!--                <li><a><i class="fas fa-bug" style="color:red;"></i> <span>Senha: </span>--><?php //=$this->params['senha']?><!--</a></li>-->
+                <li><?=Html::a('<i class="fas fa-bug" style="color:blue;"></i> <span>Notificaçoes</span>', ['notes/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-bug" style="color:yellow;"></i> <span>Tarefas</span>', ['tasks/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-bug" style="color:green;"></i> <span>Tipos Des Propriedade</span>', ['tipo/index'])?></li>
             </ul>
         </section>
         <!-- /.sidebar -->

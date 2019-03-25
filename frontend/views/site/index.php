@@ -179,6 +179,13 @@ $this->title = 'ImoAfrica Real Estate';
                                     <option selected>Ilha</option>
                                     <option value="st">Santo Antão</option>
                                     <option value="sv">São Vicente</option>
+                                    <option value="sv">São Nicolao</option>
+                                    <option value="sv">Sal</option>
+                                    <option value="sv">Boavista</option>
+                                    <option value="sv">Maio</option>
+                                    <option value="sv">Santiago</option>
+                                    <option value="sv">Fogo</option>
+                                    <option value="sv">Brava</option>
                                 </select>
                             </div>
                         </div>

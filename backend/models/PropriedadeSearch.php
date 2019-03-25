@@ -17,8 +17,9 @@ class PropriedadeSearch extends Propriedade
     public function rules()
     {
         return [
-            [['id', 'area', 'preco', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala'], 'integer'],
+            [['id', 'area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
             [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr', 'created_at', 'updated_at'], 'safe'],
+            [['preco'], 'number'],
         ];
     }
 
@@ -66,6 +67,9 @@ class PropriedadeSearch extends Propriedade
             'banheiro' => $this->banheiro,
             'cozinha' => $this->cozinha,
             'sala' => $this->sala,
+            'publicar' => $this->publicar,
+            'id_tipo' => $this->id_tipo,
+            'destaque' => $this->destaque,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

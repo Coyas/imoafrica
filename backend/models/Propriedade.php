@@ -14,7 +14,7 @@ use Yii;
  * @property string $ilha
  * @property string $zona
  * @property int $area
- * @property int $preco
+ * @property double $preco
  * @property string $proposito
  * @property int $quarto
  * @property int $garragem
@@ -25,12 +25,15 @@ use Yii;
  * @property string $descricaoEn
  * @property string $descricaoFr
  * @property int $publicar
+ * @property int $id_tipo
+ * @property int $destaque
  * @property string $created_at
  * @property string $updated_at
  *
  * @property DonoPropriedade[] $donoPropriedades
  * @property Dono[] $donos
  * @property Imagens[] $imagens
+ * @property Tipo $tipo
  */
 class Propriedade extends \yii\db\ActiveRecord
 {
@@ -48,11 +51,13 @@ class Propriedade extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'area', 'preco'], 'required'],
-            [['area', 'preco', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar'], 'integer'],
+            [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'area', 'preco', 'id_tipo'], 'required'],
+            [['area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
+            [['preco'], 'number'],
             [['proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona'], 'string', 'max' => 50],
+            [['id_tipo'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['id_tipo' => 'id']],
         ];
     }
 
@@ -80,6 +85,8 @@ class Propriedade extends \yii\db\ActiveRecord
             'descricaoEn' => 'Descricao En',
             'descricaoFr' => 'Descricao Fr',
             'publicar' => 'Publicar',
+            'id_tipo' => 'Id Tipo',
+            'destaque' => 'Destaque',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -107,5 +114,13 @@ class Propriedade extends \yii\db\ActiveRecord
     public function getImagens()
     {
         return $this->hasMany(Imagens::className(), ['id_propriedade' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipo()
+    {
+        return $this->hasOne(Tipo::className(), ['id' => 'id_tipo']);
     }
 }
