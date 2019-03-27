@@ -93,14 +93,13 @@ class JunteController extends Controller
                     ->send();
 //                print_r($value);
             }
-            echo Yii::$app->params['supportEmail']."<br>";
-            echo $model->nome."<br>";
-            echo $model->email."<br>";
-            echo $model->assunto."<br>";
-            echo $model->content."<br>";
+//            echo Yii::$app->params['supportEmail']."<br>";
+//            echo $model->nome."<br>";
+//            echo $model->email."<br>";
+//            echo $model->assunto."<br>";
+//            echo $model->content."<br>";
 
             $model->save();
-            die;
 
             return $this->redirect(['view', 'id' => $model->id]);
         }

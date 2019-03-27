@@ -18,6 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'assunto')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'morada')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'telefone')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'anexo')->fileInput(['maxlength' => true]) ?>

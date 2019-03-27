@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="junte-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php /* echo $this->render('_search', ['model' => $searchModel]);*/ echo Yii::$app->params['supportEmail']."<br>";?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Junte', ['create'], ['class' => 'btn btn-success']) ?>
@@ -29,7 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome',
             'email:email',
             'assunto',
-            'content:ntext',
+            'morada',
+            //'telefone',
+            //'content:ntext',
             //'anexo',
 
             ['class' => 'yii\grid\ActionColumn'],

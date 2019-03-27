@@ -18,7 +18,7 @@ class JunteSearch extends Junte
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'email', 'assunto', 'content', 'anexo'], 'safe'],
+            [['nome', 'email', 'assunto', 'morada', 'telefone', 'content', 'anexo'], 'safe'],
         ];
     }
 
@@ -64,6 +64,8 @@ class JunteSearch extends Junte
         $query->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'assunto', $this->assunto])
+            ->andFilterWhere(['like', 'morada', $this->morada])
+            ->andFilterWhere(['like', 'telefone', $this->telefone])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'anexo', $this->anexo]);
 

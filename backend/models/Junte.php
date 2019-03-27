@@ -11,6 +11,8 @@ use Yii;
  * @property string $nome
  * @property string $email
  * @property string $assunto
+ * @property string $morada
+ * @property string $telefone
  * @property string $content
  * @property string $anexo
  */
@@ -30,11 +32,12 @@ class Junte extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'email', 'assunto', 'content', 'anexo'], 'required'],
+            [['nome', 'email', 'assunto', 'morada', 'telefone', 'content', 'anexo'], 'required'],
             [['content'], 'string'],
             [['nome'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 200],
-            [['assunto', 'anexo'], 'string', 'max' => 255],
+            [['assunto', 'morada', 'anexo'], 'string', 'max' => 255],
+            [['telefone'], 'string', 'max' => 50],
         ];
     }
 
@@ -48,6 +51,8 @@ class Junte extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'email' => 'Email',
             'assunto' => 'Assunto',
+            'morada' => 'Morada',
+            'telefone' => 'Telefone',
             'content' => 'Content',
             'anexo' => 'Anexo',
         ];

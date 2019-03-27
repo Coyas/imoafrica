@@ -1,18 +1,22 @@
 <?php
 namespace frontend\controllers;
 
+use app\models\Junte;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\Query;
+use yii\helpers\Html;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\ContactForm;
+use yii\web\UploadedFile;
+
 
 /**
  * Site controller
@@ -295,7 +299,45 @@ class SiteController extends Controller
         }
     }
     public function actionJunte(){
-        return $this->render('junte');
+//        echo Yii::$app->params['anexoF'];
+//        echo Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['anexo'].'1553704830.png'));
+//        die;
+        $junte = new Junte();
+
+        if($junte->load(Yii::$app->request->post())){
+            $junte->anexo = UploadedFile::getInstance($junte, 'anexo');
+            if($junte->anexo){
+                $time = time();
+                $junte->anexo->saveAs(Yii::$app->params['anexoF'].$time.'.'.$junte->anexo->extension);
+                $junte->anexo = Yii::$app->params['anexoF'].$time.'.'.$junte->anexo->extension;
+            }
+            if ($junte->anexo){
+                $value = Yii::$app->mailer->compose()
+                    ->setTo([Yii::$app->params['supportEmail'] => $junte->nome])
+                    ->setFrom($junte->email)
+                    ->setSubject('Recrutamentos e pedidos de estagios')
+                    ->setHtmlBody($junte->content)
+                    ->attach($junte->anexo)
+                    ->send();
+                print_r("foi anexo: ".$value);
+            }else {
+                $value = Yii::$app->mailer->compose()
+                    ->setTo([Yii::$app->params['supportEmail'] => $junte->nome])
+                    ->setFrom($junte->email)
+                    ->setSubject('Recrutamentos e pedidos de estagios')
+                    ->setHtmlBody($junte->content)
+                    ->send();
+                print_r("nao foi anexo: ".$value);
+            }
+
+            $junte->save();
+            $junte->getErrors();
+            die;
+        }else {
+            return $this->render('junte', [
+                'junte' => $junte
+            ]);
+        }
     }
     public function actionAvaliacao(){
         $model = new ContactForm();

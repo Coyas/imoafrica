@@ -23,8 +23,10 @@ class m190320_110719_DataBaseIMO extends Migration
             'nome' => $this->string(100)->notNull(),
             'email' => $this->string(200)->notNull(),
             'assunto' => $this->string(255)->notNull(),
+            'morada' => $this->string(255)->notNull(),
+            'telefone' => $this->string(50)->notNull(),
             'content' => $this->text()->notNull(),
-            'anexo' => $this->string(255)->notNull(),
+            'anexo' => $this->string(255),
         ]);
 
         $this->createTable('notes', [
