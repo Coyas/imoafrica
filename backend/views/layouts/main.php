@@ -337,13 +337,12 @@ AppAsset::register($this);
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-restroom"></i>
+
+                    <?= Html::a('<i class="fas fa-restroom"></i>
                         <span>Recrutamentos</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-green">novo</small>
-                        </span>
-                    </a>
+                        </span>', ['junte/index'])?>
                 </li>
                 <li>
                     <a href="#">
@@ -370,7 +369,7 @@ AppAsset::register($this);
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><?=Html::a('<i class="fas fa-eye"></i> <span>Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
+                        <li><?=Html::a('<i class="fas fa-eye"></i> <span> Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
                         <li><a href="#"><i class="fas fa-phone"></i> Contactos</a></li>
                         <li><?=Html::a('<i class="fas fa-users"></i> Usuarios', ['users/'])?></li>
 <!--                        <li class="treeview">-->

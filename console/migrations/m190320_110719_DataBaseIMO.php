@@ -18,6 +18,15 @@ class m190320_110719_DataBaseIMO extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
+        $this->createTable('junte', [
+            'id' => $this->primaryKey(),
+            'nome' => $this->string(100)->notNull(),
+            'email' => $this->string(200)->notNull(),
+            'assunto' => $this->string(255)->notNull(),
+            'content' => $this->text()->notNull(),
+            'anexo' => $this->string(255)->notNull(),
+        ]);
+
         $this->createTable('notes', [
             'id' => $this->primaryKey(),
             'title' => $this->integer()->notNull(),
@@ -131,6 +140,7 @@ class m190320_110719_DataBaseIMO extends Migration
 
 
 
+        $this->dropTable('junte');
         $this->dropTable('contatos');
         $this->dropTable('tipo');
         $this->dropTable('propriedade');
