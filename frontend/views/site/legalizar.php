@@ -7,6 +7,8 @@
  */
 
 use yii\web\View;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 ?>
 
     <div  class="section fp-auto-height">
@@ -32,38 +34,40 @@ use yii\web\View;
 
                     <div class="formfale">
                         <h1 class="titleform"> Fale Connosco </h1>
-                        <form action="">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="input-group col-md-12">
-                                            <input class="inputcontato" type="text" placeholder="Nome">
-                                        </div>
-                                        <div class="input-group col-md-12">
-                                            <input class="inputcontato" type="email" placeholder="E-mail">
-                                        </div>
+                        <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="input-group col-md-12">
+                                        <!--                                        <input class="inputcontato" type="text" placeholder="Nome">-->
+                                        <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Nome'), 'class' => 'inputcontato'])->label(false); ?>
+                                    </div>
+                                    <div class="input-group col-md-12">
+                                        <!--                                        <input class="inputcontato" type="email" placeholder="E-mail">-->
+                                        <?= $form->field($model, 'email')->textInput(['class' => 'inputcontato','placeholder' => Yii::t('app', 'E-mail')])->label(false) ?>
+                                    </div>
 
-                                        <div class="input-group col-md-12">
-                                            <select class="meuselectcontato" name="" id="">
-                                                <optgroup>
-                                                    <option value=""> Legalizar imovel</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
+                                    <div class="input-group col-md-12">
+                                        <?= $form->field($model, 'subject')->dropDownList(
+                                            ['Legalizar imovel' => 'Legalizar imovel'])->label(false);
+                                        ?>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="input-group col-md-12">
-                                            <textarea class="col-md-12 meutextareac" name="" id="" rows="4" placeholder="Mensagem"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group col-md-12">
-                                    <input class="meubotaocontatoreverse" name="" value="Enviar" id="" type="submit">
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="input-group col-md-12">
+                                        <!--                                        <textarea class="col-md-12 meutextareac" name="" id="" rows="4" placeholder="Mensagem"></textarea>-->
+                                        <?= $form->field($model, 'body')->textarea(['rows' => 4, 'class' => 'col-md-12 meutextareac', 'placeholder' => Yii::t('app', 'Mensagem')])->label(false) ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-12">
+                                <!--                                <input class="meubotaocontatoreverse" name="" value="Enviar" id="" type="submit">-->
+                                <?= Html::submitButton(Yii::t('app','Enviar'), ['class' => 'meubotaocontatoreverse', 'name' => 'contact-button']) ?>
+                            </div>
+                        </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
 
                 </div>
@@ -79,7 +83,7 @@ use yii\web\View;
 <?php
 $this->registerJs(
     "$(\"#banner\").show();",
-    View::POS_READY,
+    View::POS_LOAD,
     'shownave'
 );
 ?>

@@ -117,7 +117,7 @@ use yii\helpers\Html;
 $this->registerJs(
     "$(\"#banner\").show();",
     View::POS_READY,
-    'shownave'
+    'shownaves'
 );
 ?>
 

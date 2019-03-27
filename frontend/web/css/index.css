@@ -4,6 +4,29 @@ body{
   height: 100vh;
 }
 
+#contactform-subject{
+    background: #000000;
+    color: #ecba49;
+    font-weight: bold;
+    font-size: 0.8em;
+    border: 0;
+    height: 30px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.form-group {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+    margin-bottom: 0;
+}
+
 .imgin {
     width: 346px;
     height: 214px;

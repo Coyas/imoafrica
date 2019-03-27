@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
+use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
@@ -35,41 +36,52 @@ $this->title = 'Contacto';
 
                 <div class="formfale">
                     <h1 class="titleform"> Fale Connosco </h1>
-                    <form action="">
+                    <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="input-group col-md-12">
-                                        <input class="inputcontato" type="text" placeholder="Nome">
+<!--                                        <input class="inputcontato" type="text" placeholder="Nome">-->
+                                        <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Nome'), 'class' => 'inputcontato'])->label(false); ?>
                                     </div>
                                     <div class="input-group col-md-12">
-                                        <input class="inputcontato" type="email" placeholder="E-mail">
+<!--                                        <input class="inputcontato" type="email" placeholder="E-mail">-->
+                                        <?= $form->field($model, 'email')->textInput(['class' => 'inputcontato','placeholder' => Yii::t('app', 'E-mail')])->label(false) ?>
                                     </div>
 
                                     <div class="input-group col-md-12">
-                                        <select class="meuselectcontato" name="" id="">
-                                            <optgroup>
-                                                <option value=""> Informaçes da empresa</option>
-                                                <option value=""> Legalizar imovel</option>
-                                                <option value=""> Avaliar Propriedade</option>
-                                                <option value=""> OUTRO</option>
-                                            </optgroup>
-                                        </select>
+                                        <?= $form->field($model, 'subject')->dropDownList(
+                                            ['Informaçes da empresa' => 'Informaçes da empresa',
+                                            'Legalizar imovel' => ' Legalizar imovel',
+                                            'Avaliar Propriedade' => 'Avaliar Propriedade',
+                                            'Outro' => 'Outro'],
+                                            ['prompt'=>'Assunto...'], ['class' => 'meuselectcontato'])->label(false);
+                                            ?>
+<!--                                        <select class="meuselectcontato" name="" id="">-->
+<!--                                            <optgroup>-->
+<!--                                                <option value=""> Informaçes da empresa</option>-->
+<!--                                                <option value=""> Legalizar imovel</option>-->
+<!--                                                <option value=""> Avaliar Propriedade</option>-->
+<!--                                                <option value=""> OUTRO</option>-->
+<!--                                            </optgroup>-->
+<!--                                        </select>-->
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="input-group col-md-12">
-                                        <textarea class="col-md-12 meutextareac" name="" id="" rows="4" placeholder="Mensagem"></textarea>
+<!--                                        <textarea class="col-md-12 meutextareac" name="" id="" rows="4" placeholder="Mensagem"></textarea>-->
+                                        <?= $form->field($model, 'body')->textarea(['rows' => 4, 'class' => 'col-md-12 meutextareac', 'placeholder' => Yii::t('app', 'Mensagem')])->label(false) ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-group col-md-12">
-                                <input class="meubotaocontatoreverse" name="" value="Enviar" id="" type="submit">
+<!--                                <input class="meubotaocontatoreverse" name="" value="Enviar" id="" type="submit">-->
+                                <?= Html::submitButton(Yii::t('app','Enviar'), ['class' => 'meubotaocontatoreverse', 'name' => 'contact-button']) ?>
                             </div>
                         </div>
-                    </form>
+                    <?php ActiveForm::end(); ?>
                 </div>
 
             </div>
@@ -81,13 +93,13 @@ $this->title = 'Contacto';
     </div>
 </div>
 
-
 <?php
 $this->registerJs(
     "$(\"#banner\").show();",
-    View::POS_READY,
+    View::POS_LOAD,
     'shownave'
 );
 ?>
+
 
 
