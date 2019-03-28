@@ -136,13 +136,13 @@ AppAsset::register($this);
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
-                        <p>2018 © ImoAfrica. Todos os direitos reservados<br>
-                            Implementado pela <a href="#">iMedia Innovative media</a>
+                        <p><?= date('Y')?> © ImoAfrica. Todos os direitos reservados<br>
+                            Implementado pela <a href="https://innovatmedia.com" target="_blank">iMedia Innovative media</a>
                         </p>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <?= Html::a(Html::img(Url::to('images/facebook.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']), 'https://web.facebook.com/imoafricarealestate/', ['class' => 'facebooklink', 'target' => '_blank'])?>
-                        <?= Html::a(Html::img(Url::to('images/instagram.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Instagram']), 'https://web.facebook.com/imoafricarealestate/', ['class' => 'instagramlink', 'target' => '_blank'])?>
+                        <?= Html::a(Html::img(Url::to('images/instagram.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Instagram']), 'https://tufjghgt.ate/', ['class' => 'instagramlink', 'target' => '_blank'])?>
 <!--                        <a class="facebooklink" href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>-->
 <!--                        <a class="instagramlink" href="#"> <img src="images/instagram.png" width="50" height="50" alt="Nosso Instagram"> </a>-->
                     </div>

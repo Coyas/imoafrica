@@ -5,6 +5,7 @@ use app\models\Junte;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
+use http\Url;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\Query;
@@ -70,6 +71,19 @@ class SiteController extends Controller
         ];
     }
 
+    public function Dados(){
+        $dados = (new Query())
+            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->from('propriedade p')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->orderBy('id')
+            ->count();
+
+//        echo $dados;die;
+        return $dados;
+    }
+
     /**
      * Displays homepage.
      *
@@ -77,6 +91,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
 //        select p.id, i.foto, p.preco, p.nomePt, p.nomeEn, p.nomeFr from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
 //        pegar propriedades
         $destaques = (new Query())
@@ -85,6 +118,7 @@ class SiteController extends Controller
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
             ->Andwhere(['p.destaque' => 1])
+            ->andWhere(['p.publicar' => 1])
             ->orderBy('id')
             ->All();
 
@@ -94,8 +128,11 @@ class SiteController extends Controller
             ->from('propriedade p')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
+            ->andWhere(['p.publicar' => 1])
             ->orderBy('id')
             ->All();
+
+
 
 
 //        print_r($destaques);die;
@@ -149,6 +186,25 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -169,54 +225,54 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
+//    public function actionAbout()
+//    {
+//        return $this->render('about');
+//    }
 
     /**
      * Signs user up.
      *
      * @return mixed
      */
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionSignup()
+//    {
+//        $model = new SignupForm();
+//        if ($model->load(Yii::$app->request->post())) {
+//            if ($user = $model->signup()) {
+//                if (Yii::$app->getUser()->login($user)) {
+//                    return $this->goHome();
+//                }
+//            }
+//        }
+//
+//        return $this->render('signup', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Requests password reset.
      *
      * @return mixed
      */
-    public function actionRequestPasswordReset()
-    {
-        $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
-            }
-        }
-
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionRequestPasswordReset()
+//    {
+//        $model = new PasswordResetRequestForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+//            if ($model->sendEmail()) {
+//                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+//
+//                return $this->goHome();
+//            } else {
+//                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+//            }
+//        }
+//
+//        return $this->render('requestPasswordResetToken', [
+//            'model' => $model,
+//        ]);
+//    }
 
     /**
      * Resets password.
@@ -225,27 +281,46 @@ class SiteController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
-    {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-
-            return $this->goHome();
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
-    }
+//    public function actionResetPassword($token)
+//    {
+//        try {
+//            $model = new ResetPasswordForm($token);
+//        } catch (InvalidArgumentException $e) {
+//            throw new BadRequestHttpException($e->getMessage());
+//        }
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+//            Yii::$app->session->setFlash('success', 'New password saved.');
+//
+//            return $this->goHome();
+//        }
+//
+//        return $this->render('resetPassword', [
+//            'model' => $model,
+//        ]);
+//    }
 
     public function actionArrendar()
     {
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
         //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
         $slides = (new Query())
             ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
@@ -263,6 +338,25 @@ class SiteController extends Controller
     }
 
     public function actionComprar(){
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
         //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
         $slides = (new Query())
             ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
@@ -280,10 +374,47 @@ class SiteController extends Controller
     }
 
     public function actionVender(){
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
         return $this->render('vender');
     }
     public function actionLegalizar(){
         $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -299,6 +430,25 @@ class SiteController extends Controller
         }
     }
     public function actionJunte(){
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
 //        echo Yii::$app->params['anexoF'];
 //        echo Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['anexo'].'1553704830.png'));
 //        die;
@@ -341,6 +491,24 @@ class SiteController extends Controller
     }
     public function actionAvaliacao(){
         $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -355,7 +523,55 @@ class SiteController extends Controller
             ]);
         }
     }
-    public function actionDetalhes(){
-        return $this->render('detalhes');
+    public function actionDetalhes($id){
+        $model = new ContactForm();
+
+        if ($this->Dados() < 4){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
+//        select p.ilha, t.nome from propriedade p left join tipo t on p.id_tipo = t.id where p.id = 1;
+        $dados = (new Query())
+            ->select('*')
+            ->from('propriedade p')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
+            ->where(['p.id' => $id])
+            ->One();
+
+//        select * from imagens where id_propriedade = 1;
+        $slides = (new Query())
+            ->select('*')
+            ->from('imagens')
+            ->where(['id_propriedade' => $id])
+            ->All();
+
+//        print_r($slides);die;
+        $dono = (new Query())
+            ->select('d.nome, d.apelido')
+            ->from('dono d')
+            ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
+            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+            ->where(['p.id' => $dados['id']])
+            ->One();
+//        print_r($dono);die;
+
+        return $this->render('detalhes', [
+            'dados' => $dados,
+            'slides' => $slides,
+            'dono' => $dono
+        ]);
     }
 }

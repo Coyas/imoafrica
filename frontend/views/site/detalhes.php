@@ -6,6 +6,8 @@
  * Time: 10:06 AM
  */
 
+use yii\db\Query;
+use yii\helpers\Html;
 use yii\web\View;
 ?>
 
@@ -15,48 +17,37 @@ use yii\web\View;
         <div class="row">
             <div class="gallery col-md-6">
                 <div class="detalhes-header">
-                    <div class="desc-detalhes preco"> <b>Preço:</b> 200.000 $00</div>
-                    <div class="desc-detalhes tipo"> <b>Tipo:</b> Arrendar</div>
-                    <div class="desc-detalhes area"> <b>Area: </b> 0000m<sup>2</sup></div>
+                    <div class="desc-detalhes preco"> <b>Preço:</b> <?= Html::encode($dados['preco'])?> $00</div>
+                    <div class="desc-detalhes tipo"> <b>Propósito:</b> <?php echo $dados['proposito'] == 0 ? "Arrendar" : "Vender"?></div>
+                    <div class="desc-detalhes area"> <b>Area: </b> <?= Html::encode($dados['area'])?>m<sup>2</sup></div>
 <!--                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>-->
                 </div>
-                <h2 class="detalhes-title"><b>Terreno + Casa</b><br>Praia, Achada Grande Trás</h2>
+                <h2 class="detalhes-title"><b><?= Html::encode($dados['nome'])?></b><br><?= Html::encode($dados['ilha']. ", ".$dados['ilha'])?></h2>
 
                 <h4 class="detalhes-desc">Descrisão</h4>
-                <p class="detalhes-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae dictum eros.
-                    Quisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
-                    Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsumQuisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
-                    Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsumQuisque semper vel purus eget auctor. Pellentesque ut aliquam ante, in lobortis mauris.
-                    Cras mattis mauris placerat faucibus pulvinar. Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsum Sed fringilla, ligula non luctus lacinia
-                    risus, sit amet euismod lacus tellus ac ipsumSed fringilla, ligula non luctus lacinia
+                <p class="detalhes-text">
+                    <?= Html::encode($dados['descricaoPt'])?>
                 </p>
                 <h4 class="detalhes-desc">Compartimentos</h4>
                 <div class="detalhes-header">
                     <div class="com-detalhes tooltips">
-                        <img src="images/quarto.png" class="icone-detalhes" alt=""> <b><sub>2</sub></b>
+                        <img src="images/quarto.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['quarto'])?></sub></b>
                         <span class="tooltiptext">Quartos</span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/garragem.png" class="icone-detalhes" alt=""> <b><sub>3</sub></b>
+                        <img src="images/garragem.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['garragem'])?></sub></b>
                         <span class="tooltiptext">Garragem</span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b><sub>2</sub></b>
+                        <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['banheiro'])?></sub></b>
                         <span class="tooltiptext">Casa De Banho</span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b><sub>1</sub></b>
+                        <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['cozinha'])?></sub></b>
                         <span class="tooltiptext">Cozinha</span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/sala.png" class="icone-detalhes" alt=""> <b><sub>1</sub></b>
+                        <img src="images/sala.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['sala'])?></sub></b>
                         <span class="tooltiptext">Sala De Estar</span></div>
                 </div>
             </div>
@@ -70,22 +61,20 @@ use yii\web\View;
                         </div>
                         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:580px;overflow:hidden;">
 
-                            <?php for ($i = 1; $i <= 4; $i ++):?>
+                            <?php foreach ($slides as $slide) {
+                                $pasta = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+                                ?>
                                 <div>
-                                    <img data-u="image" src="img/021.jpg" />
+<!--                                    <img data-u="image" src="img/021.jpg" />-->
+                                    <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['data-u' => 'image'])?>
                                     <div data-u="thumb">
-                                        <a href="img/021-s200x100.jpg" data-lightbox="roadtrip" data-title="Image desc">
-                                            <img data-u="thumb" src="img/021-s200x100.jpg" />
+                                        <a href="<?=Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto'])?>" data-lightbox="roadtrip" data-title="Image desc">
+<!--                                            <img data-u="thumb" src="img/021-s200x100.jpg" />-->
+                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['data-u' => 'thumb'])?>
                                         </a>
                                     </div>
                                 </div>
-                                <div>
-                                    <img data-u="image" src="img/022.jpg" />
-                                    <div data-u="thumb">
-                                        <img data-u="thumb" src="img/022-s200x100.jpg" />
-                                    </div>
-                                </div>
-                            <?php endfor;?>
+                            <?php }?>
 
                         </div>
                         <!-- Thumbnail Navigator -->
@@ -116,9 +105,9 @@ use yii\web\View;
     </div>
 </div>
 
-<div class="section">
-    <h1 class="gallery-title"> Veja em 360° </h1>
-</div>
+<!--<div class="section">-->
+<!--    <h1 class="gallery-title"> Veja em 360° </h1>-->
+<!--</div>-->
 
 
 <?php

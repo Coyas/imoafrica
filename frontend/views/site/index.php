@@ -275,17 +275,19 @@ $this->title = 'ImoAfrica Real Estate';
                                 $pasta2 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
                                 ?>
                                 <div class="col-md-3 col-sm-6 lthome filter arrendar">
-                                    <div class="destaques">
-<!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                        <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
-                                        <div class="text-center">
-                                            <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
-                                            <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
-                                            <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
-                                            <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
-                                            <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                    <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
+                                        <div class="destaques">
+    <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                            <div class="text-center">
+                                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
+                                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
+                                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                                <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                                <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                             <?php } ?>
@@ -307,17 +309,19 @@ $this->title = 'ImoAfrica Real Estate';
                                 $pasta3 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
                                 ?>
                                 <div class="col-md-3 col-sm-6 lthome filter arrendar">
-                                    <div class="destaques">
-                                        <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                        <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
-                                        <div class="text-center">
-                                            <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
-                                            <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
-                                            <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
-                                            <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
-                                            <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                    <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
+                                        <div class="destaques">
+                                            <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                            <div class="text-center">
+                                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
+                                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
+                                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                                <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                                <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
 
                             <?php } ?>

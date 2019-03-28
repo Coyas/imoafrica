@@ -35,6 +35,15 @@ $this->title = 'Contacto';
                 </div>
 
                 <div class="formfale">
+                    <?php if(Yii::$app->session->hasFlash('success')){ ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= Yii::t('app', 'Obrigado por nos contactar. Nós iremos responder mas breve possivel.')?>
+                        </div>
+                    <?php }else if(Yii::$app->session->hasFlash('error')){ ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= Yii::t('app', 'Ouve um problema ao enviar o email, tente de novo mais tarde.')?>
+                        </div>
+                    <?php }else { ?>
                     <h1 class="titleform"> Fale Connosco </h1>
                     <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                         <div class="row">
@@ -81,7 +90,7 @@ $this->title = 'Contacto';
                                 <?= Html::submitButton(Yii::t('app','Enviar'), ['class' => 'meubotaocontatoreverse', 'name' => 'contact-button']) ?>
                             </div>
                         </div>
-                    <?php ActiveForm::end(); ?>
+                    <?php ActiveForm::end(); }?>
                 </div>
 
             </div>
