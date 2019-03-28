@@ -143,8 +143,7 @@ class DonoController extends Controller
             ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
             ->where(['dono.id' => $id])
             ->All();
-//        print_r($id_propriedades);
-
+//        print_r($id_propriedades);die;
 
 
 //        Pegar a lista de todas as imagens desse dono
@@ -181,24 +180,36 @@ class DonoController extends Controller
                 }
             }
 //            die;
+//        $propriedades = (new Query())->select('p.id')
+//            ->from('dono')
+//            ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
+//            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+//            ->where(['dono.id' => $id])
+//            ->All();
+//        echo $pasta;die;
 //        apagar pasta do dono do servidor
         if (is_dir(Yii::$app->params['upload'].$pasta)){
+//            echo "pasta existe";die;
             rmdir(Yii::$app->params['upload'].$pasta);
         }else {
-            echo "pasta nao existe: ".$pasta;
+//            echo "pasta nao existe: ".$pasta;
 //            die;
         }
 
         //        apagar o elo entre dono e propriedade
-        DonoPropriedade::deleteAll(['id_dono' => $id]);
+        $ok = Propriedade::findOne($id);
+
+        if($ok){
+            DonoPropriedade::deleteAll(['id_dono' => $id]);
 //        eliminar imagens do banco de dados
-        foreach ($id_propriedades as $id_propriedade) {
-            Imagens::deleteAll(['id_propriedade' => $id_propriedade['id']]);
-        }
+            foreach ($id_propriedades as $id_propriedade) {
+                Imagens::deleteAll(['id_propriedade' => $id_propriedade['id']]);
+            }
 //        eliminar propriedades
-        foreach ($id_propriedades as $id_propriedade){
+            foreach ($id_propriedades as $id_propriedade){
 //            echo $id_propriedade['id'];
-            Propriedade::findOne($id_propriedade['id'])->delete();
+                Propriedade::findOne($id_propriedade['id'])->delete();
+            }
         }
 //        eliminar o dono
         try {

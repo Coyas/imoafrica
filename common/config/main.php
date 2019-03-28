@@ -29,11 +29,19 @@ return [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => false,
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'imoafrica.com',
+//                'username' => 'suporte@imoafrica.com',
+//                'password' => 'Terra.system1',
+//                'port' => '465',
+//                'encryption' => 'ssl',
+//            ],
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'imoafrica.com',
-                'username' => 'suporte@imoafrica.com',
-                'password' => 'Terra.system1',
+                'username' => 'geral@imoafrica.com',
+                'password' => 'MalucoImoafrica87??',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],

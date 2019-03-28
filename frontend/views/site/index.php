@@ -195,16 +195,16 @@ $this->title = 'ImoAfrica Real Estate';
                         <div class="meucol selectmeu">
                             <div class="input-group mb-2 formmargin">
                                 <select class="meu-select">
-                                    <option selected>Ilha</option>
-                                    <option value="st">Santo Antão</option>
-                                    <option value="sv">São Vicente</option>
-                                    <option value="sv">São Nicolao</option>
-                                    <option value="sv">Sal</option>
-                                    <option value="sv">Boavista</option>
-                                    <option value="sv">Maio</option>
-                                    <option value="sv">Santiago</option>
-                                    <option value="sv">Fogo</option>
-                                    <option value="sv">Brava</option>
+                                    <option selected>Conselho</option>
+                                    <option value="st">Praia</option>
+                                    <option value="sv">Assomada</option>
+                                    <option value="sv">S.l. Orgaos</option>
+                                    <option value="sv">Picos</option>
+                                    <option value="sv">Calheta</option>
+                                    <option value="sv">Tarrafal</option>
+                                    <option value="sv">Cidade Velha</option>
+                                    <option value="sv">Ribeira da Barca</option>
+                                    <option value="sv">Sao Domingos</option>
                                 </select>
                             </div>
                         </div>
@@ -217,9 +217,11 @@ $this->title = 'ImoAfrica Real Estate';
                             <div class="input-group mb-2 formmargin">
                                 <select class="meu-select">
                                     <option selected>Tipo Propriedade</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="1">Apartamento T1</option>
+                                    <option value="1">Apartamento T2</option>
+                                    <option value="1">Apartamento T3</option>
+                                    <option value="2">Terreno + Casa</option>
+                                    <option value="3">Aeroporto Privado</option>
                                 </select>
                             </div>
                         </div>

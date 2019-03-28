@@ -93,7 +93,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -187,7 +187,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -304,7 +304,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -340,7 +340,7 @@ class SiteController extends Controller
     public function actionComprar(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -376,7 +376,7 @@ class SiteController extends Controller
     public function actionVender(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -398,7 +398,7 @@ class SiteController extends Controller
     public function actionLegalizar(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -432,7 +432,7 @@ class SiteController extends Controller
     public function actionJunte(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -492,7 +492,7 @@ class SiteController extends Controller
     public function actionAvaliacao(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -526,7 +526,7 @@ class SiteController extends Controller
     public function actionDetalhes($id){
         $model = new ContactForm();
 
-        if ($this->Dados() < 4){
+        if ($this->Dados() < 0){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
