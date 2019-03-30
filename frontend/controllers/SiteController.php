@@ -71,17 +71,36 @@ class SiteController extends Controller
         ];
     }
 
-    public function Dados(){
+    public function configs(){
+        $offline = null;
+
         $dados = (new Query())
-            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->select('*')
             ->from('propriedade p')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
             ->orderBy('id')
             ->count();
 
-//        echo $dados;die;
-        return $dados;
+        $configs = (new Query())
+            ->select('*')
+            ->from('configs')
+            ->One();
+//        print_r($configs);die;
+//        echo $configs['mpropriedade'];die;
+        $valor = $configs['valor'];
+//        echo $valor;
+
+        if ($configs['config'] == 'Minproperty' && $dados < (int)$configs['valor'] ){
+            $offline = true;
+        }else {
+            $offline = false;
+        }
+
+//        echo $dados;
+//        echo $offline;die;
+        return $offline;
+
     }
 
     /**
@@ -93,7 +112,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
+        if ($this->configs()){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -110,11 +129,13 @@ class SiteController extends Controller
                 ]);
             }
         }
-//        select p.id, i.foto, p.preco, p.nomePt, p.nomeEn, p.nomeFr from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
+//        select p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
 //        pegar propriedades
         $destaques = (new Query())
-            ->select('p.id, i.foto, p.preco, p.nomePt, p.nomeEn, p.nomeFr')
+            ->select('p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo')
             ->from('propriedade p')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
             ->Andwhere(['p.destaque' => 1])
@@ -122,15 +143,31 @@ class SiteController extends Controller
             ->orderBy('id')
             ->All();
 
-//        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+//        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
         $slides = (new Query())
-            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
             ->from('propriedade p')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
             ->andWhere(['p.publicar' => 1])
             ->orderBy('id')
+            ->limit(4)
             ->All();
+        $slides2 = (new Query())
+            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+            ->from('propriedade p')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
+            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+            ->where(['i.capa' => 1])
+            ->andWhere(['p.publicar' => 1])
+            ->orderBy('id')
+            ->offset(4)
+            ->All();
+
+//        echo (0 % 2);die;
 
 
 
@@ -139,7 +176,8 @@ class SiteController extends Controller
 
         return $this->render('index', [
             'destaques' => $destaques,
-            'slides' => $slides
+            'slides' => $slides,
+            'slides2' => $slides2
         ]);
     }
 
@@ -187,7 +225,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
+        if ($this->configs()){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -304,7 +342,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
+        if ($this->configs()){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -322,12 +360,24 @@ class SiteController extends Controller
             }
         }
         //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+//        $slides = (new Query())
+//            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+//            ->from('propriedade p')
+//            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+//            ->where(['i.capa' => 1])
+//            ->andWhere(['like', 'p.proposito', 0])
+//            ->orderBy('id')
+//            ->All();
+        //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
         $slides = (new Query())
-            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
             ->from('propriedade p')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
-            ->andWhere(['like', 'p.proposito', 0])
+            ->andWhere(['p.publicar' => 1])
+            ->andWhere(['p.proposito' => 1])
             ->orderBy('id')
             ->All();
 //        print_r($slides);die;
@@ -340,7 +390,7 @@ class SiteController extends Controller
     public function actionComprar(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
+        if ($this->configs()){
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -358,15 +408,27 @@ class SiteController extends Controller
             }
         }
         //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+//        $slides = (new Query())
+//            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+//            ->from('propriedade p')
+//            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+//            ->where(['i.capa' => 1])
+//            ->andWhere(['like', 'p.proposito', 1])
+//            ->orderBy('id')
+//            ->All();
+////        print_r($slides);die;
+        //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
         $slides = (new Query())
-            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
             ->from('propriedade p')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
+            ->leftJoin('tipo t', 'p.id_tipo = t.id')
             ->leftJoin('imagens i', 'p.id = i.id_propriedade')
             ->where(['i.capa' => 1])
-            ->andWhere(['like', 'p.proposito', 1])
+            ->andWhere(['p.publicar' => 1])
+            ->andWhere(['p.proposito' => 2])
             ->orderBy('id')
             ->All();
-//        print_r($slides);die;
 
         return $this->render('comprar', [
             'slides' => $slides
@@ -374,47 +436,12 @@ class SiteController extends Controller
     }
 
     public function actionVender(){
-        $model = new ContactForm();
 
-        if ($this->Dados() < 0){
-            $this->layout = 'obras';
-
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-                }
-
-                return $this->refresh();
-            } else {
-                return $this->render('obras', [
-                    'model' => $model,
-                ]);
-            }
-        }
         return $this->render('vender');
     }
     public function actionLegalizar(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
-            $this->layout = 'obras';
-
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-                }
-
-                return $this->refresh();
-            } else {
-                return $this->render('obras', [
-                    'model' => $model,
-                ]);
-            }
-        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -430,25 +457,7 @@ class SiteController extends Controller
         }
     }
     public function actionJunte(){
-        $model = new ContactForm();
 
-        if ($this->Dados() < 0){
-            $this->layout = 'obras';
-
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-                }
-
-                return $this->refresh();
-            } else {
-                return $this->render('obras', [
-                    'model' => $model,
-                ]);
-            }
-        }
 //        echo Yii::$app->params['anexoF'];
 //        echo Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['anexo'].'1553704830.png'));
 //        die;
@@ -492,23 +501,6 @@ class SiteController extends Controller
     public function actionAvaliacao(){
         $model = new ContactForm();
 
-        if ($this->Dados() < 0){
-            $this->layout = 'obras';
-
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-                }
-
-                return $this->refresh();
-            } else {
-                return $this->render('obras', [
-                    'model' => $model,
-                ]);
-            }
-        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -524,32 +516,17 @@ class SiteController extends Controller
         }
     }
     public function actionDetalhes($id){
-        $model = new ContactForm();
 
-        if ($this->Dados() < 0){
-            $this->layout = 'obras';
-
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
-                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-                }
-
-                return $this->refresh();
-            } else {
-                return $this->render('obras', [
-                    'model' => $model,
-                ]);
-            }
-        }
-//        select p.ilha, t.nome from propriedade p left join tipo t on p.id_tipo = t.id where p.id = 1;
+//        select c.nome, t.nome, p.zona, p.area, p.preco, p.proposito, p.quarto, p.garragem, p.banheiro, p.cozinha, p.sala, p.descricaoPt
+//from propriedade p left join tipo t on p.id_tipo = t.id left join conselho c on p.id_conselho = c.id where p.id = 2;
         $dados = (new Query())
-            ->select('*')
+            ->select('p.id, c.nome as conselho, t.nome as tipo, p.zona, p.area, p.preco, p.proposito, p.quarto, p.garragem, p.banheiro, p.cozinha, p.sala, p.descricaoPt')
             ->from('propriedade p')
             ->leftJoin('tipo t', 'p.id_tipo = t.id')
+            ->leftJoin('conselho c', 'p.id_conselho = c.id')
             ->where(['p.id' => $id])
             ->One();
+//        print_r($dados);die;
 
 //        select * from imagens where id_propriedade = 1;
         $slides = (new Query())
@@ -557,8 +534,8 @@ class SiteController extends Controller
             ->from('imagens')
             ->where(['id_propriedade' => $id])
             ->All();
-
 //        print_r($slides);die;
+
         $dono = (new Query())
             ->select('d.nome, d.apelido')
             ->from('dono d')
@@ -570,6 +547,7 @@ class SiteController extends Controller
 
         return $this->render('detalhes', [
             'dados' => $dados,
+            'dados2' => $dados2,
             'slides' => $slides,
             'dono' => $dono
         ]);

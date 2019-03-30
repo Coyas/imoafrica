@@ -306,15 +306,15 @@ AppAsset::register($this);
 <!--                </div>-->
             </div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
+<!--            <form action="#" method="get" class="sidebar-form">-->
+<!--                <div class="input-group">-->
+<!--                    <input type="text" name="q" class="form-control" placeholder="Search...">-->
+<!--                    <span class="input-group-btn">-->
+<!--                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>-->
+<!--                </button>-->
+<!--              </span>-->
+<!--                </div>-->
+<!--            </form>-->
 <!--             /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -347,19 +347,28 @@ AppAsset::register($this);
                 <li>
                     <a href="#">
 <!--                        <i class="fa fa-files-o"></i>-->
-                        <i class="fas fa-thumbs-up"></i>
-                        <span> Avaliações</span>
+                        <i class="fas fa-envelope"></i>
+                        <span> Mensagens</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-green">novo</small>
                         </span>
                     </a>
                 </li>
-                <li>
+
+
+                <li class="treeview">
                     <a href="#">
-                        <i class="fas fa-file-signature"></i>
-                        <span>Legalizações</span>
+                        <i class="fas fa-file-signature"></i> <span>Postagens</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><?=Html::a('<i class="fas fa-blog"></i> <span> Ver Postagens</span>', ['post/'])?></li>
+                        <li><?=Html::a('<i class="fas fa-comment"></i> <span> Comentarios</span>', ['comment/'])?></li>
+                    </ul>
                 </li>
+
 
                 <li class="treeview">
                     <a href="#">
@@ -370,7 +379,7 @@ AppAsset::register($this);
                     </a>
                     <ul class="treeview-menu">
                         <li><?=Html::a('<i class="fas fa-eye"></i> <span> Visitar O Site</span>', 'http://imoafrica.cv', ['target' => '_blank'])?></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> Contactos</a></li>
+                        <li><?=Html::a('<i class="fas fa-users"></i> Contatos', ['contatos/'])?></li>
                         <li><?=Html::a('<i class="fas fa-users"></i> Usuarios', ['users/'])?></li>
 <!--                        <li class="treeview">-->
 <!--                            <a href="#"><i class="fa fa-circle-o"></i> Level One-->
@@ -399,9 +408,11 @@ AppAsset::register($this);
 
                 <li class="header">ACESSOS</li>
                 <li><?=Html::a('<i class="fas fa-bug" style="color:red;"></i> <span>Reportar Problema</span>', ['bugreport/index'])?></li>
-                <li><?=Html::a('<i class="fas fa-bug" style="color:blue;"></i> <span>Notificaçoes</span>', ['notes/index'])?></li>
-                <li><?=Html::a('<i class="fas fa-bug" style="color:yellow;"></i> <span>Tarefas</span>', ['tasks/index'])?></li>
-                <li><?=Html::a('<i class="fas fa-bug" style="color:green;"></i> <span>Tipos Des Propriedade</span>', ['tipo/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-bell" style="color:blue;"></i> <span>Notificaçoes</span>', ['notes/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-tasks" style="color:yellow;"></i> <span>Tarefas</span>', ['tasks/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-home" style="color:green;"></i> <span>Tipos De Propriedade</span>', ['tipo/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-map-marker" style="color:pink;"></i> <span>Conselhos</span>', ['conselho/index'])?></li>
+                <li><?=Html::a('<i class="fas fa-cog" style="color:brown;"></i> <span>Configuraçoes</span>', ['configs/index'])?></li>
             </ul>
         </section>
         <!-- /.sidebar -->

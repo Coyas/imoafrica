@@ -23,8 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'access')->dropDownList(
     [
-        0 => 'Gestor',
-        1 => 'Administrador',
+        0 => 'Estagiario',
+        1 => 'Gestor',
+        2 => 'Administrador (Area TI)',
     ]
 ); ?>
 

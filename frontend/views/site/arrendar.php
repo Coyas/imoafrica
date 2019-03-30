@@ -9,6 +9,7 @@
 use yii\db\Query;
 use yii\web\View;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 <div class="section">
@@ -30,18 +31,21 @@ use yii\helpers\Html;
 
                     $pasta = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
                     ?>
+
                     <div class="col-md-3 col-sm-6 lthome filter arrendar">
-                        <div class="destaques">
-                            <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
-                            <div class="text-center">
-                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
-                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
-                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
-                                <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
-                                <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                        <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
+                            <div class="destaques">
+                                <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
+                                <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                <div class="text-center">
+                                    <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo "Arrendar";}elseif ($slide['proposito'] == 2){ echo "A Venda";}?></span>
+                                    <h2 class="txt-nome"> <?= $slide['tipo'] ?>  </h2>
+                                    <h3 class="txt-localizacao"> <?=$slide['conselho']?>, <?=$slide['zona']?> </h3>
+                                    <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
+                                    <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                 <?php } ?>
@@ -65,9 +69,16 @@ use yii\helpers\Html;
                                 <div class="meucol selectmeu">
                                     <div class="input-group mb-2 formmargin">
                                         <select class="meu-select">
-                                            <option selected>Ilha</option>
-                                            <option value="st">Santo Antão</option>
-                                            <option value="sv">São Vicente</option>
+                                            <option selected>Conselho</option>
+                                            <option value="st">Praia</option>
+                                            <option value="sv">Assomada</option>
+                                            <option value="sv">S.l. Orgaos</option>
+                                            <option value="sv">Picos</option>
+                                            <option value="sv">Calheta</option>
+                                            <option value="sv">Tarrafal</option>
+                                            <option value="sv">Cidade Velha</option>
+                                            <option value="sv">Ribeira da Barca</option>
+                                            <option value="sv">Sao Domingos</option>
                                         </select>
                                     </div>
                                 </div>
@@ -80,9 +91,11 @@ use yii\helpers\Html;
                                     <div class="input-group mb-2 formmargin">
                                         <select class="meu-select">
                                             <option selected>Tipo Propriedade</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option value="1">Apartamento T1</option>
+                                            <option value="1">Apartamento T2</option>
+                                            <option value="1">Apartamento T3</option>
+                                            <option value="2">Terreno + Casa</option>
+                                            <option value="3">Aeroporto Privado</option>
                                         </select>
                                     </div>
                                 </div>

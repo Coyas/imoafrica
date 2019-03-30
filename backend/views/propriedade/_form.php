@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Tipo;
+use app\models\Conselho;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Propriedade */
@@ -12,15 +15,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'id_tipo')->textInput() ?>
+    <?php // $form->field($model, 'id_tipo')->textInput() ?>
+    <?= $form->field($model, 'id_tipo')->dropDownList(
+            \yii\helpers\ArrayHelper::map(Tipo::find()->All(), 'id', 'nome')
+    )?>
 
-    <?= $form->field($model, 'nomePt')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'nomeEn')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'nomeFr')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ilha')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'id_conselho')->textInput() ?>
+    <?= $form->field($model, 'id_conselho')->dropDownList(
+        \yii\helpers\ArrayHelper::map(Conselho::find()->All(), 'id', 'nome')
+    )?>
 
     <?= $form->field($model, 'zona')->textInput(['maxlength' => true]) ?>
 
@@ -28,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'preco')->textInput() ?>
 
-    <?= $form->field($model, 'proposito')->dropDownList([ '0' => 'Arrendar', '1' => 'Vender', ], ['prompt' => 'Proposito da propriedade']) ?>
+    <?= $form->field($model, 'proposito')->dropDownList([ 1 => 'Arrendar', 2 => 'Vender', ], ['prompt' => 'Proposito da propriedade']) ?>
 
     <?= $form->field($model, 'quarto')->textInput() ?>
 

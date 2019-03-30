@@ -57,22 +57,41 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-//                        'nomePt',
+//            'id',
                         [
-                            'label'=>'nomePt',
+                            'label'=>'Propriedade',
                             'format' => 'raw',
                             'value'=>function ($data) {
-                                return Html::a(Html::encode($data->nomePt), ['propriedade/view', 'id' => $data->id]);
+                                return Html::a(Html::encode($data->tipo->nome), ['propriedade/view', 'id' => $data->id]);
                             },
                         ],
-//            'nomeEn',
-//            'nomeFr',
-                        'ilha',
-//            'zona',
                         'area',
+//                        'id_conselho',
+                        [
+                            'label'=>'Localizaçao',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                return $data->conselho->nome;
+                            },
+                        ],
+//            'zona',
                         'preco',
-                        'proposito',
+//                        'proposito',
+                        [
+                            'label'=>'Proposito',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                    if ($data->proposito == 1){
+                                        return "Arrendar";
+                                    }elseif ($data->proposito == 2){
+                                        return "Vender";
+                                    }else {
+                                        return "";
+                                    }
+
+
+                            },
+                        ],
                         //'quarto',
                         //'garragem',
                         //'banheiro',

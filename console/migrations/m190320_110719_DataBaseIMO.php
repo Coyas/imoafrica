@@ -18,6 +18,47 @@ class m190320_110719_DataBaseIMO extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
+        $this->createTable('post', [
+            'id' => $this->primaryKey(),
+            'title' => $this->string(150),
+            'slug' => $this->string(200),
+            'content' => $this->text()->notNull(),
+            'autor' => $this->string(150)->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
+        $this->createTable('comment', [
+            'id' => $this->primaryKey(),
+            'email' => $this->string(200)->notNull(),
+            'content' => $this->text()->notNull(),
+            'publicar' => $this->integer()->defaultValue(0)->notNull(),
+            'id_post' => $this->integer()->defaultValue(0)->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
+        $this->addForeignKey('FKcomment', 'comment', 'id_post', 'post', 'id');
+
+        $this->createTable('resposta', [
+            'id' => $this->primaryKey(),
+            'email' => $this->string(200)->notNull(),
+            'content' => $this->text()->notNull(),
+            'id_comment' => $this->integer()->defaultValue(0)->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
+        $this->addForeignKey('FKresposta', 'resposta', 'id_comment', 'comment', 'id');
+
+        $this->createTable('configs', [
+            'id' => $this->primaryKey(),
+            'config' => $this->String('50')->unique()->notNull(),
+            'valor' => $this->string('50')->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime()
+        ], $tableOptions);
+
         $this->createTable('junte', [
             'id' => $this->primaryKey(),
             'nome' => $this->string(100)->notNull(),
@@ -27,6 +68,7 @@ class m190320_110719_DataBaseIMO extends Migration
             'telefone' => $this->string(50)->notNull(),
             'content' => $this->text()->notNull(),
             'anexo' => $this->string(255),
+            'created_at' => $this->dateTime()
         ]);
 
         $this->createTable('notes', [
@@ -63,19 +105,23 @@ class m190320_110719_DataBaseIMO extends Migration
             'updated_at' => $this->dateTime(),
         ], $tableOptions);
 
+        $this->createTable('conselho', [
+            'id' => $this->primaryKey(),
+            'nome' => $this->string(80)->notNull(),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
+        ], $tableOptions);
+
 //        proposito:
 //            0 - arrendar
 //            1 - vender
         $this->createTable('propriedade', [
             'id' => $this->primaryKey(),
-            'nomePt' => $this->string(50)->notNull(),
-            'nomeEn' => $this->string(50)->notNull(),
-            'nomeFr' => $this->string(50)->notNull(),
-            'ilha' => $this->string(50)->notNull(),
-            'zona' => $this->string(50)->notNull(),
+            'id_conselho' => $this->integer(),
+            'zona' => $this->string(100)->notNull(),
             'area' => $this->integer()->notNull(),
             'preco' => $this->double(2)->notNull(),
-            'proposito' => "ENUM('0','1')",
+            'proposito' => $this->integer()->defaultValue(0),
 //            numero de compartimentos
             'quarto' => $this->integer()->defaultValue(0),
             'garragem' => $this->integer()->defaultValue(0),
@@ -91,6 +137,8 @@ class m190320_110719_DataBaseIMO extends Migration
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ], $tableOptions);
+
+        $this->addForeignKey('FKconselho', 'propriedade', 'id_conselho', 'conselho', 'id');
 
         $this->createTable('dono', [
             'id' => $this->primaryKey(),
@@ -134,6 +182,9 @@ class m190320_110719_DataBaseIMO extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('FKcomment', 'comment');
+        $this->dropForeignKey('FKconselho', 'propriedade');
+        $this->dropForeignKey('FKresposta', 'resposta');
         $this->dropForeignKey('FKimagem', 'imagens');
         $this->dropForeignKey('FKTipo', 'propriedade');
         $this->dropForeignKey('FKDonoPro', 'dono_propriedade');
@@ -142,6 +193,11 @@ class m190320_110719_DataBaseIMO extends Migration
 
 
 
+        $this->dropTable('conselho');
+        $this->dropTable('post');
+        $this->dropTable('comment');
+        $this->dropTable('resposta');
+        $this->dropTable('configs');
         $this->dropTable('junte');
         $this->dropTable('contatos');
         $this->dropTable('tipo');

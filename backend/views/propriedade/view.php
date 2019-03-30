@@ -9,7 +9,7 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model app\models\Propriedade */
 
-$this->title = $model->nomePt;
+$this->title = $model->id_tipo;
 $this->params['breadcrumbs'][] = ['label' => 'Propriedades', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -52,21 +52,73 @@ $this->params['breadcrumbs'][] = $this->title;
                     'model' => $model,
                     'attributes' => [
 //            'id',
-                        'nomePt',
-                        'nomeEn',
-                        'nomeFr',
-                        'ilha',
+//                        'id_conselho',
+//                        'id_tipo',
+                        [
+                            'label'=>'Propriedade',
+                            'format' => 'raw',
+                            'value'=>function ($data) {
+                                return Html::encode($data->tipo->nome);
+                            },
+                        ],
+                        [
+                            'label'=>'Localizaçao',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                return $data->conselho->nome;
+                            },
+                        ],
+                        [
+                            'label'=>'Proposito',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                if ($data->proposito == 1){
+                                    return "Arrendar";
+                                }elseif ($data->proposito == 2){
+                                    return "Vender";
+                                }else {
+                                    return "";
+                                }
+
+
+                            },
+                        ],
+//                        'publicar',
+                        [
+                            'label'=>'Publicar',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                if ($data->publicar == 0){
+                                    return "Nao";
+                                }else {
+                                    return "Sim";
+                                }
+
+
+                            },
+                        ],
+//                        'destaque',
+                        [
+                            'label'=>'Publicar',
+                            'format' => 'html',
+                            'value'=>function ($data) {
+                                if ($data->destaque == 0){
+                                    return "Nao";
+                                }else {
+                                    return "Sim";
+                                }
+
+
+                            },
+                        ],
                         'zona',
                         'area',
                         'preco',
-                        'proposito',
                         'quarto',
                         'garragem',
                         'banheiro',
                         'cozinha',
                         'sala',
-                        'publicar',
-                        'destaque',
                         'descricaoPt:ntext',
                         'descricaoEn:ntext',
                         'descricaoFr:ntext',

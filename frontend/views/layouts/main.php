@@ -43,7 +43,7 @@ AppAsset::register($this);
                 <div class="menumob">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
-         <i class="fas fa-bars"></i>
+            <i class="fas fa-bars"></i>
         </span>
                     </button>
 
@@ -166,7 +166,7 @@ $this->registerJs(
         navigation: true,
 	    navigationPosition: 'right',
 	    showActiveTooltip: false,
-	    scrollOverflow: true,
+	    scrollOverflow: false,
         //scrollingSpeed: 5000,
         //easing: 'easeInOutCubic',
         //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/

@@ -18,11 +18,11 @@ use yii\web\View;
             <div class="gallery col-md-6">
                 <div class="detalhes-header">
                     <div class="desc-detalhes preco"> <b>Preço:</b> <?= Html::encode($dados['preco'])?> $00</div>
-                    <div class="desc-detalhes tipo"> <b>Propósito:</b> <?php echo $dados['proposito'] == 0 ? "Arrendar" : "Vender"?></div>
+                    <div class="desc-detalhes tipo"> <b>Propósito:</b> <?php if($dados['proposito'] == 1){ echo "Arrendar";}elseif ($dados['proposito'] == 2){ echo "Vender";}?></div>
                     <div class="desc-detalhes area"> <b>Area: </b> <?= Html::encode($dados['area'])?>m<sup>2</sup></div>
 <!--                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>-->
                 </div>
-                <h2 class="detalhes-title"><b><?= Html::encode($dados['nome'])?></b><br><?= Html::encode($dados['ilha']. ", ".$dados['ilha'])?></h2>
+                <h2 class="detalhes-title"><b><?= Html::encode($dados['tipo'])?></b><br><?= Html::encode($dados['conselho']. ", ".$dados['zona'])?></h2>
 
                 <h4 class="detalhes-desc">Descrisão</h4>
                 <p class="detalhes-text">

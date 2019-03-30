@@ -8,14 +8,11 @@ use Yii;
  * This is the model class for table "propriedade".
  *
  * @property int $id
- * @property string $nomePt
- * @property string $nomeEn
- * @property string $nomeFr
- * @property string $ilha
+ * @property int $id_conselho
  * @property string $zona
  * @property int $area
  * @property double $preco
- * @property string $proposito
+ * @property int $proposito
  * @property int $quarto
  * @property int $garragem
  * @property int $banheiro
@@ -34,6 +31,7 @@ use Yii;
  * @property Dono[] $donos
  * @property Imagens[] $imagens
  * @property Tipo $tipo
+ * @property Conselho $conselho
  */
 class Propriedade extends \yii\db\ActiveRecord
 {
@@ -51,13 +49,14 @@ class Propriedade extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'area', 'preco', 'id_tipo'], 'required'],
-            [['area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
+            [['id_conselho', 'area', 'proposito', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
+            [['zona', 'area', 'preco', 'id_tipo'], 'required'],
             [['preco'], 'number'],
-            [['proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr'], 'string'],
+            [['descricaoPt', 'descricaoEn', 'descricaoFr'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona'], 'string', 'max' => 50],
+            [['zona'], 'string', 'max' => 100],
             [['id_tipo'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['id_tipo' => 'id']],
+            [['id_conselho'], 'exist', 'skipOnError' => true, 'targetClass' => Conselho::className(), 'targetAttribute' => ['id_conselho' => 'id']],
         ];
     }
 
@@ -68,12 +67,9 @@ class Propriedade extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nomePt' => 'Nome Pt',
-            'nomeEn' => 'Nome En',
-            'nomeFr' => 'Nome Fr',
-            'ilha' => 'Ilha',
+            'id_conselho' => 'Conselho/cidade',
             'zona' => 'Zona',
-            'area' => 'Area',
+            'area' => 'Dimensao (Area)',
             'preco' => 'Preco',
             'proposito' => 'Proposito',
             'quarto' => 'Quarto',
@@ -81,12 +77,12 @@ class Propriedade extends \yii\db\ActiveRecord
             'banheiro' => 'Banheiro',
             'cozinha' => 'Cozinha',
             'sala' => 'Sala',
-            'descricaoPt' => 'Descricao Pt',
-            'descricaoEn' => 'Descricao En',
-            'descricaoFr' => 'Descricao Fr',
+            'descricaoPt' => 'Descricao (Portugues)',
+            'descricaoEn' => 'Descricao (Ingles)',
+            'descricaoFr' => 'Descricao (Frances)',
             'publicar' => 'Publicar',
-            'id_tipo' => 'Id Tipo',
-            'destaque' => 'Destaque',
+            'id_tipo' => 'Tipo De Propriedade',
+            'destaque' => 'Manter em Destaque',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -122,5 +118,13 @@ class Propriedade extends \yii\db\ActiveRecord
     public function getTipo()
     {
         return $this->hasOne(Tipo::className(), ['id' => 'id_tipo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConselho()
+    {
+        return $this->hasOne(Conselho::className(), ['id' => 'id_conselho']);
     }
 }

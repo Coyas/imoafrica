@@ -17,8 +17,8 @@ class PropriedadeSearch extends Propriedade
     public function rules()
     {
         return [
-            [['id', 'area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
-            [['nomePt', 'nomeEn', 'nomeFr', 'ilha', 'zona', 'proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'id_conselho', 'area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
+            [['zona', 'proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr', 'created_at', 'updated_at'], 'safe'],
             [['preco'], 'number'],
         ];
     }
@@ -60,6 +60,7 @@ class PropriedadeSearch extends Propriedade
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'id_conselho' => $this->id_conselho,
             'area' => $this->area,
             'preco' => $this->preco,
             'quarto' => $this->quarto,
@@ -74,11 +75,7 @@ class PropriedadeSearch extends Propriedade
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'nomePt', $this->nomePt])
-            ->andFilterWhere(['like', 'nomeEn', $this->nomeEn])
-            ->andFilterWhere(['like', 'nomeFr', $this->nomeFr])
-            ->andFilterWhere(['like', 'ilha', $this->ilha])
-            ->andFilterWhere(['like', 'zona', $this->zona])
+        $query->andFilterWhere(['like', 'zona', $this->zona])
             ->andFilterWhere(['like', 'proposito', $this->proposito])
             ->andFilterWhere(['like', 'descricaoPt', $this->descricaoPt])
             ->andFilterWhere(['like', 'descricaoEn', $this->descricaoEn])

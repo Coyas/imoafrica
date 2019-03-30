@@ -70,7 +70,7 @@ class DonoController extends Controller
                 'pagesize' => 10,
             ],
             'sort' => [
-                'defaultOrder' => ['nomePt' => SORT_ASC]
+                'defaultOrder' => ['id' => SORT_DESC]
             ]
         ]);
         return $this->render('view', [

@@ -70,7 +70,12 @@ $this->title = 'ImoAfrica Real Estate';
         </div>
         <div class="fixed-footer p-3 footermobile">
             <!--        <a href="#"> <img src="images/facebook.png" width="50" height="50" alt="Nosso Facebook"> </a>-->
-            <a href="#"> <?= Html::img(URL::to(Yii::$app->params['img'].'faceboook.png', true), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']);?> </a>
+            <?php //Html::a(Html::img(Url::to('images/facebook.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']);?> </a>
+            <?php // Html::a(Html::img(Url::to('images/instagram.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Instagram']), 'https://tufjghgt.ate/', ['class' => 'instagramlink', 'target' => '_blank'])?>
+
+            <?= Html::a(Html::img(Url::to('images/facebook.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Facebook']), 'https://web.facebook.com/imoafricarealestate/', ['class' => 'facebooklink', 'target' => '_blank'])?>
+            <?= Html::a(Html::img(Url::to('images/instagram.png'), ['width' => 50, 'height' => 50, 'alt' => 'Nosso Instagram']), 'https://tufjghgt.ate/', ['class' => 'instagramlink', 'target' => '_blank'])?>
+
 
         </div>
 
@@ -282,9 +287,9 @@ $this->title = 'ImoAfrica Real Estate';
     <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
                                             <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
-                                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
-                                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
-                                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
+                                                <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo "Arrendar";}elseif ($slide['proposito'] == 2){ echo "A Venda";}?></span>
+                                                <h2 class="txt-nome"> <?= $slide['tipo'] ?>  </h2>
+                                                <h3 class="txt-localizacao"> <?=$slide['conselho']?>, <?=$slide['zona']?> </h3>
                                                 <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
                                                 <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
                                             </div>
@@ -298,14 +303,14 @@ $this->title = 'ImoAfrica Real Estate';
 
                     <div class="carousel-item">
                         <div class="row">
-                            <?php foreach ($slides as $slide){
+                            <?php foreach ($slides2 as $slide2){
                                 //        select d.nome, d.apelido from dono d left join dono_propriedade dp on d.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
                                 $dono = (new Query())
                                     ->select('d.nome, d.apelido')
                                     ->from('dono d')
                                     ->leftJoin('dono_propriedade dp', 'd.id = dp.id_dono')
                                     ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
-                                    ->where(['p.id' => $slide['id']])
+                                    ->where(['p.id' => $slide2['id']])
                                     ->One();
 
                                 $pasta3 = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
@@ -314,13 +319,13 @@ $this->title = 'ImoAfrica Real Estate';
                                     <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
                                         <div class="destaques">
                                             <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide2['foto']), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
-                                                <span class="property-box-label property-box-label-primary"><?= $slide['proposito'] == 0 ? "Arrendar" : "A Venda"?></span>
-                                                <h2 class="txt-nome"> <?= $slide['nomePt'] ?>  </h2>
-                                                <h3 class="txt-localizacao"> <?=$slide['ilha']?>, <?=$slide['zona']?> </h3>
-                                                <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
-                                                <h4 class="txt-preco"> <?=$slide['preco']?> $00 </h4>
+                                                <span class="property-box-label property-box-label-primary"><?php if($slide2['proposito'] == 1){ echo "Arrendar";}elseif ($slide2['proposito'] == 2){ echo "A Venda";}?></span>
+                                                <h2 class="txt-nome"> <?= $slide2['tipo'] ?>  </h2>
+                                                <h3 class="txt-localizacao"> <?=$slide2['conselho']?>, <?=$slide2['zona']?> </h3>
+                                                <h3 class="txt-dimensao"> <?= $slide2['area']?>m<sup>2</sup> </h3>
+                                                <h4 class="txt-preco"> <?=$slide2['preco']?> $00 </h4>
                                             </div>
                                         </div>
                                     </a>
@@ -332,7 +337,15 @@ $this->title = 'ImoAfrica Real Estate';
 
                     <ol class="carousel-indicators">
                         <li data-target="#destaquesCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#destaquesCarousel" data-slide-to="1"></li>
+                        <?php $i = 0; foreach ($slides as $slide) {
+                            $i++;
+                        }
+                            if($i > 4){
+                        ?>
+                        <li data-target="#destaquesCarousel" data-slide-to="1" class=""></li>
+                        <?php } if($i > 8){ ?>
+                            <li data-target="#destaquesCarousel" data-slide-to="2" class=""></li>
+                        <?php }?>
                     </ol>
 
                 </div>
