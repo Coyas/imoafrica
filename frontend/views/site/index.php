@@ -371,7 +371,7 @@ $this->title = 'ImoAfrica Real Estate';
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/pesquisa.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> <?=Yii::t('app', 'Pesquisas Inteligente')?> </h3>
+                        <h3 class="pub-title"> <?=Yii::t('app', 'Pesquisas Inteligentes')?> </h3>
                         <p class="pub-text"> Dispomos de uma ferramenta para pesquisa filtrada de propriedades. </p>
                         <a href="#" class="pub-btn aa"><?=Yii::t('app', 'Saiba Mais')?></a>
                     </div>

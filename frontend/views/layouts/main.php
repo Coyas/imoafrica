@@ -136,8 +136,8 @@ AppAsset::register($this);
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
-                        <p><?= date('Y')?> © ImoAfrica. Todos os direitos reservados<br>
-                            Implementado pela <a href="https://innovatmedia.com" target="_blank">iMedia Innovative media</a>
+                        <p><?= date('Y')?> © ImoAfrica. <?=Yii::t('app', 'Todos os direitos reservados')?><br>
+                            <?=Yii::t('app', 'Implementado pela')?> <a href="https://innovatmedia.com" target="_blank">iMedia Innovative media</a>
                         </p>
                     </div>
                     <div class="col-md-4 col-sm-4">

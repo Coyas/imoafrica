@@ -41,7 +41,7 @@ return  [
     'Propriedqdes A Venda' => 'Property For Sale',
     'Propriedades para Arrendar' => 'Properties for Rent',
     'Todos os direitos reservados' => 'All rights reserved',
-    'implementado pela' => 'implemented by',
+    'Implementado pela' => 'implemented by',
     'Selecione ficheiro' => 'Select File',
     'Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr' => 'Open from Monday to Friday from 8:00 a.m. to 7:00 p.m.',
     'Preço' => 'Price',

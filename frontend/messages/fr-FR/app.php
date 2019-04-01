@@ -41,7 +41,7 @@ return [
     'Propriedqdes A Venda' => 'Propriété à vendre',
     'Propriedades para Arrendar' => 'Propriétés à louer',
     'Todos os direitos reservados' => 'Tous droits réservés.',
-    'implementado pela' => 'mis en œuvre par',
+    'Implementado pela' => 'mis en œuvre par',
     'Selecione ficheiro' => 'Sélectionner un fichier',
     'Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr' => 'Ouvert du lundi au vendredi de 8h00 à 19h00',
     'Preço' => 'Prix',
