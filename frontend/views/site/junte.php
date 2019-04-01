@@ -37,27 +37,27 @@ use yii\widgets\ActiveForm;
 <!--                    <form action="">-->
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $form->field($junte, 'nome')->textInput(['maxlength' => true, 'placeholder' => 'Nome', 'class' => 'inputcontato'])->label(false) ?>
+                            <?= $form->field($junte, 'nome')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Nome'), 'class' => 'inputcontato'])->label(false) ?>
 
-                            <?= $form->field($junte, 'email')->textInput(['maxlength' => true, 'placeholder' => 'E-mail', 'class' => 'inputcontato'])->label(false) ?>
+                            <?= $form->field($junte, 'email')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'E-mail'), 'class' => 'inputcontato'])->label(false) ?>
 
-                            <?= $form->field($junte, 'telefone')->textInput(['maxlength' => true, 'placeholder' => 'Telefone', 'class' => 'inputcontato'])->label(false) ?>
+                            <?= $form->field($junte, 'telefone')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Telefone'), 'class' => 'inputcontato'])->label(false) ?>
 
-                            <?= $form->field($junte, 'morada')->textInput(['maxlength' => true, 'placeholder' => 'Morada', 'class' => 'inputcontato'])->label(false) ?>
+                            <?= $form->field($junte, 'morada')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Morada'), 'class' => 'inputcontato'])->label(false) ?>
 
-                            <?= $form->field($junte, 'content')->textarea(['rows' => 4, 'placeholder' => 'Mensagem', 'class' => 'col-md-12 meutextareac'])->label(false) ?>
+                            <?= $form->field($junte, 'content')->textarea(['rows' => 4, 'placeholder' => Yii::t('app', 'Mensagem'), 'class' => 'col-md-12 meutextareac'])->label(false) ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p>Curriculum Vitae</p>
                             <?= $form->field($junte, 'anexo')->fileInput(['maxlength' => true, 'class' => 'inputfile', 'id' => 'file'])->label(false) ?>
-                            <label for="file">Selecione ficheiro</label>
+                            <label for="file"><?=Yii::t('app', 'Selecione ficheiro')?></label>
                             <p class="small">pdf .doc .docx</p>
                         </div>
                         <div class="col-md-6">
                             <p></p>
-                            <?= Html::submitButton('Enviar', ['class' => 'meubotaocontatoj pull-left']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'meubotaocontatoj pull-left']) ?>
                         </div>
                     </div>
 

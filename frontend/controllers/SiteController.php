@@ -547,7 +547,7 @@ class SiteController extends Controller
 
         return $this->render('detalhes', [
             'dados' => $dados,
-            'dados2' => $dados2,
+//            'dados2' => $dados2,
             'slides' => $slides,
             'dono' => $dono
         ]);

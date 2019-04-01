@@ -30,7 +30,7 @@ $this->title = 'Contacto';
                         <span class="itemscontato"> <img src="images/tele.png" width="20" height="20" alt=""> (+238) 298 76 77 </span>
                         <span class="itemscontato"> <img src="images/email.png" width="20" height="20" alt=""> geral@imoafrica.com </span>
                         <span class="itemscontato"> <img src="images/endereco.png" width="20" height="20" alt=""> Rua Caixa Economica, ao lado INE Fazenda, Praia Santiago cv, Praia 7300 </span>
-                        <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr </span>
+                        <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> <?= Yii::t('app', 'Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr')?> </span>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@ $this->title = 'Contacto';
                                             'Legalizar imovel' => ' Legalizar imovel',
                                             'Avaliar Propriedade' => 'Avaliar Propriedade',
                                             'Outro' => 'Outro'],
-                                            ['prompt'=>'Assunto...'], ['class' => 'meuselectcontato'])->label(false);
+                                            ['prompt'=> Yii::t('app', 'Assunto...')], ['class' => 'meuselectcontato'])->label(false);
                                             ?>
 <!--                                        <select class="meuselectcontato" name="" id="">-->
 <!--                                            <optgroup>-->
@@ -87,7 +87,7 @@ $this->title = 'Contacto';
                             </div>
                             <div class="input-group col-md-12">
 <!--                                <input class="meubotaocontatoreverse" name="" value="Enviar" id="" type="submit">-->
-                                <?= Html::submitButton(Yii::t('app','Enviar'), ['class' => 'meubotaocontatoreverse', 'name' => 'contact-button']) ?>
+                                <?= Html::submitButton(Yii::t('app',Yii::t('app', 'Enviar')), ['class' => 'meubotaocontatoreverse', 'name' => 'contact-button']) ?>
                             </div>
                         </div>
                     <?php ActiveForm::end(); }?>

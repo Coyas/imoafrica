@@ -232,16 +232,16 @@ $this->title = 'ImoAfrica Real Estate';
                         </div>
                         <div class="meucol inputmeu">
                             <div class="input-group mb-2 formmargin">
-                                <input type="text" class="meu-form" id="" placeholder="Apartir de">
+                                <input type="text" class="meu-form" id="" placeholder="<?=Yii::t('app', 'Apartir de')?>">
                             </div>
                         </div>
                         <div class="meucol inputmeu">
                             <div class="input-group mb-2 mr-sm-2">
-                                <input type="text" class="meu-form" id="" placeholder="Até">
+                                <input type="text" class="meu-form" id="" placeholder="<?=Yii::t('app', 'Até')?>">
                             </div>
                         </div>
                         <div class="meucol inputmeu">
-                            <button type="submit" class="meubotao mb-2"> Filtrar propriedade</button>
+                            <button type="submit" class="meubotao mb-2"><?=Yii::t('app', 'Filtrar propriedade')?></button>
                         </div>
 
                     </div>
@@ -258,9 +258,9 @@ $this->title = 'ImoAfrica Real Estate';
             <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1 class="gallery-title">Destaques</h1>
                 <div class="text-center">
-                    <button class="btn btn-default filter-button active" data-filter="all">Todos</button>
-                    <button class="btn btn-default filter-button" data-filter="arrendar">Arrendar</button>
-                    <button class="btn btn-default filter-button" data-filter="comprar">Comprar</button>
+                    <button class="btn btn-default filter-button active" data-filter="all"><?=Yii::t('app', 'Todos')?></button>
+                    <button class="btn btn-default filter-button" data-filter="arrendar"><?=Yii::t('app', 'Arrendar')?></button>
+                    <button class="btn btn-default filter-button" data-filter="comprar"><?=Yii::t('app', 'Comprar')?></button>
                 </div>
             </div>
             <br/>
@@ -287,7 +287,7 @@ $this->title = 'ImoAfrica Real Estate';
     <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
                                             <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
-                                                <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo "Arrendar";}elseif ($slide['proposito'] == 2){ echo "A Venda";}?></span>
+                                                <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($slide['proposito'] == 2){ echo Yii::t('app', 'A Venda');}?></span>
                                                 <h2 class="txt-nome"> <?= $slide['tipo'] ?>  </h2>
                                                 <h3 class="txt-localizacao"> <?=$slide['conselho']?>, <?=$slide['zona']?> </h3>
                                                 <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
@@ -321,7 +321,7 @@ $this->title = 'ImoAfrica Real Estate';
                                             <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
                                             <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide2['foto']), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
-                                                <span class="property-box-label property-box-label-primary"><?php if($slide2['proposito'] == 1){ echo "Arrendar";}elseif ($slide2['proposito'] == 2){ echo "A Venda";}?></span>
+                                                <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($slide['proposito'] == 2){ echo Yii::t('app', 'A Venda');}?></span>
                                                 <h2 class="txt-nome"> <?= $slide2['tipo'] ?>  </h2>
                                                 <h3 class="txt-localizacao"> <?=$slide2['conselho']?>, <?=$slide2['zona']?> </h3>
                                                 <h3 class="txt-dimensao"> <?= $slide2['area']?>m<sup>2</sup> </h3>
@@ -363,25 +363,25 @@ $this->title = 'ImoAfrica Real Estate';
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/clientes.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> ??? Clientes Satisfeitos</h3>
+                        <h3 class="pub-title"> ??? <?=Yii::t('app', 'Clientes Satisfeitos')?></h3>
                         <p class="pub-text"> Confira os varios clientes satisfeitos e seus testimunhos. </p>
-                        <a href="#" class="pub-btn aa">Saiba Mais</a>
+                        <a href="#" class="pub-btn aa"><?=Yii::t('app', 'Saiba Mais')?></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/pesquisa.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> Pesquisas Inteligente </h3>
+                        <h3 class="pub-title"> <?=Yii::t('app', 'Pesquisas Inteligente')?> </h3>
                         <p class="pub-text"> Dispomos de uma ferramenta para pesquisa filtrada de propriedades. </p>
-                        <a href="#" class="pub-btn aa">Saiba Mais</a>
+                        <a href="#" class="pub-btn aa"><?=Yii::t('app', 'Saiba Mais')?></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="text-center pub">
                         <img src="images/help.png" alt="" class="pub-img img-fluid">
-                        <h3 class="pub-title"> Nós Estamos Aqui Para Ajudar </h3>
+                        <h3 class="pub-title"> <?=Yii::t('app', 'Nós Estamos Aqui Para Ajudar')?> </h3>
                         <p class="pub-text"> Na oferta de um serviço integrado e global no mundo de mediação imobiliária. </p>
-                        <a href="#" class="pub-btn aa">Saiba Mais</a>
+                        <a href="#" class="pub-btn aa"><?=Yii::t('app', 'Saiba Mais')?></a>
                     </div>
                 </div>
             </div>

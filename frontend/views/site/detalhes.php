@@ -17,38 +17,38 @@ use yii\web\View;
         <div class="row">
             <div class="gallery col-md-6">
                 <div class="detalhes-header">
-                    <div class="desc-detalhes preco"> <b>Preço:</b> <?= Html::encode($dados['preco'])?> $00</div>
-                    <div class="desc-detalhes tipo"> <b>Propósito:</b> <?php if($dados['proposito'] == 1){ echo "Arrendar";}elseif ($dados['proposito'] == 2){ echo "Vender";}?></div>
-                    <div class="desc-detalhes area"> <b>Area: </b> <?= Html::encode($dados['area'])?>m<sup>2</sup></div>
+                    <div class="desc-detalhes preco"> <b><?=Yii::t('app', 'Preço')?>:</b> <?= Html::encode($dados['preco'])?> $00</div>
+                    <div class="desc-detalhes tipo"> <b><?=Yii::t('app', 'Propósito')?>:</b> <?php if($dados['proposito'] == 1){ echo "Arrendar";}elseif ($dados['proposito'] == 2){ echo "Vender";}?></div>
+                    <div class="desc-detalhes area"> <b><?=Yii::t('app', 'Área') ?>: </b> <?= Html::encode($dados['area'])?>m<sup>2</sup></div>
 <!--                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>-->
                 </div>
                 <h2 class="detalhes-title"><b><?= Html::encode($dados['tipo'])?></b><br><?= Html::encode($dados['conselho']. ", ".$dados['zona'])?></h2>
 
-                <h4 class="detalhes-desc">Descrisão</h4>
+                <h4 class="detalhes-desc"><?=Yii::t('app', 'Descrição')?></h4>
                 <p class="detalhes-text">
                     <?= Html::encode($dados['descricaoPt'])?>
                 </p>
-                <h4 class="detalhes-desc">Compartimentos</h4>
+                <h4 class="detalhes-desc"><?=Yii::t('app', 'Compartimentos')?></h4>
                 <div class="detalhes-header">
                     <div class="com-detalhes tooltips">
                         <img src="images/quarto.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['quarto'])?></sub></b>
-                        <span class="tooltiptext">Quartos</span>
+                        <span class="tooltiptext"><?=Yii::t('app', 'Quartos')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
                         <img src="images/garragem.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['garragem'])?></sub></b>
-                        <span class="tooltiptext">Garragem</span>
+                        <span class="tooltiptext"><?=Yii::t('app', 'Garagem')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
                         <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['banheiro'])?></sub></b>
-                        <span class="tooltiptext">Casa De Banho</span>
+                        <span class="tooltiptext"><?=Yii::t('app', 'Casa De Banho')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
                         <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['cozinha'])?></sub></b>
-                        <span class="tooltiptext">Cozinha</span>
+                        <span class="tooltiptext"><?=Yii::t('app', 'Cozinha')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
                         <img src="images/sala.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['sala'])?></sub></b>
-                        <span class="tooltiptext">Sala De Estar</span></div>
+                        <span class="tooltiptext"><?=Yii::t('app', 'Sala De Estar')?></span></div>
                 </div>
             </div>
 
