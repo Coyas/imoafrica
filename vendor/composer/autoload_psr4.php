@@ -18,6 +18,7 @@ return array(
     'kato\\' => array($vendorDir . '/perminder-klair/yii2-dropzone'),
     'himiklab\\yii2\\recaptcha\\tests\\' => array($vendorDir . '/himiklab/yii2-recaptcha-widget/tests'),
     'himiklab\\yii2\\recaptcha\\' => array($vendorDir . '/himiklab/yii2-recaptcha-widget/src'),
+    'cetver\\LanguageSelector\\' => array($vendorDir . '/cetver/yii2-language-selector'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),

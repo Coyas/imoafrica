@@ -76,4 +76,13 @@ return array (
       '@kato' => $vendorDir . '/perminder-klair/yii2-dropzone',
     ),
   ),
+  'cetver/yii2-language-selector' => 
+  array (
+    'name' => 'cetver/yii2-language-selector',
+    'version' => '1.0.3.0',
+    'alias' => 
+    array (
+      '@cetver/LanguageSelector' => $vendorDir . '/cetver/yii2-language-selector',
+    ),
+  ),
 );

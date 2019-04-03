@@ -11,6 +11,7 @@ use yii\helpers\Url;
 use common\widgets\Alert;
 
 LoginAsset::Register($this);
+//echo Url::to('sys/icon.png');die;
 ?>
 
 <?php $this->beginPage() ?>
@@ -21,7 +22,7 @@ LoginAsset::Register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--    <link rel="icon" href="sys/icon.png">-->
-    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/sys/icon.png')]); ?>
+    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('sys/icon.png')]); ?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>

@@ -8,6 +8,7 @@ use app\models\Imagens;
 use backend\models\ImagensSearch;
 use yii\db\Query;
 use yii\db\StaleObjectException;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,45 +67,45 @@ class ImagensController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
-    {
-        $model = new Imagens();
+//    public function actionCreate($id)
+//    {
+//        $model = new Imagens();
+////
+//        if ($model->load(Yii::$app->request->post()) ) {
+//            if($foto = UploadedFile::getInstance($model, 'foto')) {
+//                $data2 = date('d-m-Y h:m:s');
+//                // substituir todos os espacos nos files por _ e concatenar com E"datade hoje"
+//                $model->foto = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_P'.$data2.'.'.$foto->extension);
+//                echo $model->foto;
+//                $foto->saveAs('upload/imoveis/' . $model->foto);
+////                if ($foto->saveAs('upload/imoveis/' . $model->foto)){
+////                    echo "savaAs com sucesso".$id."<br>";
+////                }else {
+////                    echo "savaAs com erro:".$id."<br>";
+////                }
+//                $data2 = date('Y-m-d h:m:s');
+//                $model->created_at = $data2;
+//                $model->updated_at = null;
+//            }
+////            die;
 //
-        if ($model->load(Yii::$app->request->post()) ) {
-            if($foto = UploadedFile::getInstance($model, 'foto')) {
-                $data2 = date('d-m-Y h:m:s');
-                // substituir todos os espacos nos files por _ e concatenar com E"datade hoje"
-                $model->foto = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_P'.$data2.'.'.$foto->extension);
-                echo $model->foto."<br>";
-                $foto->saveAs('upload/imoveis/' . $model->foto);
-//                if ($foto->saveAs('upload/imoveis/' . $model->foto)){
-//                    echo "savaAs com sucesso".$id."<br>";
-//                }else {
-//                    echo "savaAs com erro:".$id."<br>";
-//                }
-                $data2 = date('Y-m-d h:m:s');
-                $model->created_at = $data2;
-                $model->updated_at = null;
-            }
-//            die;
-
-            $model->id_propriedade = $id;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-//        select nome from dono left join dono_propriedade dp on dono.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
-//        $dados = (new Query())->select('nome')->from('dono')
-//            ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
-//            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
-//            ->where(['p.id' => $id])->One();
-//        print_r($dados);die;
-//        $dono = $dados['nome'].date('h:m:s');
-        return $this->render('create', [
-            'model' => $model
-//            'id' => $id,
-//            'dono' => $dono,
-        ]);
-    }
+//            $model->id_propriedade = $id;
+//            $model->save();
+//            return $this->redirect(['view', 'id' => $model->id]);
+//        }
+////        select nome from dono left join dono_propriedade dp on dono.id = dp.id_dono left join propriedade p on dp.id_propriedade = p.id where p.id = 1;
+////        $dados = (new Query())->select('nome')->from('dono')
+////            ->leftJoin('dono_propriedade dp', 'dono.id = dp.id_dono')
+////            ->leftJoin('propriedade p', 'dp.id_propriedade = p.id')
+////            ->where(['p.id' => $id])->One();
+////        print_r($dados);die;
+////        $dono = $dados['nome'].date('h:m:s');
+//        return $this->render('create', [
+//            'model' => $model
+////            'id' => $id,
+////            'dono' => $dono,
+//        ]);
+//    }
 
     public function actionUpload($id)
     {
@@ -118,8 +119,14 @@ class ImagensController extends Controller
 //        echo $pasta;die;
 //        $fileName = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_imo-'.$data.'.'.$foto->extension)
         $fileName = 'file';
-        $uploadPath = 'upload/imoveis/'.$pasta;
+//        echo Yii::$app->params['upload'].$pasta."<br>";
+//        echo Url::to(Yii::$app->params['upload'], true).$pasta;die;
+        $uploadPath = Url::to(Yii::$app->params['upload']).$pasta;
+//        echo Url::to("imoafrica/backend/web/".Yii::$app->params['upload'], true).$pasta."<br>";
+//        echo Yii::$app->params['upload'].$pasta;die;
+        $uploadPath = Yii::$app->params['upload'].$pasta;
         $model = new Imagens();
+        $txt = null;
 
         if (isset($_FILES[$fileName])) {
             $file = \yii\web\UploadedFile::getInstanceByName($fileName);
@@ -132,14 +139,18 @@ class ImagensController extends Controller
 //                $file->name = str_replace(" ", "_", substr ($file->baseName, 0, 10).'_imo-'.$data.'.'.$file->extension);
 
                 //Now save file data to database
+                echo "ficheiro foi guardado";
                 $model->foto = $file->name;
                 $model->id_propriedade = $id;
                 $model->created_at = date('Y-m-d h:m:s');
                 $model->save();
                 echo \yii\helpers\Json::encode($file);
+            }else {
+               echo "erro na gravacao de ficheiro";
             }
         }else {
-            return $this->render('upload',['id' => $id]);
+//            $txt = "isset falhou";
+            return $this->render('upload',['id' => $id, 'txt' => $txt]);
         }
 
         return false;

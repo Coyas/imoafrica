@@ -27,7 +27,6 @@ return [
     'Propriedade' => 'Propriété',
     'Enviar' => 'envoyer',
     'Mensagem' => 'message',
-    'Destaques' => '',
     'Todos' => 'Tous',
     'A Venda' => 'la vente',
     'Clientes Satisfeitos' => 'Clients satisfaits',
@@ -55,4 +54,16 @@ return [
     'Garagem' => 'Garage',
     'Cozinha' => 'Cuisine',
     'Casa De Banho' => 'salle de bain',
+    'Filtrar propriedade' => 'Propriété du filtre',
+    'Destaques' => 'En vedette',
+
+    'Fale Connosco' => 'Nous contacter',
+    'Quer Saber O Quanto Vale A Sua Propriedade?' => 'Vous voulez savoir combien vaut votre propriété?',
+
+    'Telefone' => 'Téléphone',
+    'Obrigado por nos contactar. Nós iremos responder mais breve possivel.' => 'Merci de nous avoir contacté. Nous vous répondrons dès que possible.',
+    'Houve um problema ao enviar o email, tente de novo mais tarde.' => 'Un problème est survenu lors de l\'envoi du courrier électronique. Veuillez réessayer ultérieurement.',
+    'Morada' => 'Adresse',
+    'Saiba Como Legalizar O Seu Imóvel.' => 'Apprenez à légaliser votre propriété.',
+    'Propriedades a Venda' => 'Propriétés à vendre'
 ];

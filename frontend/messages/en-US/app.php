@@ -27,7 +27,6 @@ return  [
     'Propriedade' => 'Property',
     'Enviar' => 'Send',
     'Mensagem' => 'Message',
-    'Destaques' => '',
     'Todos' => 'All',
     'A Venda' => 'For Sale',
     'Clientes Satisfeitos' => 'Satisfied Customers',
@@ -55,4 +54,18 @@ return  [
     'Garagem' => 'Garage',
     'Cozinha' => 'Kitchen',
     'Casa De Banho' => 'Bathroom',
+    'Filtrar propriedade' => 'Filter property',
+    'Destaques' => 'Featured',
+
+    'Fale Connosco' => 'Talk to us',
+    'Quer Saber O Quanto Vale A Sua Propriedade?' => 'Want To Know How Much Is Your Property Worth?',
+
+    'Telefone' => 'Telephone',
+    'Obrigado por nos contactar. Nós iremos responder mas breve possivel.' => 'Thanks for contacting us. We will respond as soon as possible.',
+    'Ouve um problema ao enviar o email, tente de novo mais tarde.' => 'There was a problem sending the email, please try again later.',
+    'Morada' => 'address',
+    'Saiba Como Legalizar O Seu Imóvel.' => 'Learn How to Legalize Your Property.',
+    'Propriedades a Venda' => 'Properties for Sale'
+
+
 ];

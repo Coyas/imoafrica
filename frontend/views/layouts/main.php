@@ -22,7 +22,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!--    <link rel="icon" href="icon.png">-->
-    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('/icon.png')]); ?>
+    <?=$this->registerLinkTag(['rel'=>'icon', 'type'=>'image/png', 'href'=>Url::to('icon.png')]); ?>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
 
@@ -103,16 +103,19 @@ AppAsset::register($this);
                     </li>
                     <li>
                         <div class="btn-group">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img width="40" height="40" src="images/pt.png">
-                            </a>
+<!--                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                <img width="40" height="40" src="images/pt.png">-->
+<!--                            </a>-->
+                            <?= Html::a(Html::img(Url::to('images/pt.png'), ['width' => 40, 'height' => 40]), Url::current(['language' => 'pt-PT']), ['title' => 'Português', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'])?>
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" title="Select this card"><img width="40" height="40" src="images/fr.png"></a>
+<!--                                    <a href="#" title="Select this card"><img width="40" height="40" src="images/fr.png"></a>-->
+                                    <?= Html::a(Html::img(Url::to('images/fr.png'), ['title' => 'Select this card', 'width' => 40, 'height' => 40]), Url::current(['language' => 'fr-FR']), ['title' => 'Francês'])?>
                                 </li>
                                 <li>
-                                    <a href="#" title="Select this card"><img width="40" height="40" src="images/en.png"></a>
+<!--                                    <a href="#" title=""><img width="40" height="40" src="images/en.png"></a>-->
+                                    <?= Html::a(Html::img(Url::to('images/en.png'), ['title' => 'Select this card', 'width' => 40, 'height' => 40]), Url::current(['language' => 'en-US']), ['title' => 'Inglês'])?>
                                 </li>
 
                             </ul>

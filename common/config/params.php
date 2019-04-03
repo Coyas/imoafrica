@@ -6,5 +6,5 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'upload' => 'upload/imoveis/',
     'anexo' => 'upload/emailAnexo/',
-    'anexoF' => '../../backend/web/upload/emailAnexo/'
+//    'anexoF' => '../../backend/web/upload/emailAnexo/'
 ];

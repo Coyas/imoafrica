@@ -147,8 +147,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!-- Swiper -->
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <?php foreach ($imagens as $imagen){?>
-                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$imagen['foto'], true))?></div>
+                            <?php foreach ($imagens as $imagen){//echo  Url::to(Yii::$app->params['image'].$pasta."/".$imagen['foto'], true);die;?>
+                                <div class="swiper-slide"><?=Html::img(Url::to(Yii::$app->params['image'].$pasta."/".$imagen['foto'], true))?></div>
                             <?php } ?>
                         </div>
                         <!-- Add Pagination -->

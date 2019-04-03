@@ -8,11 +8,12 @@
 
 use yii\helpers\Html;
 use yii\web\View;
+
 ?>
 
 <?= \kato\DropZone::widget([
     'options' => [
-        'url' => 'upload?id='.$id,
+        'url' => 'index.php?r=imagens/upload&id='.$id,
         'maxFilesize' => '10',
     ],
     'clientEvents' => [
@@ -22,7 +23,10 @@ use yii\web\View;
 ]);
 
 ?>
-<div class="margin-T-2"></div>
+<div class="margin-T-2">
+
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-md-offset-5">

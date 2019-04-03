@@ -22,17 +22,17 @@ use yii\bootstrap\ActiveForm;
 
                 <div class="contatodesc col-md-6 mh-100 p-0">
                     <div class="contato">
-                        <h1 class="titlecontato"> <?= Yii::t('app', 'Quer Saber O Quanto Vale A Sua Propriedade? ') ?></h1>
+                        <h1 class="titlecontato"> <?= Yii::t('app', 'Quer Saber O Quanto Vale A Sua Propriedade?') ?></h1>
                         <div class="dadosendereco">
                             <span class="itemscontato"> <img src="images/tele.png" width="20" height="20" alt=""> (+238) 298 76 77 </span>
                             <span class="itemscontato"> <img src="images/email.png" width="20" height="20" alt=""> geral@imoafrica.com </span>
                             <span class="itemscontato"> <img src="images/endereco.png" width="20" height="20" alt=""> Rua Caixa Economica, ao lado INE Fazenda, Praia Santiago cv, Praia 7300 </span>
-                            <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr </span>
+                            <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> <?=Yii::t('app', 'Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr')?> </span>
                         </div>
                     </div>
 
                     <div class="formfale">
-                        <h1 class="titleform"> Fale Connosco </h1>
+                        <h1 class="titleform"> <?=Yii::t('app', 'Fale Connosco')?> </h1>
                         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                         <div class="row">
                             <div class="col-md-6">
@@ -48,7 +48,7 @@ use yii\bootstrap\ActiveForm;
 
                                     <div class="input-group col-md-12">
                                         <?= $form->field($model, 'subject')->dropDownList(
-                                            ['Avaliar Propriedade' => ' Avaliar Propriedade'])->label(false);
+                                            ['Avaliar Propriedade' => Yii::t('app', 'Avaliar Propriedade')])->label(false);
                                         ?>
                                     </div>
                                 </div>

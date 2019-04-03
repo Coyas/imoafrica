@@ -25,7 +25,7 @@ $this->title = 'Contacto';
 
             <div class="contatodesc col-md-6 mh-100 p-0">
                 <div class="contato">
-                    <h1 class="titlecontato"> <?= Yii::t('app', 'Contactos ') ?></h1>
+                    <h1 class="titlecontato"> <?= Yii::t('app', 'Contactos') ?></h1>
                     <div class="dadosendereco">
                         <span class="itemscontato"> <img src="images/tele.png" width="20" height="20" alt=""> (+238) 298 76 77 </span>
                         <span class="itemscontato"> <img src="images/email.png" width="20" height="20" alt=""> geral@imoafrica.com </span>
@@ -44,7 +44,7 @@ $this->title = 'Contacto';
                             <?= Yii::t('app', 'Ouve um problema ao enviar o email, tente de novo mais tarde.')?>
                         </div>
                     <?php }else { ?>
-                    <h1 class="titleform"> Fale Connosco </h1>
+                    <h1 class="titleform"> <?=Yii::t('app', 'Fale Connosco')?> </h1>
                     <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                         <div class="row">
                             <div class="col-md-6">

@@ -6,10 +6,16 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\db\Query;
 
+use app\models\Conselho;
+use app\models\Tipo;
+use yii\widgets\ActiveForm;
+
 $this->title = 'ImoAfrica Real Estate';
 //echo Html::a('PT', Url::current(['language' => 'pt-PT']))."<br>";
 //echo Html::a('En', Url::current(['language' => 'en-US']))."<br>";
 //echo Html::a('FR', Url::current(['language' => 'fr-FR']));
+
+
 ?>
 
 <div class="section">
@@ -44,7 +50,7 @@ $this->title = 'ImoAfrica Real Estate';
                             </li>
                             <li class="nav-item">
                                 <!--                            <a class="nav-link" href="#">Vender</a>-->
-                                <?= Html::a(Yii::t('app', 'Vender'), ['site/vender'], ['class' => 'nav-link'])?>
+                                <?= Html::a(Yii::t('app', 'Vender'), ['site/contact'], ['class' => 'nav-link'])?>
                             </li>
                             <li class="nav-item">
                                 <!--                            <a class="nav-link" href="#">Legalizar</a>-->
@@ -182,71 +188,91 @@ $this->title = 'ImoAfrica Real Estate';
             ->One();
 
         $pasta = str_replace(" ", "_", $dono['nome'].$dono['apelido']);
+//        echo Url::to(Yii::$app->params['image'].$pasta."/".$destaque['foto'], true);die;
 //        echo Yii::$app->params['upload'].$pasta."/".$destaque['foto']."<br>";
 //        echo Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']);
 //        echo Html::a('Contact YiiLIb.com', Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']));
         ?>
 
         <?php //html::img(Url::to("/".Yii::$app->params['upload'].$pasta."/".$destaque['foto']), ['class' => 'd-block w-100']);?>
-        <div class="slide" data-anchor="slide1"> <?= html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$destaque['foto']), ['class' => 'd-block w-100'])?></div>
+        <div class="slide" data-anchor="slide1"> <?= html::img(Url::to(Yii::$app->params['image'].$pasta."/".$destaque['foto'], true), ['class' => 'd-block w-100'])?></div>
 <!--        <div class="slide" data-anchor="slide1"> --><?php //// html::img(Url::to(Yii::$app->params['upload'].$pasta."/".$destaque['foto'], true), ['class' => 'd-block w-100'])?><!--</div>-->
 <!--        <div class="slide" data-anchor="slide1"> <img class="d-block w-100" src="../publi/new1.webp" alt="First slide"></div>-->
     <?php } //die;?>
     <div class="formpesquisatodo">
         <div class="formpesquisa">
-            <form class="form-inline">
+            <?php
+            $form = ActiveForm::begin([
+                'id' => 'pesquisa-from',
+                'options' => ['class' => 'form-inline'],
+            ]);
+            ?>
+<!--            <form class="form-inline">-->
                 <div class="container">
                     <div class="row">
                         <div class="meucol selectmeu">
                             <div class="input-group mb-2 formmargin">
-                                <select class="meu-select">
-                                    <option selected>Conselho</option>
-                                    <option value="st">Praia</option>
-                                    <option value="sv">Assomada</option>
-                                    <option value="sv">S.l. Orgaos</option>
-                                    <option value="sv">Picos</option>
-                                    <option value="sv">Calheta</option>
-                                    <option value="sv">Tarrafal</option>
-                                    <option value="sv">Cidade Velha</option>
-                                    <option value="sv">Ribeira da Barca</option>
-                                    <option value="sv">Sao Domingos</option>
-                                </select>
+                                <?= $form->field($pesquisa, 'conselho')->dropDownList(
+                                    \yii\helpers\ArrayHelper::map(Conselho::find()->All(), 'id', 'nome'),
+                                    ['prompt' => Yii::t('app', 'Conselho'), 'class' => 'meu-select']
+                                )->label(false)?>
+<!--                                <select class="meu-select">-->
+<!--                                    <option selected>=Yii::t('app', 'Conselho')?></option>-->
+<!--                                    <option value="st">Praia</option>-->
+<!--                                    <option value="sv">Assomada</option>-->
+<!--                                    <option value="sv">S.l. Orgaos</option>-->
+<!--                                    <option value="sv">Picos</option>-->
+<!--                                    <option value="sv">Calheta</option>-->
+<!--                                    <option value="sv">Tarrafal</option>-->
+<!--                                    <option value="sv">Cidade Velha</option>-->
+<!--                                    <option value="sv">Ribeira da Barca</option>-->
+<!--                                    <option value="sv">Sao Domingos</option>-->
+<!--                                </select>-->
                             </div>
                         </div>
                         <div class="meucol inputmeu">
                             <div class="input-group mb-2 formmargin">
-                                <input type="text" class="meu-form" id="" placeholder="Zona">
+                                <?= $form->field($pesquisa, 'zona')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Zona')])->label(false) ?>
+<!--                                <input type="text" class="meu-form" id="" placeholder="=Yii::t('app', 'Zona')?>">-->
                             </div>
                         </div>
                         <div class="meucol selectmeu">
                             <div class="input-group mb-2 formmargin">
-                                <select class="meu-select">
-                                    <option selected>Tipo Propriedade</option>
-                                    <option value="1">Apartamento T1</option>
-                                    <option value="1">Apartamento T2</option>
-                                    <option value="1">Apartamento T3</option>
-                                    <option value="2">Terreno + Casa</option>
-                                    <option value="3">Aeroporto Privado</option>
-                                </select>
+                                <?= $form->field($pesquisa, 'tproperty')->dropDownList(
+                                    \yii\helpers\ArrayHelper::map(Tipo::find()->All(), 'id', 'nome'),
+                                    ['prompt' => Yii::t('app', Yii::t('app', 'Tipo Propriedade')), 'class' => 'meu-select']
+                                )->label(false)?>
+<!--                                <select class="meu-select">-->
+<!--                                    <option selected><=Yii::t('app', 'Tipo Propriedade')?></option>-->
+<!--                                    <option value="1">Apartamento T1</option>-->
+<!--                                    <option value="1">Apartamento T2</option>-->
+<!--                                    <option value="1">Apartamento T3</option>-->
+<!--                                    <option value="2">Terreno + Casa</option>-->
+<!--                                    <option value="3">Aeroporto Privado</option>-->
+<!--                                </select>-->
                             </div>
                         </div>
                         <div class="meucol inputmeu">
                             <div class="input-group mb-2 formmargin">
-                                <input type="text" class="meu-form" id="" placeholder="<?=Yii::t('app', 'Apartir de')?>">
+                                <?= $form->field($pesquisa, 'de')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Apartir de')])->label(false) ?>
+<!--                                <input type="text" class="meu-form" id="" placeholder="<Yii::t('app', 'Apartir de')?>">-->
                             </div>
                         </div>
                         <div class="meucol inputmeu">
                             <div class="input-group mb-2 mr-sm-2">
-                                <input type="text" class="meu-form" id="" placeholder="<?=Yii::t('app', 'Até')?>">
+                                <?= $form->field($pesquisa, 'ate')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Até')])->label(false) ?>
+<!--                                <input type="text" class="meu-form" id="" placeholder="<=Yii::t('app', 'Até')?>">-->
                             </div>
                         </div>
                         <div class="meucol inputmeu">
-                            <button type="submit" class="meubotao mb-2"><?=Yii::t('app', 'Filtrar propriedade')?></button>
+                            <?= Html::submitButton(Yii::t('app', 'Filtrar propriedade'), ['class' => 'meubotao mb-2']) ?>
+<!--                            <button type="submit" class="meubotao mb-2"><=Yii::t('app', 'Filtrar propriedade')?></button>-->
                         </div>
 
                     </div>
                 </div>
-            </form>
+<!--            </form>-->
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 </div>
@@ -256,7 +282,7 @@ $this->title = 'ImoAfrica Real Estate';
     <div class="sdestques caixaslid">
         <div class="row">
             <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 class="gallery-title">Destaques</h1>
+                <h1 class="gallery-title"><?=Yii::t('app', 'Destaques')?></h1>
                 <div class="text-center">
                     <button class="btn btn-default filter-button active" data-filter="all"><?=Yii::t('app', 'Todos')?></button>
                     <button class="btn btn-default filter-button" data-filter="arrendar"><?=Yii::t('app', 'Arrendar')?></button>
@@ -285,7 +311,7 @@ $this->title = 'ImoAfrica Real Estate';
                                     <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
                                         <div class="destaques">
     <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta2."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                            <?= Html::img(Url::to(Yii::$app->params['image'].$pasta2."/".$slide['foto'], true), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
                                                 <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($slide['proposito'] == 2){ echo Yii::t('app', 'A Venda');}?></span>
                                                 <h2 class="txt-nome"> <?= $slide['tipo'] ?>  </h2>
@@ -319,7 +345,7 @@ $this->title = 'ImoAfrica Real Estate';
                                     <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
                                         <div class="destaques">
                                             <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta3."/".$slide2['foto']), ['class' => 'img-fluid imgin'])?>
+                                            <?= Html::img(Url::to(Yii::$app->params['upload'].$pasta3."/".$slide2['foto'], true), ['class' => 'img-fluid imgin'])?>
                                             <div class="text-center">
                                                 <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($slide['proposito'] == 2){ echo Yii::t('app', 'A Venda');}?></span>
                                                 <h2 class="txt-nome"> <?= $slide2['tipo'] ?>  </h2>

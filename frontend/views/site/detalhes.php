@@ -9,6 +9,8 @@
 use yii\db\Query;
 use yii\helpers\Html;
 use yii\web\View;
+use yii\helpers\Url;
+
 ?>
 
     <div class="section">
@@ -35,19 +37,19 @@ use yii\web\View;
                         <span class="tooltiptext"><?=Yii::t('app', 'Quartos')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/garragem.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['garragem'])?></sub></b>
+                        <img src="images/garragem.png" class="icone-detalhes" alt=""> <b> <sub><?= Html::encode($dados['garragem'])?></sub></b>
                         <span class="tooltiptext"><?=Yii::t('app', 'Garagem')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['banheiro'])?></sub></b>
+                        <img src="images/banheiro.png" class="icone-detalhes" alt=""> <b> <sub><?= Html::encode($dados['banheiro'])?></sub></b>
                         <span class="tooltiptext"><?=Yii::t('app', 'Casa De Banho')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['cozinha'])?></sub></b>
+                        <img src="images/cozinha.png" class="icone-detalhes" alt=""> <b> <sub><?= Html::encode($dados['cozinha'])?></sub></b>
                         <span class="tooltiptext"><?=Yii::t('app', 'Cozinha')?></span>
                     </div>
                     <div class="com-detalhes  tooltips">
-                        <img src="images/sala.png" class="icone-detalhes" alt=""> <b><sub><?= Html::encode($dados['sala'])?></sub></b>
+                        <img src="images/sala.png" class="icone-detalhes" alt=""> <b> <sub><?= Html::encode($dados['sala'])?></sub></b>
                         <span class="tooltiptext"><?=Yii::t('app', 'Sala De Estar')?></span></div>
                 </div>
             </div>
@@ -66,11 +68,11 @@ use yii\web\View;
                                 ?>
                                 <div>
 <!--                                    <img data-u="image" src="img/021.jpg" />-->
-                                    <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['data-u' => 'image'])?>
+                                    <?= Html::img(Url::to(Yii::$app->params['image'].$pasta."/".$slide['foto'], true), ['data-u' => 'image'])?>
                                     <div data-u="thumb">
-                                        <a href="<?=Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto'])?>" data-lightbox="roadtrip" data-title="Image desc">
+                                        <a href="<?=Url::to(Yii::$app->params['image'].$pasta."/".$slide['foto'], true)?>" data-lightbox="roadtrip" data-title="Image desc">
 <!--                                            <img data-u="thumb" src="img/021-s200x100.jpg" />-->
-                                            <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['data-u' => 'thumb'])?>
+                                            <?= Html::img(Url::to(Yii::$app->params['image'].$pasta."/".$slide['foto'], true), ['data-u' => 'thumb'])?>
                                         </a>
                                     </div>
                                 </div>
