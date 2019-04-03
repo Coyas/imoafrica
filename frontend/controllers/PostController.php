@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use app\models\Post;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -46,7 +47,18 @@ class PostController extends Controller
      */
     public function actionView($title)
     {
-        return $this->render('view');
+
+        $model = (new Query())
+            ->select('*')
+            ->from('post')
+            ->where(['slug' => $title])
+            ->All();
+
+//        print_r($model);
+
+        return $this->render('view', [
+            'model' => $model
+        ]);
     }
 
 

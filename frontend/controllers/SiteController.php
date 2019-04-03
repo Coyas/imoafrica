@@ -151,17 +151,6 @@ class SiteController extends Controller
                 ->orderBy('id')
                 ->limit(4)
                 ->All();
-            $slides2 = (new Query())
-                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
-                ->from('propriedade p')
-                ->leftJoin('conselho c', 'p.id_conselho = c.id')
-                ->leftJoin('tipo t', 'p.id_tipo = t.id')
-                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-                ->where(['i.capa' => 1])
-                ->andWhere(['p.publicar' => 1])
-                ->orderBy('id')
-                ->offset(4)
-                ->All();
 
             return $this->render('pesquisa', [
                 'model' => $model,
