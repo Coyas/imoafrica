@@ -11,6 +11,10 @@ use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+
+use app\models\Conselho;
+use app\models\Tipo;
+use yii\widgets\ActiveForm;
 ?>
 <div class="section">
     <!-- Page Content -->
@@ -36,9 +40,9 @@ use yii\helpers\Url;
                         <a id="slides" href="<?=Url::to(['site/detalhes', 'id' => $slide['id']])?>">
                             <div class="destaques">
                                 <!--                                        <img src="images/p2.jpg" class="img-fluid">-->
-                                <?= Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['upload'].$pasta."/".$slide['foto']), ['class' => 'img-fluid imgin'])?>
+                                <?= Html::img(Url::to(Yii::$app->params['image'].$pasta."/".$slide['foto'], true), ['class' => 'img-fluid imgin'])?>
                                 <div class="text-center">
-                                    <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo "Arrendar";}elseif ($slide['proposito'] == 2){ echo "A Venda";}?></span>
+                                    <span class="property-box-label property-box-label-primary"><?php if($slide['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($slide['proposito'] == 2){ echo Yii::t('app', 'A Venda');}?></span>
                                     <h2 class="txt-nome"> <?= $slide['tipo'] ?>  </h2>
                                     <h3 class="txt-localizacao"> <?=$slide['conselho']?>, <?=$slide['zona']?> </h3>
                                     <h3 class="txt-dimensao"> <?= $slide['area']?>m<sup>2</sup> </h3>
@@ -63,59 +67,78 @@ use yii\helpers\Url;
 
             <div class="formpesquisatodo">
                 <div class="">
-                    <form class="form-inline">
+                    <?php
+                    $form = ActiveForm::begin([
+                        'id' => 'pesquisa-from',
+                        'options' => ['class' => 'form-inline'],
+                    ]);
+                    ?>
+<!--                    <form class="form-inline">-->
                         <div class="container">
                             <div class="row">
                                 <div class="meucol selectmeu">
                                     <div class="input-group mb-2 formmargin">
-                                        <select class="meu-select">
-                                            <option selected>Conselho</option>
-                                            <option value="st">Praia</option>
-                                            <option value="sv">Assomada</option>
-                                            <option value="sv">S.l. Orgaos</option>
-                                            <option value="sv">Picos</option>
-                                            <option value="sv">Calheta</option>
-                                            <option value="sv">Tarrafal</option>
-                                            <option value="sv">Cidade Velha</option>
-                                            <option value="sv">Ribeira da Barca</option>
-                                            <option value="sv">Sao Domingos</option>
-                                        </select>
+                                        <?= $form->field($pesquisa, 'conselho')->dropDownList(
+                                            \yii\helpers\ArrayHelper::map(Conselho::find()->All(), 'id', 'nome'),
+                                            ['prompt' => Yii::t('app', 'Conselho'), 'class' => 'meu-select']
+                                        )->label(false)?>
+<!--                                        <select class="meu-select">-->
+<!--                                            <option selected>=Yii::t('app', 'Conselho')?></option>-->
+<!--                                            <option value="st">Praia</option>-->
+<!--                                            <option value="sv">Assomada</option>-->
+<!--                                            <option value="sv">S.l. Orgaos</option>-->
+<!--                                            <option value="sv">Picos</option>-->
+<!--                                            <option value="sv">Calheta</option>-->
+<!--                                            <option value="sv">Tarrafal</option>-->
+<!--                                            <option value="sv">Cidade Velha</option>-->
+<!--                                            <option value="sv">Ribeira da Barca</option>-->
+<!--                                            <option value="sv">Sao Domingos</option>-->
+<!--                                        </select>-->
                                     </div>
                                 </div>
                                 <div class="meucol inputmeu">
                                     <div class="input-group mb-2 formmargin">
-                                        <input type="text" class="meu-form" id="" placeholder="Zona">
+<!--                                        <input type="text" class="meu-form" id="" placeholder="< Yii::t('app', 'Zona')?>">-->
+                                        <?= $form->field($pesquisa, 'zona')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Zona')])->label(false) ?>
                                     </div>
                                 </div>
                                 <div class="meucol selectmeu">
                                     <div class="input-group mb-2 formmargin">
-                                        <select class="meu-select">
-                                            <option selected>Tipo Propriedade</option>
-                                            <option value="1">Apartamento T1</option>
-                                            <option value="1">Apartamento T2</option>
-                                            <option value="1">Apartamento T3</option>
-                                            <option value="2">Terreno + Casa</option>
-                                            <option value="3">Aeroporto Privado</option>
-                                        </select>
+                                        <?= $form->field($pesquisa, 'tproperty')->dropDownList(
+                                            \yii\helpers\ArrayHelper::map(Tipo::find()->All(), 'id', 'nome'),
+                                            ['prompt' => Yii::t('app', Yii::t('app', 'Tipo Propriedade')), 'class' => 'meu-select']
+                                        )->label(false)?>
+<!--                                        <select class="meu-select">-->
+<!--                                            <option selected>< Yii::t('app', 'Tipo Propriedade')?></option>-->
+<!--                                            <option value="1">Apartamento T1</option>-->
+<!--                                            <option value="1">Apartamento T2</option>-->
+<!--                                            <option value="1">Apartamento T3</option>-->
+<!--                                            <option value="2">Terreno + Casa</option>-->
+<!--                                            <option value="3">Aeroporto Privado</option>-->
+<!--                                        </select>-->
                                     </div>
                                 </div>
                                 <div class="meucol inputmeu">
                                     <div class="input-group mb-2 formmargin">
-                                        <input type="text" class="meu-form" id="" placeholder="Apartir de">
+<!--                                        <input type="text" class="meu-form" id="" placeholder="--//=Yii::t('app', 'Apartir de')?>--">-->
+                                        <?= $form->field($pesquisa, 'de')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Apartir de')])->label(false) ?>
                                     </div>
                                 </div>
                                 <div class="meucol inputmeu">
                                     <div class="input-group mb-2 mr-sm-2">
-                                        <input type="text" class="meu-form" id="" placeholder="Até">
+<!--                                        <input type="text" class="meu-form" id="" placeholder="<Yii::t('app', 'Até')?>">-->
+                                        <?= $form->field($pesquisa, 'ate')->textInput(['class' => 'meu-form', 'placeholder' => Yii::t('app', 'Até')])->label(false) ?>
                                     </div>
                                 </div>
                                 <div class="meucol inputmeu">
-                                    <button type="submit" class="meubotao mb-2"> Filtrar propriedade</button>
+<!--                                    <button type="submit" class="meubotao mb-2"> Yii::t('app', 'Filtrar propriedade')?></button>-->
+                                    <?= Html::submitButton(Yii::t('app', 'Filtrar propriedade'), ['class' => 'meubotao mb-2']) ?>
                                 </div>
 
                             </div>
                         </div>
-                    </form>
+<!--                    </form>-->
+                    <?php ActiveForm::end() ?>
                 </div>
             </div>
 

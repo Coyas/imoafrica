@@ -21,11 +21,11 @@ use yii\widgets\ActiveForm;
         <div class="row">
         <?php if(Yii::$app->session->hasFlash('success')){ ?>
             <div class="alert alert-success" role="alert">
-                <?= Yii::t('app', 'Obrigado por nos contactar. Nós iremos responder mas breve possivel.')?>
+                <?= Yii::t('app', 'Obrigado por nos contactar. Nós iremos responder mais breve possivel.')?>
             </div>
         <?php }else if(Yii::$app->session->hasFlash('error')){ ?>
             <div class="alert alert-danger" role="alert">
-                <?= Yii::t('app', 'Ouve um problema ao enviar o email, tente de novo mais tarde.')?>
+                <?= Yii::t('app', 'Houve um problema ao enviar o email, tente denovo mais tarde.')?>
             </div>
         <?php }else { ?>
             <h1 class="juntese"><?= Yii::t('app', 'Junte-se a nós')?></h1>

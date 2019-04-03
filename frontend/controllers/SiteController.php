@@ -5,6 +5,7 @@ use app\models\Junte;
 use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
+use frontend\models\PesquisaFrom;
 use http\Url;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -111,6 +112,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $model = new ContactForm();
+        $pesquisa = new PesquisaFrom();
 
         if ($this->configs()){
             $this->layout = 'obras';
@@ -129,55 +131,165 @@ class SiteController extends Controller
                 ]);
             }
         }
-//        select p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
+
+        if ($pesquisa->load(Yii::$app->request->post()) && $pesquisa->validate()){
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where([
+                    'i.capa' => 1,
+                    'p.publicar' => 1,
+                    'p.id_tipo' => $pesquisa->tproperty,
+                    'p.id_conselho' => $pesquisa->conselho,
+                ])
+                ->andWhere(['between', 'p.preco', $pesquisa->de, $pesquisa->ate])
+                ->andWhere(['like', 'p.zona', $pesquisa->zona])
+                ->orderBy('id')
+                ->limit(4)
+                ->All();
+            $slides2 = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->orderBy('id')
+                ->offset(4)
+                ->All();
+
+            return $this->render('pesquisa', [
+                'model' => $model,
+                'pesquisa' => $pesquisa,
+                'slides' => $slides
+            ]);
+        }else {
+            //        select p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1 and p.destaque = 1;
 //        pegar propriedades
-        $destaques = (new Query())
-            ->select('p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo')
-            ->from('propriedade p')
-            ->leftJoin('conselho c', 'p.id_conselho = c.id')
-            ->leftJoin('tipo t', 'p.id_tipo = t.id')
-            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-            ->where(['i.capa' => 1])
-            ->Andwhere(['p.destaque' => 1])
-            ->andWhere(['p.publicar' => 1])
-            ->orderBy('id')
-            ->All();
+            $destaques = (new Query())
+                ->select('p.id, i.foto, p.preco, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->Andwhere(['p.destaque' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->orderBy('id')
+                ->All();
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->orderBy('id')
+                ->limit(4)
+                ->All();
+            $slides2 = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->orderBy('id')
+                ->offset(4)
+                ->All();
 
-//        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
-        $slides = (new Query())
-            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
-            ->from('propriedade p')
-            ->leftJoin('conselho c', 'p.id_conselho = c.id')
-            ->leftJoin('tipo t', 'p.id_tipo = t.id')
-            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-            ->where(['i.capa' => 1])
-            ->andWhere(['p.publicar' => 1])
-            ->orderBy('id')
-            ->limit(4)
-            ->All();
-        $slides2 = (new Query())
-            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
-            ->from('propriedade p')
-            ->leftJoin('conselho c', 'p.id_conselho = c.id')
-            ->leftJoin('tipo t', 'p.id_tipo = t.id')
-            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-            ->where(['i.capa' => 1])
-            ->andWhere(['p.publicar' => 1])
-            ->orderBy('id')
-            ->offset(4)
-            ->All();
-
-//        echo (0 % 2);die;
+            return $this->render('index', [
+                'destaques' => $destaques,
+                'slides' => $slides,
+                'slides2' => $slides2,
+                'pesquisa' => $pesquisa
+            ]);
+        }
 
 
 
 
-//        print_r($destaques);die;
+    }
 
-        return $this->render('index', [
-            'destaques' => $destaques,
+    public function actionPesquisa()
+    {
+        $model = new ContactForm();
+        $pesquisa = new PesquisaFrom();
+
+        if ($this->configs()){
+            $this->layout = 'obras';
+
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
+                    Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                }
+
+                return $this->refresh();
+            } else {
+                return $this->render('obras', [
+                    'model' => $model,
+                ]);
+            }
+        }
+
+        if ($pesquisa->load(Yii::$app->request->post()) && $pesquisa->validate()){
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where([
+                    'i.capa' => 1,
+                    'p.publicar' => 1,
+                    'p.id_tipo' => $pesquisa->tproperty,
+                    'p.id_conselho' => $pesquisa->conselho,
+                ])
+                ->andWhere(['between', 'p.preco', $pesquisa->de, $pesquisa->ate])
+                ->andWhere(['like', 'p.zona', $pesquisa->zona])
+                ->orderBy('id')
+                ->All();
+        }else{
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->orderBy('id')
+                ->All();
+        }
+
+
+        //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+//        $slides = (new Query())
+//            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
+//            ->from('propriedade p')
+//            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+//            ->where(['i.capa' => 1])
+//            ->andWhere(['like', 'p.proposito', 0])
+//            ->orderBy('id')
+//            ->All();
+
+//        print_r($slides);die;
+
+        return $this->render('arrendar', [
             'slides' => $slides,
-            'slides2' => $slides2
+            'pesquisa' => $pesquisa
         ]);
     }
 
@@ -186,35 +298,35 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
+//    public function actionLogin()
+//    {
+//        if (!Yii::$app->user->isGuest) {
+//            return $this->goHome();
+//        }
+//
+//        $model = new LoginForm();
+//        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+//            return $this->goBack();
+//        } else {
+//            $model->password = '';
+//
+//            return $this->render('login', [
+//                'model' => $model,
+//            ]);
+//        }
+//    }
 
     /**
      * Logs out the current user.
      *
      * @return mixed
      */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
+//    public function actionLogout()
+//    {
+//        Yii::$app->user->logout();
+//
+//        return $this->goHome();
+//    }
 
     /**
      * Displays contact page.
@@ -341,6 +453,7 @@ class SiteController extends Controller
     public function actionArrendar()
     {
         $model = new ContactForm();
+        $pesquisa = new PesquisaFrom();
 
         if ($this->configs()){
             $this->layout = 'obras';
@@ -359,6 +472,42 @@ class SiteController extends Controller
                 ]);
             }
         }
+
+        if ($pesquisa->load(Yii::$app->request->post()) && $pesquisa->validate()){
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where([
+                    'i.capa' => 1,
+                    'p.publicar' => 1,
+                    'p.proposito' => 1,
+                    'p.id_tipo' => $pesquisa->tproperty,
+                    'p.id_conselho' => $pesquisa->conselho,
+                ])
+                ->andWhere(['between', 'p.preco', $pesquisa->de, $pesquisa->ate])
+                ->andWhere(['like', 'p.zona', $pesquisa->zona])
+                ->orderBy('id')
+                ->All();
+        }else{
+            //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->andWhere(['p.proposito' => 1])
+                ->orderBy('id')
+                ->All();
+        }
+
+
         //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
 //        $slides = (new Query())
 //            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
@@ -368,29 +517,20 @@ class SiteController extends Controller
 //            ->andWhere(['like', 'p.proposito', 0])
 //            ->orderBy('id')
 //            ->All();
-        //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
-        $slides = (new Query())
-            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
-            ->from('propriedade p')
-            ->leftJoin('conselho c', 'p.id_conselho = c.id')
-            ->leftJoin('tipo t', 'p.id_tipo = t.id')
-            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-            ->where(['i.capa' => 1])
-            ->andWhere(['p.publicar' => 1])
-            ->andWhere(['p.proposito' => 1])
-            ->orderBy('id')
-            ->All();
+
 //        print_r($slides);die;
 
         return $this->render('arrendar', [
-            'slides' => $slides
+            'slides' => $slides,
+            'pesquisa' => $pesquisa
         ]);
     }
 
     public function actionComprar(){
         $model = new ContactForm();
+        $pesquisa = new PesquisaFrom();
 
-        if ($this->configs()){
+        if ($this->configs()) {
             $this->layout = 'obras';
 
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -404,10 +544,55 @@ class SiteController extends Controller
             } else {
                 return $this->render('obras', [
                     'model' => $model,
+                    'pesquisa' => $pesquisa
                 ]);
             }
         }
-        //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+
+        if($pesquisa->load(Yii::$app->request->post()) && $pesquisa->validate()){
+//            echo "conselho: ".$pesquisa->conselho."<br>";
+//            echo "zona: ".$pesquisa->zona."<br>";
+//            echo "tipo: ".$pesquisa->tproperty."<br>";
+//            echo "de: ".$pesquisa->de."<br>";
+//            echo "ate: ".$pesquisa->ate."<br>";
+//            echo "foi pesquisado kkkkkk<br>";
+//            die;
+
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->Where([
+                    'i.capa' => 1,
+                    'p.publicar' => 1,
+                    'p.proposito' => 2,
+                    'p.id_tipo' => $pesquisa->tproperty,
+                    'p.id_conselho' => $pesquisa->conselho,
+                ])
+                ->andWhere(['between', 'p.preco', $pesquisa->de, $pesquisa->ate])
+                ->andWhere(['like', 'p.zona', $pesquisa->zona])
+                ->All();
+
+//            ['like', 'zona', zona] ta gera: name LIKE '%test%'
+//                ->andWhere(['like', 'p.zona', $pesquisa->zona])
+//            ['between', 'preco', a, b] ta gera id BETWEEN a AND b
+
+//            print_r($slides);die;
+//                ->andWhere(['p.publicar' => 1])
+//                ->andWhere(['p.proposito' => 1])
+//                ->orderBy('id')
+//                ->All();
+
+//            return $this->render('comprar', [
+//                'slides' => $slides,
+//                'pesquisa' => $pesquisa
+//            ]);
+
+        }else {
+
+            //        select p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt from propriedade p left join imagens i on p.id = i.id_propriedade where i.capa = 1;
 //        $slides = (new Query())
 //            ->select('p.id, i.foto, p.preco, p.ilha, p.zona, p.nomePt, p.proposito, p.area')
 //            ->from('propriedade p')
@@ -417,22 +602,26 @@ class SiteController extends Controller
 //            ->orderBy('id')
 //            ->All();
 ////        print_r($slides);die;
-        //        select p.id, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
-        $slides = (new Query())
-            ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
-            ->from('propriedade p')
-            ->leftJoin('conselho c', 'p.id_conselho = c.id')
-            ->leftJoin('tipo t', 'p.id_tipo = t.id')
-            ->leftJoin('imagens i', 'p.id = i.id_propriedade')
-            ->where(['i.capa' => 1])
-            ->andWhere(['p.publicar' => 1])
-            ->andWhere(['p.proposito' => 2])
-            ->orderBy('id')
-            ->All();
+            //        select p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo from propriedade p left join conselho c on p.id_conselho = c.id left join tipo t on p.id_tipo = t.id left join imagens i on p.id = i.id_propriedade where i.capa = 1;
+            $slides = (new Query())
+                ->select('p.id, p.proposito, p.area, i.foto, p.preco, p.zona, p.id_conselho, c.nome as conselho, t.nome as tipo')
+                ->from('propriedade p')
+                ->leftJoin('conselho c', 'p.id_conselho = c.id')
+                ->leftJoin('tipo t', 'p.id_tipo = t.id')
+                ->leftJoin('imagens i', 'p.id = i.id_propriedade')
+                ->where(['i.capa' => 1])
+                ->andWhere(['p.publicar' => 1])
+                ->andWhere(['p.proposito' => 2])
+                ->orderBy('id')
+                ->All();
+
+        }
 
         return $this->render('comprar', [
-            'slides' => $slides
+            'slides' => $slides,
+            'pesquisa' => $pesquisa
         ]);
+
     }
 
     public function actionVender(){

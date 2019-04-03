@@ -8,6 +8,7 @@ use Yii;
 use app\models\Propriedade;
 use backend\models\PropriedadeSearch;
 use yii\db\Query;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -93,6 +94,13 @@ class PropriedadeController extends Controller
         $model = new Propriedade();
         $dono_propriedade = new DonoPropriedade();
         $imagem = new Imagens();
+//        echo Url::to(Yii::$app->params['upload'].$pasta, true)."<br>";
+//        echo Yii::$app->params['upload'].$pasta;die;
+//        if(is_dir(Yii::$app->params['upload'].$pasta)){
+//            echo "localhost/".Yii::$app->params['upload'];
+//        }else{
+//            echo "nao é dir";
+//        }die;
 
         if ($model->load(Yii::$app->request->post()) && $imagem->load(Yii::$app->request->post())) {
             $data = date('Y:m:d h:m:s');
@@ -110,16 +118,18 @@ class PropriedadeController extends Controller
                 // substituir todos os espacos nos files por _ e concatenar com E"datade hoje"
                 $imagem->foto = str_replace(" ", "_", substr ($foto->baseName, 0, 10).'_P'.$data2.'.'.$foto->extension);
 
-                if(is_dir(Yii::$app->params['upload'].$pasta)){
+                if(is_dir(Url::to(Yii::$app->params['upload'].$pasta))){
+//                    echo "pasta existe: ".Yii::$app->params['upload'].$pasta ."/". $imagem->foto;
                     $foto->saveAs(Yii::$app->params['upload'].$pasta ."/". $imagem->foto);
                 }else {
+//                    echo "pasta nao existe: ".Yii::$app->params['upload'].$pasta ."/". $imagem->foto;die;
                     if(mkdir (Yii::$app->params['upload'].$pasta, 0777)){
+//                        echo "criando a pasta: ".Yii::$app->params['upload'].$pasta ."/". $imagem->foto;
                         $foto->saveAs(Yii::$app->params['upload'].$pasta ."/". $imagem->foto);
                     }else{
-                        echo "Nao foi possivel criar a pasta";die;
+                        echo "Nao foi possivel criar a pasta".Yii::$app->params['upload'].$pasta ."/". $imagem->foto;die;
                     }
                 }
-
 
                 $data2 = date('Y-m-d h:m:s');
                 $imagem->capa = 1;
