@@ -395,7 +395,11 @@ $post = null;
                         <img src="images/clientes.png" alt="" class="pub-img img-fluid">
                         <h3 class="pub-title"> ??? <?=Yii::t('app', 'Clientes Satisfeitos')?></h3>
                         <p class="pub-text"> Confira os varios clientes satisfeitos e seus testimunhos. </p>
-                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => 'clientes-satisfeitos'], ['class' => 'pub-btn aa'])?>
+                        <?php
+                            $title = str_replace(" ", "-", strtolower(Yii::t('app', 'Clientes Satisfeitos')));
+//                            echo $title;die;
+                        ?>
+                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => $title], ['class' => 'pub-btn aa'])?>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -403,7 +407,10 @@ $post = null;
                         <img src="images/pesquisa.png" alt="" class="pub-img img-fluid">
                         <h3 class="pub-title"> <?=Yii::t('app', 'Pesquisas Inteligentes')?> </h3>
                         <p class="pub-text"> Dispomos de uma ferramenta para pesquisa filtrada de propriedades. </p>
-                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => 'pesquisas-inteligentes'], ['class' => 'pub-btn aa'])?>
+                        <?php
+                            $title = str_replace(" ", "-", strtolower(Yii::t('app', 'Pesquisas Inteligentes')))
+                        ?>
+                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => $title], ['class' => 'pub-btn aa'])?>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -411,7 +418,10 @@ $post = null;
                         <img src="images/help.png" alt="" class="pub-img img-fluid">
                         <h3 class="pub-title"> <?=Yii::t('app', 'Nós Estamos Aqui Para Ajudar')?> </h3>
                         <p class="pub-text"> Na oferta de um serviço integrado e global no mundo de mediação imobiliária. </p>
-                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => 'nos-estamos-aqui-para-ajudar'], ['class' => 'pub-btn aa'])?>
+                        <?php
+                            $title = str_replace(" ", "-", strtolower(Yii::t('app', 'Nós Estamos Aqui Para Ajudar')))
+                        ?>
+                        <?= Html::a(Yii::t('app', 'Saiba Mais'), ['post/view', 'title' => $title], ['class' => 'pub-btn aa'])?>
                     </div>
                 </div>
             </div>
