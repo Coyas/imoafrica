@@ -102,22 +102,34 @@ AppAsset::register($this);
                         <a class="nav-link bold" id="tel" href="tel:002389210115"><img src="images/phone.png" width="30" height="30" alt="" class="">  (+238) 921 01 15</a>
                     </li>
                     <li>
-                        <div class="btn-group">
-<!--                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                <img width="40" height="40" src="images/pt.png">-->
-<!--                            </a>-->
-                            <?= Html::a(Html::img(Url::to('images/pt.png'), ['width' => 40, 'height' => 40]), Url::current(['language' => 'pt-PT']), ['title' => 'Português', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'])?>
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown">
+                                <?php
+                                $lang = Yii::$app->params['lang'];
+                                    if ($lang ==='pt-PT'){
+                                        echo Html::img(Url::to('images/pt.png'), ['width' => 40, 'height' => 40]);
 
-                            <ul class="dropdown-menu">
-                                <li>
-<!--                                    <a href="#" title="Select this card"><img width="40" height="40" src="images/fr.png"></a>-->
-                                    <?= Html::a(Html::img(Url::to('images/fr.png'), ['title' => 'Select this card', 'width' => 40, 'height' => 40]), Url::current(['language' => 'fr-FR']), ['title' => 'Francês'])?>
-                                </li>
-                                <li>
-<!--                                    <a href="#" title=""><img width="40" height="40" src="images/en.png"></a>-->
-                                    <?= Html::a(Html::img(Url::to('images/en.png'), ['title' => 'Select this card', 'width' => 40, 'height' => 40]), Url::current(['language' => 'en-US']), ['title' => 'Inglês'])?>
-                                </li>
+                                    }elseif ($lang === 'en-US'){
+                                        echo Html::img(Url::to('images/en.png'), ['width' => 40, 'height' => 40]);
+                                    }elseif ($lang === 'fr-FR'){
+                                        echo Html::img(Url::to('images/fr.png'), ['width' => 40, 'height' => 40]);
+                                    }else{
+                                        echo Html::img(Url::to('images/pt.png'), ['width' => 40, 'height' => 40]);
+                                    }
+                                ?>
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu"><!--data-toggle="tooltip" data-placement="left" title="Hooray!"-->
+                                <?php if ($lang === 'pt-PT'){ ?>
+                                    <li><?= Html::a(Html::img(Url::to('images/fr.png'), [ 'title' => 'Frances', 'width' => 40, 'height' => 40]), Url::current(['language' => 'fr-FR']))?></li>
+                                    <li><?= Html::a(Html::img(Url::to('images/en.png'), ['title' => 'Ingles', 'width' => 40, 'height' => 40]), Url::current(['language' => 'en-US']))?></li>
 
+                                <?php }elseif ($lang === 'fr-FR'){?>
+                                    <li><?= Html::a(Html::img(Url::to('images/pt.png'), [ 'title' => 'Portugues', 'width' => 40, 'height' => 40]), Url::current(['language' => 'pt-PT']))?></li>
+                                    <li><?= Html::a(Html::img(Url::to('images/en.png'), ['title' => 'Ingles', 'width' => 40, 'height' => 40]), Url::current(['language' => 'en-US']))?></li>
+                                <?php }elseif ($lang === 'en-US'){?>
+                                    <li><?= Html::a(Html::img(Url::to('images/pt.png'), ['title' => 'Portugues', 'width' => 40, 'height' => 40]), Url::current(['language' => 'pt-PT']))?></li>
+                                    <li><?= Html::a(Html::img(Url::to('images/fr.png'), [ 'title' => 'Frances', 'width' => 40, 'height' => 40]), Url::current(['language' => 'fr-FR']))?></li>
+                                <?php }?>
                             </ul>
                         </div>
                     </li>
@@ -159,7 +171,12 @@ AppAsset::register($this);
 <!--fim do fullpage-->
 <?php
 $this->registerJs(
-    " new fullpage('#fullpage', {
+    "
+     $(document).ready(function(){
+        $('[data-toggle=\"tooltip\"]').tooltip();   
+      });
+      
+     new fullpage('#fullpage', {
         //licença
         licenseKey: '57FD467D-B08342AA-83713A7A-94441FA6',
         //options here

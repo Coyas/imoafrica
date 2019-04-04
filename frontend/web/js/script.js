@@ -1,6 +1,9 @@
 /*// ESCONDER MENU BAR*/
 //$("#banner").hide();
 // fade in .navbar
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+
 $(function () {
 
     /*if ($(window).width() > 1024) {

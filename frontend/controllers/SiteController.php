@@ -114,6 +114,19 @@ class SiteController extends Controller
         $model = new ContactForm();
         $pesquisa = new PesquisaFrom();
 
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
+
         if ($this->configs()){
             $this->layout = 'obras';
 
@@ -212,6 +225,19 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         $pesquisa = new PesquisaFrom();
+
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
 
         if ($this->configs()){
             $this->layout = 'obras';
@@ -325,6 +351,19 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
 
         if ($this->configs()){
             $this->layout = 'obras';
@@ -444,6 +483,19 @@ class SiteController extends Controller
         $model = new ContactForm();
         $pesquisa = new PesquisaFrom();
 
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
+
         if ($this->configs()){
             $this->layout = 'obras';
 
@@ -518,6 +570,20 @@ class SiteController extends Controller
     public function actionComprar(){
         $model = new ContactForm();
         $pesquisa = new PesquisaFrom();
+
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
+
 
         if ($this->configs()) {
             $this->layout = 'obras';
@@ -615,10 +681,36 @@ class SiteController extends Controller
 
     public function actionVender(){
 
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
+
         return $this->render('vender');
     }
     public function actionLegalizar(){
         $model = new ContactForm();
+
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
@@ -635,6 +727,19 @@ class SiteController extends Controller
         }
     }
     public function actionJunte(){
+
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
 
 //        echo Yii::$app->params['anexoF'];
 //        echo Html::img(Yii::$app->urlManagerB->createUrl(Yii::$app->params['anexo'].'1553704830.png'));
@@ -694,6 +799,19 @@ class SiteController extends Controller
     public function actionAvaliacao(){
         $model = new ContactForm();
 
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        Yii::$app->params['lang'] = $languageS;
+//echo Yii::$app->params['lang'];die;
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['supportEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -719,6 +837,8 @@ class SiteController extends Controller
         //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
         // get a session variable. The following usages are equivalent:
         $languageS = $session->get('language');
+
+        Yii::$app->params['lang'] = $languageS;
 //        echo 'Da sessao: '.$languageS;
         $lang = str_replace("-", "_", $languageS);
 

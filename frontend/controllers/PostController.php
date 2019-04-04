@@ -47,6 +47,7 @@ class PostController extends Controller
      */
     public function actionView($title)
     {
+//        Yii::$app->params['lang'] = $languageS;
         // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
         $cookies = Yii::$app->request->cookies;
         $session = Yii::$app->session;
@@ -56,6 +57,8 @@ class PostController extends Controller
         //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
         // get a session variable. The following usages are equivalent:
         $languageS = $session->get('language');
+        Yii::$app->params['lang'] = $languageS;
+
 //        echo 'Da sessao: '.$languageS;
         $lang = str_replace("-", "_", $languageS);
         $a = -1;
