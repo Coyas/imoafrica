@@ -168,6 +168,7 @@ $this->registerJs(
         lazyLoading: true,
         navigation: true,
 	    navigationPosition: 'right',
+	    continuousHorizontal: true,
 	    showActiveTooltip: false,
 	    scrollOverflow: false,
         //scrollingSpeed: 5000,
