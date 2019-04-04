@@ -6,7 +6,7 @@ use common\models\PasswordResetRequestForm;
 use common\models\ResetPasswordForm;
 use common\models\SignupForm;
 use frontend\models\PesquisaFrom;
-use http\Url;
+use yii\helpers\Url;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\db\Query;
@@ -645,8 +645,9 @@ class SiteController extends Controller
             $junte->anexo = UploadedFile::getInstance($junte, 'anexo');
             if($junte->anexo){
                 $time = time();
-                $junte->anexo->saveAs(Yii::$app->params['anexoF'].$time.'.'.$junte->anexo->extension);
-                $junte->anexo = Yii::$app->params['anexoF'].$time.'.'.$junte->anexo->extension;
+//                echo Url::to(Yii::$app->params['anexo'].$time.'.'.$junte->anexo->extension, true);die;
+                $junte->anexo->saveAs(Yii::$app->params['anexo'].$time.'.'.$junte->anexo->extension);
+                $junte->anexo = Yii::$app->params['anexo'].$time.'.'.$junte->anexo->extension;
             }
             if ($junte->anexo){
                 $value = Yii::$app->mailer->compose()
@@ -667,9 +668,15 @@ class SiteController extends Controller
                 print_r("nao foi anexo: ".$value);
             }
 
-            $junte->save();
-            $junte->getErrors();
-            die;
+            if($junte->save()){
+                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            } else {
+                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+            }
+
+            $this->refresh();
+//            $junte->getErrors();
+//            die;
         }else {
             return $this->render('junte', [
                 'junte' => $junte
@@ -695,10 +702,22 @@ class SiteController extends Controller
     }
     public function actionDetalhes($id){
 
+        // get the cookie and session collection (yii\web\CookieCollection) from the "request" component
+        $cookies = Yii::$app->request->cookies;
+        $session = Yii::$app->session;
+        // get the "language" cookie value. If the cookie does not exist, return "pt-PT" as the default value.
+        $languageC = $cookies->getValue('language', 'pt-PT');
+//        echo 'Do cookie: '.$languageC.'<br>';
+        //if($language != 'pt-PT' || $language != 'en-US') $language = 'pt-PT';
+        // get a session variable. The following usages are equivalent:
+        $languageS = $session->get('language');
+//        echo 'Da sessao: '.$languageS;
+        $lang = str_replace("-", "_", $languageS);
+
 //        select c.nome, t.nome, p.zona, p.area, p.preco, p.proposito, p.quarto, p.garragem, p.banheiro, p.cozinha, p.sala, p.descricaoPt
 //from propriedade p left join tipo t on p.id_tipo = t.id left join conselho c on p.id_conselho = c.id where p.id = 2;
         $dados = (new Query())
-            ->select('p.id, c.nome as conselho, t.nome as tipo, p.zona, p.area, p.preco, p.proposito, p.quarto, p.garragem, p.banheiro, p.cozinha, p.sala, p.descricaoPt')
+            ->select('p.id, c.nome as conselho, t.nome as tipo, p.zona, p.area, p.preco, p.proposito, p.quarto, p.garragem, p.banheiro, p.cozinha, p.sala, p.descricao'.$lang.'')
             ->from('propriedade p')
             ->leftJoin('tipo t', 'p.id_tipo = t.id')
             ->leftJoin('conselho c', 'p.id_conselho = c.id')
@@ -727,7 +746,8 @@ class SiteController extends Controller
             'dados' => $dados,
 //            'dados2' => $dados2,
             'slides' => $slides,
-            'dono' => $dono
+            'dono' => $dono,
+            'lang' => $lang
         ]);
     }
 }

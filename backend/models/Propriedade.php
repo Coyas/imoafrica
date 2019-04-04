@@ -18,9 +18,9 @@ use Yii;
  * @property int $banheiro
  * @property int $cozinha
  * @property int $sala
- * @property string $descricaoPt
- * @property string $descricaoEn
- * @property string $descricaoFr
+ * @property string $descricaopt_PT
+ * @property string $descricaoen_US
+ * @property string $descricaofr_FR
  * @property int $publicar
  * @property int $id_tipo
  * @property int $destaque
@@ -52,7 +52,7 @@ class Propriedade extends \yii\db\ActiveRecord
             [['id_conselho', 'area', 'proposito', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
             [['zona', 'area', 'preco', 'id_tipo'], 'required'],
             [['preco'], 'number'],
-            [['descricaoPt', 'descricaoEn', 'descricaoFr'], 'string'],
+            [['descricaopt_PT', 'descricaoen_US', 'descricaofr_FR'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['zona'], 'string', 'max' => 100],
             [['id_tipo'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['id_tipo' => 'id']],
@@ -67,9 +67,9 @@ class Propriedade extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_conselho' => 'Conselho/cidade',
+            'id_conselho' => 'Id Conselho',
             'zona' => 'Zona',
-            'area' => 'Dimensao (Area)',
+            'area' => 'Area',
             'preco' => 'Preco',
             'proposito' => 'Proposito',
             'quarto' => 'Quarto',
@@ -77,12 +77,12 @@ class Propriedade extends \yii\db\ActiveRecord
             'banheiro' => 'Banheiro',
             'cozinha' => 'Cozinha',
             'sala' => 'Sala',
-            'descricaoPt' => 'Descricao (Portugues)',
-            'descricaoEn' => 'Descricao (Ingles)',
-            'descricaoFr' => 'Descricao (Frances)',
+            'descricaopt_PT' => 'Descricao (Portugues)',
+            'descricaoen_US' => 'Descricao (Ingles)',
+            'descricaofr_FR' => 'Descricao (Frances)',
             'publicar' => 'Publicar',
-            'id_tipo' => 'Tipo De Propriedade',
-            'destaque' => 'Manter em Destaque',
+            'id_tipo' => 'Id Tipo',
+            'destaque' => 'Destaque',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

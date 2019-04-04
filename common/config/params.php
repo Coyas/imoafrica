@@ -5,6 +5,6 @@ return [
     'supportEmail' => 'geral@imoafrica.com',
     'user.passwordResetTokenExpire' => 3600,
     'upload' => 'upload/imoveis/',
-    'anexo' => 'upload/emailAnexo/',
-//    'anexoF' => '../../backend/web/upload/emailAnexo/'
+    'anexo' => '../../backend/web/upload/emailAnexo/',
+    'image' => 'backend/web/upload/imoveis/'
 ];

@@ -57,6 +57,28 @@ class PostController extends Controller
         ]);
     }
 
+    public function actionPublicar($id){
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e) {
+            echo "Houve um errro ao publicar este post no site, report isso!";die;
+        }
+        $model->publicar = 1;
+        $model->save();
+        return $this->redirect(['post/view', 'id' => $model->id]);
+    }
+
+    public function actionRemover($id){
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e) {
+            echo "Houve um errro ao remover este post do site, report isso!";die;
+        }
+        $model->publicar = 0;
+        $model->save();
+        return $this->redirect(['post/view', 'id' => $model->id]);
+    }
+
     /**
      * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.

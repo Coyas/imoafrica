@@ -18,6 +18,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
 
+    <?= $form->field($model, 'lang')->dropDownList([
+            0 => 'Portugues',
+        1 => 'Ingles',
+        2 => 'Frances'
+    ],
+    ['prompt' => 'Qual é a lingua?']
+    ) ?>
+
+
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>

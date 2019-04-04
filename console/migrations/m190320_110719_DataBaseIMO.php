@@ -18,14 +18,17 @@ class m190320_110719_DataBaseIMO extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
+//        pt = 0;
+//        en = 1;
+//        fr = 2;
         $this->createTable('post', [
             'id' => $this->primaryKey(),
             'title' => $this->string(150),
             'slug' => $this->string(200),
-            'contentpt-PT' => $this->text()->notNull(),
-            'contenten-EN' => $this->text()->notNull(),
-            'contentfr-FR' => $this->text()->notNull(),
+            'content' => $this->text()->notNull(),
             'autor' => $this->string(150)->notNull(),
+            'publicar' => $this->smallInteger()->defaultValue(0),
+            'lang' => $this->smallInteger()->defaultValue(0),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime()
         ], $tableOptions);
@@ -46,6 +49,7 @@ class m190320_110719_DataBaseIMO extends Migration
             'id' => $this->primaryKey(),
             'email' => $this->string(200)->notNull(),
             'content' => $this->text()->notNull(),
+            'publicar' => $this->integer()->defaultValue(0)->notNull(),
             'id_comment' => $this->integer()->defaultValue(0)->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime()
@@ -130,9 +134,9 @@ class m190320_110719_DataBaseIMO extends Migration
             'banheiro' => $this->integer()->defaultValue(0),
             'cozinha' => $this->integer()->defaultValue(0),
             'sala' => $this->integer()->defaultValue(0),
-            'descricaopt-PT' => $this->text(),
-            'descricaoen-US' => $this->text(),
-            'descricaofr-FR' => $this->text(),
+            'descricaopt_PT' => $this->text(),
+            'descricaoen_US' => $this->text(),
+            'descricaofr_FR' => $this->text(),
             'publicar' => $this->integer()->defaultValue(0),
             'id_tipo' => $this->integer()->notNull(),
             'destaque' => $this->integer()->defaultValue(0),

@@ -20,7 +20,7 @@ use yii\helpers\Url;
             <div class="gallery col-md-6">
                 <div class="detalhes-header">
                     <div class="desc-detalhes preco"> <b><?=Yii::t('app', 'Preço')?>:</b> <?= Html::encode($dados['preco'])?> $00</div>
-                    <div class="desc-detalhes tipo"> <b><?=Yii::t('app', 'Propósito')?>:</b> <?php if($dados['proposito'] == 1){ echo "Arrendar";}elseif ($dados['proposito'] == 2){ echo "Vender";}?></div>
+                    <div class="desc-detalhes tipo"> <b><?=Yii::t('app', 'Propósito')?>:</b> <?php if($dados['proposito'] == 1){ echo Yii::t('app', 'Arrendar');}elseif ($dados['proposito'] == 2){ echo Yii::t('app', 'Vender');}?></div>
                     <div class="desc-detalhes area"> <b><?=Yii::t('app', 'Área') ?>: </b> <?= Html::encode($dados['area'])?>m<sup>2</sup></div>
 <!--                    <div class="desc-detalhes banheiro"> <b>Banheiros:</b> 2</div>-->
                 </div>
@@ -28,7 +28,7 @@ use yii\helpers\Url;
 
                 <h4 class="detalhes-desc"><?=Yii::t('app', 'Descrição')?></h4>
                 <p class="detalhes-text">
-                    <?= Html::encode($dados['descricaoPt'])?>
+                    <?= Html::encode($dados['descricao'.$lang])?>
                 </p>
                 <h4 class="detalhes-desc"><?=Yii::t('app', 'Compartimentos')?></h4>
                 <div class="detalhes-header">

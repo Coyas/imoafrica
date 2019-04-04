@@ -43,11 +43,11 @@ use app\models\Conselho;
 
     <?= $form->field($model, 'sala')->textInput() ?>
 
-    <?= $form->field($model, 'descricaoPt')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'descricaopt_PT')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'descricaoEn')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'descricaoen_US')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'descricaoFr')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'descricaofr_FR')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($imagem, 'foto')->fileInput()->label('Foto De Capa') ?>
 

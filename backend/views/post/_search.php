@@ -25,6 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'autor') ?>
 
+    <?php // echo $form->field($model, 'publicar') ?>
+
+    <?php // echo $form->field($model, 'lang') ?>
+
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>

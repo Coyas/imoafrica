@@ -17,8 +17,8 @@ class PropriedadeSearch extends Propriedade
     public function rules()
     {
         return [
-            [['id', 'id_conselho', 'area', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
-            [['zona', 'proposito', 'descricaoPt', 'descricaoEn', 'descricaoFr', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'id_conselho', 'area', 'proposito', 'quarto', 'garragem', 'banheiro', 'cozinha', 'sala', 'publicar', 'id_tipo', 'destaque'], 'integer'],
+            [['zona', 'descricaopt_PT', 'descricaoen_US', 'descricaofr_FR', 'created_at', 'updated_at'], 'safe'],
             [['preco'], 'number'],
         ];
     }
@@ -63,6 +63,7 @@ class PropriedadeSearch extends Propriedade
             'id_conselho' => $this->id_conselho,
             'area' => $this->area,
             'preco' => $this->preco,
+            'proposito' => $this->proposito,
             'quarto' => $this->quarto,
             'garragem' => $this->garragem,
             'banheiro' => $this->banheiro,
@@ -76,10 +77,9 @@ class PropriedadeSearch extends Propriedade
         ]);
 
         $query->andFilterWhere(['like', 'zona', $this->zona])
-            ->andFilterWhere(['like', 'proposito', $this->proposito])
-            ->andFilterWhere(['like', 'descricaoPt', $this->descricaoPt])
-            ->andFilterWhere(['like', 'descricaoEn', $this->descricaoEn])
-            ->andFilterWhere(['like', 'descricaoFr', $this->descricaoFr]);
+            ->andFilterWhere(['like', 'descricaopt_PT', $this->descricaopt_PT])
+            ->andFilterWhere(['like', 'descricaoen_US', $this->descricaoen_US])
+            ->andFilterWhere(['like', 'descricaofr_FR', $this->descricaofr_FR]);
 
         return $dataProvider;
     }

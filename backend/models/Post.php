@@ -13,6 +13,8 @@ use yii\behaviors\SluggableBehavior;
  * @property string $slug
  * @property string $content
  * @property string $autor
+ * @property int $publicar
+ * @property int $lang
  * @property string $created_at
  * @property string $updated_at
  *
@@ -28,17 +30,6 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'ensureUnique' => true,
-            ]
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,6 +38,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['content', 'autor'], 'required'],
             [['content'], 'string'],
+            [['publicar', 'lang'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'autor'], 'string', 'max' => 150],
             [['slug'], 'string', 'max' => 200],
@@ -64,8 +56,21 @@ class Post extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'content' => 'Content',
             'autor' => 'Autor',
+            'publicar' => 'Publicar',
+            'lang' => 'Lang',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                'ensureUnique' => true,
+            ]
         ];
     }
 
