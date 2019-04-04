@@ -19,23 +19,26 @@ use yii\widgets\ActiveForm;
 <div class="section fp-auto-height">
     <div class="container-fluid">
         <div class="row">
-        <?php if(Yii::$app->session->hasFlash('success')){ ?>
-            <div class="alert alert-success" role="alert">
-                <?= Yii::t('app', 'Obrigado por nos contactar. Nós iremos responder mais breve possivel.')?>
-            </div>
-        <?php }else if(Yii::$app->session->hasFlash('error')){ ?>
-            <div class="alert alert-danger" role="alert">
-                <?= Yii::t('app', 'Houve um problema ao enviar o email, tente denovo mais tarde.')?>
-            </div>
-        <?php }else { ?>
+
             <h1 class="juntese"><?= Yii::t('app', 'Junte-se a nós')?></h1>
             <div class="imgjuntese col-md-8 mh-100 p-0">
             </div>
             <div class=" col-md-4 mh-100 p-0">
                 <div class="fomrjuntese">
+
                     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+                    <?php if(Yii::$app->session->hasFlash('success')){ ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= Yii::t('app', 'Obrigado por nos contactar. Nós iremos responder mais breve possivel.')?>
+                        </div>
+                    <?php }else if(Yii::$app->session->hasFlash('error')){ ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= Yii::t('app', 'Houve um problema ao enviar o email, tente denovo mais tarde.')?>
+                        </div>
+                    <?php }else { ?>
 <!--                    <form action="">-->
                     <div class="row">
+
                         <div class="col-md-12">
                             <?= $form->field($junte, 'nome')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Nome'), 'class' => 'inputcontato'])->label(false) ?>
 
@@ -57,12 +60,12 @@ use yii\widgets\ActiveForm;
                         </div>
                         <div class="col-md-6">
                             <p></p>
-                            <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'meubotaocontatoj pull-left']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'meubotaocontatoj pull-left']); } ?>
                         </div>
                     </div>
 
 <!--                    </form>-->
-                    <?php ActiveForm::end(); }?>
+                    <?php ActiveForm::end();?>
                 </div>
             </div>
         </div>

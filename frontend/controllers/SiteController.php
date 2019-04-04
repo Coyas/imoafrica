@@ -657,7 +657,7 @@ class SiteController extends Controller
                     ->setHtmlBody($junte->content)
                     ->attach($junte->anexo)
                     ->send();
-                print_r("foi anexo: ".$value);
+                //print_r("foi anexo: ".$value);
             }else {
                 $value = Yii::$app->mailer->compose()
                     ->setTo([Yii::$app->params['supportEmail'] => $junte->nome])
@@ -665,16 +665,23 @@ class SiteController extends Controller
                     ->setSubject('Recrutamentos e pedidos de estagios')
                     ->setHtmlBody($junte->content)
                     ->send();
-                print_r("nao foi anexo: ".$value);
+                //print_r("nao foi anexo: ".$value);
             }
+//echo "entrando no save<br>";
+//            $junte->save();
+            $junte->assunto = "Recrutamentos e pedidos de estagios";
 
             if($junte->save()){
+//                echo "save done<br>";
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
+//                echo "nao houve save<br>";
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
             }
 
             $this->refresh();
+//            $this->render('junte');
+//            $junte->save();
 //            $junte->getErrors();
 //            die;
         }else {
@@ -682,6 +689,7 @@ class SiteController extends Controller
                 'junte' => $junte
             ]);
         }
+
     }
     public function actionAvaliacao(){
         $model = new ContactForm();

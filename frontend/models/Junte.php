@@ -32,7 +32,7 @@ class Junte extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'email', 'assunto', 'morada', 'telefone', 'content'], 'required'],
+            [['nome', 'email', 'morada', 'telefone', 'content'], 'required'],
             [['content'], 'string'],
             [['nome'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 200],
