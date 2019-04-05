@@ -5,7 +5,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\db\Query;
-
+use yii\web\View;
 use app\models\Conselho;
 use app\models\Tipo;
 use yii\widgets\ActiveForm;
@@ -430,3 +430,51 @@ $post = null;
 
 </div>
 
+
+
+    <!--fim do fullpage-->
+<?php
+$this->registerJs(
+    "
+     $(document).ready(function(){
+        $('[data-toggle=\"tooltip\"]').tooltip();   
+      });
+      
+     new fullpage('#fullpage', {
+        //licença
+        licenseKey: '57FD467D-B08342AA-83713A7A-94441FA6',
+        //options here
+        autoScrolling:true,
+        scrollHorizontally: true,
+        lazyLoading: true,
+        navigation: true,
+	    navigationPosition: 'right',
+	    continuousHorizontal: true,
+	    showActiveTooltip: false,
+	    scrollOverflow: false,
+        //scrollingSpeed: 5000,
+        //easing: 'easeInOutCubic',
+        //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/
+        //easingcss3: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+
+        onLeave: function(origin, destination, direction){
+            var leavingSection = this;
+
+            //after leaving section 2
+            if(origin.index == 0 && direction =='down'){
+                $('#banner').fadeIn();
+            }
+            else if(origin.index == 1 && direction == 'up'){
+                 $('#banner').fadeOut();
+            }
+        }
+
+    });
+
+    //methods
+    fullpage_api.setAllowScrolling(true);
+    $(\"#banner\").hide();",
+    View::POS_END,
+    'myfullpage'
+);
+?>

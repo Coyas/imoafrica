@@ -1,3 +1,8 @@
+#cabe .fp-tableCell {
+ height: 70px !important;
+}
+
+
 .tooltip {
     position: relative;
     display: inline-block;

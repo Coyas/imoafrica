@@ -11,10 +11,10 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 ?>
 
-    <div  class="section fp-auto-height">
-        <div id="cabe" class="container-fluid">
-            <h1 class="gallery-title"> </h1>
-        </div>
+    <div id="cabe"  class="section fp-auto-height">
+        <!--        <div  class="container-fluid">-->
+        <!--            <h1 class="gallery-title"> </h1>-->
+        <!--        </div>-->
     </div>
 
     <div class="section fp-auto-height">
@@ -28,7 +28,7 @@ use yii\bootstrap\ActiveForm;
                             <span class="itemscontato"> <img src="images/tele.png" width="20" height="20" alt=""> (+238) 298 76 77 </span>
                             <span class="itemscontato"> <img src="images/email.png" width="20" height="20" alt=""> geral@imoafrica.com </span>
                             <span class="itemscontato"> <img src="images/endereco.png" width="20" height="20" alt=""> Rua Caixa Economica, ao lado INE Fazenda, Praia Santiago cv, Praia 7300 </span>
-                            <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr </span>
+                            <span class="itemscontato"> <img src="images/aberto.png" width="20" height="20" alt=""> <?=Yii::t('app', 'Aberto de Segunda á Sexta das 8:00Hr ás 19:00Hr')?> </span>
                         </div>
                     </div>
 
@@ -80,10 +80,39 @@ use yii\bootstrap\ActiveForm;
     </div>
 
 
+    <!--fim do fullpage-->
 <?php
 $this->registerJs(
-    "$(\"#banner\").show();",
-    View::POS_LOAD,
-    'shownave'
+    "
+     $(document).ready(function(){
+        $('[data-toggle=\"tooltip\"]').tooltip();   
+      });
+      
+     new fullpage('#fullpage', {
+        //licença
+        licenseKey: '57FD467D-B08342AA-83713A7A-94441FA6',
+        //options here
+        autoScrolling:true,
+        scrollHorizontally: true,
+        lazyLoading: true,
+        navigation: true,
+	    navigationPosition: 'right',
+	    continuousHorizontal: true,
+	    showActiveTooltip: false,
+	    scrollOverflow: false,
+        //scrollingSpeed: 5000,
+        //easing: 'easeInOutCubic',
+        //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/
+        //easingcss3: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+
+        
+
+    });
+
+    //methods
+    fullpage_api.setAllowScrolling(true);
+//    $(\"#banner\").hide();",
+    View::POS_END,
+    'myfullpage'
 );
 ?>

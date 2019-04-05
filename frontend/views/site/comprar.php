@@ -152,10 +152,39 @@ use yii\widgets\ActiveForm;
 </div>
 
 
+    <!--fim do fullpage-->
 <?php
 $this->registerJs(
-    "$(\"#banner\").show();",
-    View::POS_LOAD,
-    'shownaves'
+    "
+     $(document).ready(function(){
+        $('[data-toggle=\"tooltip\"]').tooltip();   
+      });
+      
+     new fullpage('#fullpage', {
+        //licença
+        licenseKey: '57FD467D-B08342AA-83713A7A-94441FA6',
+        //options here
+        autoScrolling:true,
+        scrollHorizontally: true,
+        lazyLoading: true,
+        navigation: true,
+	    navigationPosition: 'right',
+	    continuousHorizontal: true,
+	    showActiveTooltip: false,
+	    scrollOverflow: false,
+        //scrollingSpeed: 5000,
+        //easing: 'easeInOutCubic',
+        //equivalent to jQuery `easeOutBack` extracted from http://matthewlein.com/ceaser/
+        //easingcss3: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+
+        
+
+    });
+
+    //methods
+    fullpage_api.setAllowScrolling(true);
+//    $(\"#banner\").hide();",
+    View::POS_END,
+    'myfullpage'
 );
 ?>
