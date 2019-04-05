@@ -152,7 +152,7 @@ use yii\widgets\ActiveForm;
 <?php
 $this->registerJs(
     "$(\"#banner\").show();",
-    View::POS_READY,
+    View::POS_LOAD,
     'shownaves'
 );
 ?>
